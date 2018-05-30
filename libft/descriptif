@@ -1,0 +1,15 @@
+int		ft_power(int nb, int pow);
+		Returns nb to the power of pow.Will not work if nb > 45000, as return\
+		value is an int. Will not work with negative powers, for same reason as\
+		previous.
+
+size_t	ft_strflen(char **s)
+		Returns size of pointer on pointer on strings. Will return 0 if s is\
+		empty.
+
+directory: fillit
+		int	ft_strnchr(char const *str, char c, int n)
+			Looks for n occurencies of char c in string str. 
+			Will return 1 if the exact number of occurencies is found.
+			Returns 0 elsewise.
+			Will return 0 if str or c is empty or if n is < 1.

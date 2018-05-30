@@ -1,0 +1,10 @@
+Options autorisées: -l -R -a -r -t  
+Se rappeler les liens symboliques avec -l, et quand le lien pointe sur qqchose de non valide ou de valide.
+Se rappeler que lorsqu'on passe un dossier vide en arg sans options rien ne se passe.
+Ne pas oublier que si on fait un chmod 000 . on peut plus faire de ls apres. Ce qui veut dire que si t'essaie de faire un ls su un fichier dans le dossier courant apres avoir mit les perm a 000 un message d'error avec le nom du file s'affiche.
+Dans la meme optique que la ligne precedente, checker quel message derreur si on fait un ls . et qu'on a pas les droits.
+Verifier que le print list ou autre action sur la liste ne provoque pas de fuite memoire.
+Verifier pourquoi on a des blems avec ft_ls /dev et /etc, ya des trucs qui existent pas qui apparraissent et gros vide entre la commande et le debut du retour -> cest bon tavais pas malloc;
+Faire gaffe a si on passe des fichiers casses en arg, ils apparaissent mais pas ceux qui sont caches et pas passes en arg donc un trie supplementaire s'impose;
+Faire gaffe au dossier munki.
+Ne pas oublier que si la liste est vide il faut brake.
