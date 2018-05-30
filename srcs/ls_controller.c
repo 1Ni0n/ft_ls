@@ -49,9 +49,9 @@ void	check_files(char **av, options *opts)
 		i++;
 	}
 	sort_list(&no_dir_list);
-	if (opts->t == 1)
+	if (opts != NULL && opts->t == 1)
 		sort_list_t(&no_dir_list);
-	if (opts->r == 1)
+	if (opts != NULL && opts->r == 1)
 		sort_list_r(&no_dir_list);
 	print_list(no_dir_list);
 }
@@ -78,12 +78,11 @@ S_list 	*check_dir(char **av, options *opts)
 		i++;
 	}
 	sort_list(&dir_list);
-	if (opts->t == 1)
+	if (opts != NULL && opts->t == 1)
 		sort_list_t(&dir_list);
+	if (opts != NULL && opts->r == 1)
+		sort_list_r(&dir_list);
 	print_list(dir_list);
-	/*	if (opts->r == 1)
-		sort_list_r(&dir_list);*/
-	//print_with_opts(dir_list, opts);
 	return (dir_list);
 }
 
