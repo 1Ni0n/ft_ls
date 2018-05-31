@@ -23,6 +23,6 @@ void	args_controller(int ac, char **av)
 		ls_controller(av, opts);
 	}
 	else
-		printf("args_no_opt\n");
+		ls_controller(av, opts);
 		//ls_arg_no_opt(ac, av);
 }

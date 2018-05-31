@@ -72,7 +72,7 @@ void	sort_list(S_list **list)
 	}
 }
 
-S_list 	*append_to_list(S_list *list, char *content, long mtime)
+S_list 	*append_to_list(S_list *list, char *content, long mtime, char *path)
 {
 	if (list != NULL)
 	{
@@ -80,8 +80,9 @@ S_list 	*append_to_list(S_list *list, char *content, long mtime)
 		if ((arg = malloc(sizeof *arg)))
 		{
 			arg->content = ft_strdup(content);
+			arg->path = path;
 			arg->time = mtime;
-			arg->f_flow = NULL;
+			//arg->f_flow = NULL;
 			arg->next = NULL;
 			arg->prev = NULL;
 			if (list->head == NULL)

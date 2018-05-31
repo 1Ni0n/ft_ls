@@ -57,6 +57,7 @@ void	print_list(S_list	*list)
 	entity = list->head;
 	while (entity)
 	{
+		//printf("PATH----------------> %s\n", entity->path);
 		if (entity->content[0] != '.')
 		{
 			ft_putstr(entity->content);

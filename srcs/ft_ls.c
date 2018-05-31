@@ -14,7 +14,7 @@
 
 int	main(int ac, char **av)
 {
-	if (ac == 1 || (ac == 2 && ft_strcmp(av[1], "--") == 0) || (ac == 2 && ft_strcmp(av[1], ".") == 0))
+	if (ac == 1)
 		simplest_ls();
 	else if (ac > 1)
 		args_controller(ac, av);

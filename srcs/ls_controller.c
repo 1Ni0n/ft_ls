@@ -25,7 +25,7 @@ void	check_inexistant(char **av)
 	while (av[i])
 	{
 		if (stat(av[i], &sb) == -1 && (errno & ENOENT) == 2)
-			append_to_list(does_not_exist_list, av[i], 0);
+			append_to_list(does_not_exist_list, av[i], 0, NULL);
 		i++;
 	}
 	sort_list(&does_not_exist_list);
@@ -45,7 +45,7 @@ void	check_files(char **av, options *opts)
 	while (av[i])
 	{
 		if (stat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 0)
-			append_to_list(no_dir_list, av[i], sb.st_mtime);
+			append_to_list(no_dir_list, av[i], sb.st_mtime, NULL);
 		i++;
 	}
 	sort_list(&no_dir_list);
@@ -68,12 +68,13 @@ S_list 	*check_dir(char **av, options *opts)
 		i++;
 	while (av[i])
 	{
+		printf("AV: %s, STAT: %d, DIR?: %d\n", av[i], stat(av[i], &sb), S_ISDIR(sb.st_mode));
 		if (stat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1)
 		{
-			if (av[i][0] == '.' && opts->a == 1)
-				append_to_list(dir_list, av[i], sb.st_mtime);
-			if (av[i][0] != '.')
-				append_to_list(dir_list, av[i], sb.st_mtime);
+			//if (av[i][0] == '.' && opts->a == 1)
+				append_to_list(dir_list, av[i], sb.st_mtime, NULL);
+			//else if (av[i][0] != '.')
+			//	append_to_list(dir_list, av[i], sb.st_mtime, NULL);
 		}
 		i++;
 	}
@@ -82,13 +83,14 @@ S_list 	*check_dir(char **av, options *opts)
 		sort_list_t(&dir_list);
 	if (opts != NULL && opts->r == 1)
 		sort_list_r(&dir_list);
-	print_list(dir_list);
+	//print_list(dir_list);
 	return (dir_list);
 }
 
 //On est toujours que au niveau des arguments dans 
 void	ls_controller(char **av, options *opts)
 {
+	//on instancie la dir_list que va nous renvoyer check_dir, pour ensuite la passer à main_ls;
 	S_list 		*dir_list;
 	args_node 	*dir;
 
