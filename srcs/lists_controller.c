@@ -26,13 +26,16 @@ void	free_list(S_list **list)
 	}
 }
 
-void	prev_ptr(S_list **list, args_node *elem, args_node *next)
+/*void	prev_ptr(S_list **list, args_node *elem, args_node *next)
 {
 	args_node	*thing;
+	//int			i;
 
 	thing = (*list)->head;
+	//i = 0;
 	while (thing)
 	{
+		//printf("%d\n", i++);
 		if (thing == elem)
 			break;
 		if (thing->next && thing->next == next)
@@ -43,32 +46,40 @@ void	prev_ptr(S_list **list, args_node *elem, args_node *next)
 		else
 			thing = thing->next;
 	}
-}
+}*/
 
 void	sort_list(S_list **list)
 {
 	args_node	*elem;
 	args_node	*tmp;
 	args_node	*tmp2;
+	int 		j;
 
 	elem = (*list)->head;
+	j = 0;
+	tmp = NULL;
 	while (elem)
 	{
 		if (elem->next != NULL && ft_strcmp(elem->content, elem->next->content) > 0)
 		{
+			//printf("ELEM: %s || NEXT:%s\n", elem->content, elem->next->content);
 			if (elem == (*list)->head)
 				(*list)->head = elem->next;
 			if (elem->next == (*list)->tail)
 				(*list)->tail = elem;
-			tmp = elem;
 			tmp2 = elem->next;
-			tmp->next = tmp->next->next;
+			elem->next = elem->next->next;
+			if (tmp && (tmp2 != (*list)->head))
+				tmp->next = tmp2;
 			tmp2->next = elem;
-			prev_ptr(list, tmp2, tmp2->next);
+			//prev_ptr(list, tmp2, tmp2->next);
 			elem = (*list)->head;
 		}
 		else
+		{
+			tmp = elem;
 			elem = elem->next;
+		}
 	}
 }
 

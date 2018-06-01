@@ -31,6 +31,7 @@ void	simplest_ls(void)
 		if (truc_lu->d_name[0] != '.')
 			append_to_list(list, truc_lu->d_name, 0, NULL);
 	}
+	closedir(rep);
 	sort_list(&list);
 	print_list(list);
 //	free(&list);

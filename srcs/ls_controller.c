@@ -94,6 +94,8 @@ void	ls_controller(char **av, options *opts)
 	S_list 		*dir_list;
 	args_node 	*dir;
 
+	if (check_if_only_opts(av) == 1)
+		main_ls("./", opts);
 	check_inexistant(av);
 	check_files(av, opts);
 	dir_list = check_dir(av, opts);

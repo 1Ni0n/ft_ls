@@ -35,7 +35,7 @@ static char	*check_path(char *dir_name, char *name)
 	return (NULL);
 }
 
-void	main_ls(char *dir_name, options *opts)
+void		main_ls(char *dir_name, options *opts)
 {
 
 	DIR			*rep;
@@ -51,7 +51,10 @@ void	main_ls(char *dir_name, options *opts)
 	list = new_s_list();
 	printf("%s\n", dir_name);
 	if ((rep = opendir(dir_name)) == NULL)
+	{
 		perror("");
+		return;
+	}
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);
@@ -65,6 +68,7 @@ void	main_ls(char *dir_name, options *opts)
 			append_to_list(list, truc_lu->d_name, time, full_path);
 		}
 	}
+	closedir(rep);
 	sort_list(&list);
 	//print_with_opts;
 	print_list(list);

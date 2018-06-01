@@ -23,7 +23,7 @@ void	sort_list_t(S_list **list)
 	elem = (*list)->head;
 	while (elem)
 	{
-		if (elem->next != NULL && (elem->time - elem->next->time) < 0)
+		if (elem->next != NULL && (elem->time < elem->next->time))
 		{
 			if (elem == (*list)->head)
 				(*list)->head = elem->next;
@@ -33,7 +33,7 @@ void	sort_list_t(S_list **list)
 			tmp2 = elem->next;
 			tmp->next = tmp->next->next;
 			tmp2->next = elem;
-			prev_ptr(list, tmp2, tmp2->next);
+			//prev_ptr(list, tmp2, tmp2->next);
 			elem = (*list)->head;
 		}
 		else

@@ -65,8 +65,9 @@ void		print_does_not_exist_list(S_list *no_list);
 void		print_with_opts(S_list *list, options *opts);
 void		ls_recursive(S_list *dir_list, options *opts);
 void		main_ls(char *dir_name, options *opts);
-void		prev_ptr(S_list **list, args_node *elem, args_node *next);
+//void		prev_ptr(S_list **list, args_node *elem, args_node *next);
 void		sort_list_t(S_list **list);
 void		sort_list_r(S_list **list);
+int			check_if_only_opts(char **av);
 
 #endif

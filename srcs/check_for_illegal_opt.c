@@ -12,6 +12,25 @@
 
 #include "../ft_ls.h"
 
+int				check_if_only_opts(char **av)
+{
+	int	i;
+
+	i = 1;
+	while (av[i] && ft_strcmp(av[i], "--") != 0)
+	{
+		if (av[i][0] != '-')
+			return (0);
+		i++;
+	}
+	while (av[i])
+	{
+		if (av[i + 1] != NULL)
+			return (0);
+	}
+	return (1);
+}
+
 static void		print_usage(char c)
 {
 	ft_putstr("ft_ls: illegal option -- ");
