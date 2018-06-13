@@ -21,8 +21,7 @@ void	print_with_opts(S_list *list, options *opts)
 		printf("afonwf\n");
 		//sort_list_t(list);
 	if (opts->r == 1)
-		printf("r= 1\n");
-		//sort_list_r(list);
+		//sorted_merge_r(list);
 	if (opts->a == 1)
 	{
 		while (arg)

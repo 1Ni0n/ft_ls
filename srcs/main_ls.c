@@ -69,7 +69,7 @@ void		main_ls(char *dir_name, options *opts)
 		}
 	}
 	closedir(rep);
-	sort_list(&list);
+	merge_sort(&(list->head), opts);
 	//print_with_opts;
 	print_list(list);
 	printf("\n");

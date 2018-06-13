@@ -28,7 +28,7 @@ void	check_inexistant(char **av)
 			append_to_list(does_not_exist_list, av[i], 0, NULL);
 		i++;
 	}
-	sort_list(&does_not_exist_list);
+	merge_sort(&(does_not_exist_list->head), NULL);
 	print_does_not_exist_list(does_not_exist_list);
 }
 
@@ -48,11 +48,7 @@ void	check_files(char **av, options *opts)
 			append_to_list(no_dir_list, av[i], sb.st_mtime, NULL);
 		i++;
 	}
-	sort_list(&no_dir_list);
-	if (opts != NULL && opts->t == 1)
-		sort_list_t(&no_dir_list);
-	if (opts != NULL && opts->r == 1)
-		sort_list_r(&no_dir_list);
+	merge_sort(&(no_dir_list->head), opts);
 	print_list(no_dir_list);
 }
 
@@ -78,12 +74,7 @@ S_list 	*check_dir(char **av, options *opts)
 		}
 		i++;
 	}
-	sort_list(&dir_list);
-	if (opts != NULL && opts->t == 1)
-		sort_list_t(&dir_list);
-	if (opts != NULL && opts->r == 1)
-		sort_list_r(&dir_list);
-	//print_list(dir_list);
+	merge_sort(&(dir_list->head), opts);
 	return (dir_list);
 }
 

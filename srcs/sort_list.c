@@ -99,7 +99,7 @@ void	split_list(args_node *elem, args_node **front, args_node **back)
 	slow->next = NULL;
 }
 
-void	merge_sort(args_node **head)
+void	merge_sort(args_node **head, options *opts)
 {
 	args_node *elem;
 	args_node *a;
@@ -109,9 +109,14 @@ void	merge_sort(args_node **head)
 	if (elem == NULL || elem->next == NULL)
 		return;
 	split_list(elem, &a, &b);
-	merge_sort(&a);
-	merge_sort(&b);
-	*head = sorted_merge(a, b);
+	merge_sort(&a, opts);
+	merge_sort(&b, opts);
+	if (opts != NULL && opts->t == 1)
+		*head = sorted_merge_t(a, b);
+	if (opts != NULL && opts->r == 1)
+		*head = sorted_merge_r(a, b);
+	else
+		*head = sorted_merge(a, b);
 }
 
 /*void	sort_list_t(S_list **list)

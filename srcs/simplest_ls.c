@@ -32,7 +32,7 @@ void	simplest_ls(void)
 			append_to_list(list, truc_lu->d_name, 0, NULL);
 	}
 	closedir(rep);
-	sort_list(&list);
+	merge_sort(&(list->head), NULL);
 	print_list(list);
 //	free(&list);
 }

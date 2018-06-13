@@ -69,5 +69,8 @@ void		main_ls(char *dir_name, options *opts);
 void		sort_list_t(S_list **list);
 void		sort_list_r(S_list **list);
 int			check_if_only_opts(char **av);
+void		merge_sort(args_node **head, options *opts);
+args_node	*sorted_merge_t(args_node *a, args_node *b);
+args_node	*sorted_merge_r(args_node *a, args_node *b);
 
 #endif
