@@ -49,7 +49,7 @@ void	check_files(char **av, options *opts)
 		i++;
 	}
 	merge_sort(&(no_dir_list->head), opts);
-	print_list(no_dir_list);
+	print_list(no_dir_list, opts);
 }
 
 S_list 	*check_dir(char **av, options *opts)

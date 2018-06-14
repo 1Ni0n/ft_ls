@@ -20,6 +20,8 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <time.h>
+#include <pwd.h>
+#include <grp.h>
 #include "libft/libft.h"
 
 typedef struct dirent dirent;
@@ -31,11 +33,14 @@ struct args_node
 {
 	char			*content;
 	char 			*path;
-	struct stat		sb;
 	long			time;
-	dirent			*f_flow;
+	char 			type;
+	char 			perm[10];
+	int 			pl; //physical link
+	char 			*uid;
+	char 			*gid;
+	char 			*atime; 			
 	args_node 		*next;
-	args_node		*prev;
 };
 struct S_list
 {
@@ -58,19 +63,19 @@ void		args_controller(int ac, char **av);
 S_list		*new_s_list(void);
 S_list 		*append_to_list(S_list *list, char *content, long mtime, char *path);
 void 		sort_list(S_list **list);
-void		print_list(S_list 	*list);
+void		print_list(S_list 	*list, options *opts);
 options		*check_for_illegal_opt(int ac, char **av);
 void		ls_controller(char **av, options *opts);
 void		print_does_not_exist_list(S_list *no_list);
 void		print_with_opts(S_list *list, options *opts);
 void		ls_recursive(S_list *dir_list, options *opts);
 void		main_ls(char *dir_name, options *opts);
-//void		prev_ptr(S_list **list, args_node *elem, args_node *next);
 void		sort_list_t(S_list **list);
 void		sort_list_r(S_list **list);
 int			check_if_only_opts(char **av);
 void		merge_sort(args_node **head, options *opts);
 args_node	*sorted_merge_t(args_node *a, args_node *b);
 args_node	*sorted_merge_r(args_node *a, args_node *b);
+void		option_l(S_list *list);
 
 #endif

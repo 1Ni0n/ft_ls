@@ -21,7 +21,8 @@ args_node	*sorted_merge_t(args_node *a, args_node *b)
 		return (b);
 	else if (b == NULL)
 		return (a);
-	if ((a->time <= b->time))
+	printf("a:%ld, b:%ld\n", a->time, b->time);
+	if ((a->time > b->time))
 	{
 		elem = a;
 		elem->next = sorted_merge_t(a->next, b);

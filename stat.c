@@ -60,7 +60,6 @@ int	main(int ac, char **av)
 			printf("1000\n");
 			exit(1);
 		}
-		if (printf( (S_ISLNK(sb.st_mode)) ? "Lien symbolique\n" : "BIUTEW"))
 		printf("st_mode: %o\n", sb.st_mode);
 		printf("st_ino: %llu\n", sb.st_ino);
 		printf("st_dev: %d\n", sb.st_dev);

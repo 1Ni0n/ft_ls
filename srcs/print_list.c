@@ -12,17 +12,14 @@
 
 #include "../ft_ls.h"
 
-void	print_with_opts(S_list *list, options *opts)
+void	print_list(S_list *list, options *opts)
 {
 	args_node	*arg;
 
 	arg = list->head;
-	if (opts->t == 1)
-		printf("afonwf\n");
-		//sort_list_t(list);
-	if (opts->r == 1)
-		//sorted_merge_r(list);
-	if (opts->a == 1)
+	if (opts != NULL && opts->l == 1)
+		option_l(list);
+	else
 	{
 		while (arg)
 		{
@@ -45,24 +42,6 @@ void	print_does_not_exist_list(S_list *no_list)
 		ft_putstr(": No such file or directory");
 		ft_putchar('\n');
 		elem = elem->next;
-	}
-	//free(list);
-}
-
-void	print_list(S_list	*list)
-{
-	args_node	*entity;
-
-	entity = list->head;
-	while (entity)
-	{
-		//printf("PATH----------------> %s\n", entity->path);
-		if (entity->content[0] != '.')
-		{
-			ft_putstr(entity->content);
-			ft_putchar('\n');
-		}
-		entity = entity->next;
 	}
 	//free(list);
 }

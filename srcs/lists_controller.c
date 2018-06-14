@@ -36,9 +36,7 @@ S_list 	*append_to_list(S_list *list, char *content, long mtime, char *path)
 			arg->content = ft_strdup(content);
 			arg->path = path;
 			arg->time = mtime;
-			//arg->f_flow = NULL;
 			arg->next = NULL;
-			arg->prev = NULL;
 			if (list->head == NULL)
 				list->head = arg;
 			if (list->tail == NULL)
