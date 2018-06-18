@@ -28,25 +28,34 @@ typedef struct dirent dirent;
 typedef struct S_list S_list;
 typedef struct args_node args_node;
 typedef struct options options;
+typedef struct longest longest;
 
-struct args_node
-{
-	char			*content;
-	char 			*path;
-	long			time;
-	char 			type;
-	char 			perm[10];
-	int 			pl; //physical link
-	char 			*uid;
-	char 			*gid;
-	char 			*atime; 			
-	args_node 		*next;
-};
 struct S_list
 {
 	size_t		length;
 	args_node	*head;
 	args_node	*tail;
+};
+struct args_node
+{
+	char			*content;
+	char 			*path;
+	char 			perm[10];
+	size_t 			hardlinks; //physical link
+	char 			*uid;
+	char 			*gid;
+	long			size;
+	long 			mtime;
+	char 			*mtimefull;		
+	long			time;
+	args_node 		*next;
+};
+struct longest
+{
+	size_t	hardlinks;
+	size_t	uid;
+	size_t	gid;
+	long 	size;
 };
 struct options
 {
@@ -77,5 +86,7 @@ void		merge_sort(args_node **head, options *opts);
 args_node	*sorted_merge_t(args_node *a, args_node *b);
 args_node	*sorted_merge_r(args_node *a, args_node *b);
 void		option_l(S_list *list);
+longest		*new_longest(void);
+void		print_list_l(S_list *list, longest *longest);
 
 #endif

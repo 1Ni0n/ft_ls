@@ -12,6 +12,19 @@
 
 #include "../ft_ls.h"
 
+longest	*new_longest(void)
+{
+	longest *longest;
+
+//	if (!(longest = malloc(sizeof(longest))))
+//		return (NULL);
+	longest->hardlinks = 0;
+	longest->uid = 0;
+	longest->gid = 0;
+	longest->size = 0;
+	return (longest);
+}
+
 void	free_list(S_list **list)
 {
 	args_node	*elem;
@@ -35,7 +48,7 @@ S_list 	*append_to_list(S_list *list, char *content, long mtime, char *path)
 		{
 			arg->content = ft_strdup(content);
 			arg->path = path;
-			arg->time = mtime;
+			arg->mtime = mtime;
 			arg->next = NULL;
 			if (list->head == NULL)
 				list->head = arg;

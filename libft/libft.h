@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:46:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/02/07 16:37:43 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/06/15 17:22:28 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ int		ft_strnchr(char const *str, char c, int n);
 int		ft_strnnchr(char const *str, char c, int n, int l);
 int		ft_power(int nb, int pow);
 size_t	ft_strflen(char **s);
+size_t	ft_nblen(long nb);
 #endif

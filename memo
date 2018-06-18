@@ -8,4 +8,4 @@ Verifier pourquoi on a des blems avec ft_ls /dev et /etc, ya des trucs qui exist
 Faire gaffe a si on passe des fichiers casses en arg, ils apparaissent mais pas ceux qui sont caches et pas passes en arg donc un trie supplementaire s'impose;
 Faire gaffe au dossier munki.
 Ne pas oublier que si la liste est vide il faut brake.
-./ft_ls -R ../ ne marche pas.
+Lorsque lon passe juste '-' en arg il le considere pas comme une erreur il devrait. Plus general lorsque juste '-' est passe il le considere pas comme un arg ais comme une opts pas bon.
