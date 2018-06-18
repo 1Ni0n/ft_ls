@@ -64,7 +64,7 @@ S_list 	*check_dir(char **av, options *opts)
 		i++;
 	while (av[i])
 	{
-		printf("AV: %s, STAT: %d, DIR?: %d\n", av[i], stat(av[i], &sb), S_ISDIR(sb.st_mode));
+		//printf("AV: %s, STAT: %d, DIR?: %d\n", av[i], stat(av[i], &sb), S_ISDIR(sb.st_mode));
 		if (stat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1)
 		{
 			//if (av[i][0] == '.' && opts->a == 1)

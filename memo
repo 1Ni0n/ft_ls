@@ -9,3 +9,4 @@ Faire gaffe a si on passe des fichiers casses en arg, ils apparaissent mais pas 
 Faire gaffe au dossier munki.
 Ne pas oublier que si la liste est vide il faut brake.
 Lorsque lon passe juste '-' en arg il le considere pas comme une erreur il devrait. Plus general lorsque juste '-' est passe il le considere pas comme un arg ais comme une opts pas bon.
+Lors dun affichage de -l, la section time ne montre pas lannee de modif comme il faudrait sur certains liens symboliques, mais lheure exacte.

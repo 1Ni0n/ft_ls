@@ -29,6 +29,7 @@ void	get_perm(args_node *elem)
 	char		*path;
 	struct stat sb;
 	struct stat sb2;
+	time_t		good_time;
 
 	if (elem->path == NULL)
 			path = ft_strdup(elem->content);
@@ -40,6 +41,7 @@ void	get_perm(args_node *elem)
 	{
 		elem->perm[0] = 'l';
 		sb = sb2;
+		elem->mtime = sb.st_mtime;
 	}
 	if (S_ISDIR(sb.st_mode) == 1)
 		elem->perm[0] = 'd';
@@ -72,17 +74,30 @@ void	get_correct_date(args_node *elem)
 	char 	*correct_date;
 	int 	i;
 	int		j;
+	time_t 	actual_time;
+	time_t	diff;
 
 	i = 4;
 	j = 0;
+	if ((actual_time = time(NULL)) == -1)
+		return;	
 	correct_date = (char*)malloc(sizeof(char) * (13));
 	while (i < 16)
-	{
 		correct_date[j++] = elem->mtimefull[i++];
-	}
 	correct_date[j] = '\0';
 	free(elem->mtimefull);
 	elem->mtimefull = ft_strdup(correct_date);
+	if ((diff = elem->mtime - actual_time) >= 15768000 || diff <= -15768000)
+	{
+		//printf("%s ", elem->content);
+		diff = 1970 + (elem->mtime / 31557600);
+		//printf("DIFF: %ld\n", diff);
+		elem->mtimefull[7] = ' ';
+		elem->mtimefull[8] = (diff / 1000) + '0';
+		elem->mtimefull[9] = ((diff / 100) % 10) + '0';
+		elem->mtimefull[10] = ((diff / 10) % 10) + '0';
+		elem->mtimefull[11] = (diff % 10) + '0';
+	}
 	free(correct_date);
 }
 
@@ -108,9 +123,10 @@ void get_infos(args_node *elem)
 		elem->gid = ft_strdup(p2->gr_name);
 	elem->hardlinks = sb.st_nlink;
 	elem->mtimefull = ft_strdup(ft_strtrim(ctime(&sb.st_mtime)));
+	get_perm(elem);	
 	get_correct_date(elem);
 	elem->size = sb.st_size;
-	get_perm(elem);	
+	elem->nb_of_blocks = sb.st_blksize;
 	free(path);
 }
 
@@ -129,6 +145,7 @@ void	option_l(S_list *list)
 		get_infos(elem);
 		get_longest(elem, &longest);
 		//printf("LINKS: %zu, UID: %zu, GID: %zu, SIZE: %zu\n", longest.hardlinks, longest.uid, longest.gid, longest.size);
+		printf("LINKS: %zu, UID: %s, GID: %s, SIZE: %zu, BLOCKS: %ld\n", elem->hardlinks, elem->uid, elem->gid, elem->size, elem->nb_of_blocks);
 		elem = elem->next;
 	}
 	//printf("FIN\n");

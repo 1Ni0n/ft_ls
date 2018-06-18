@@ -46,8 +46,9 @@ struct args_node
 	char 			*gid;
 	long			size;
 	long 			mtime;
-	char 			*mtimefull;		
+	char 			*mtimefull;	
 	long			time;
+	long 			nb_of_blocks;
 	args_node 		*next;
 };
 struct longest

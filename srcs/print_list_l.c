@@ -12,6 +12,19 @@
 
 #include "../ft_ls.h"
 
+long 	get_total_block_nb(args_node *elem)
+{
+	long 	total_block_nb;
+
+	total_block_nb = 0;
+	while (elem)
+	{
+		total_block_nb += elem->nb_of_blocks;
+		elem = elem->next;
+	}
+	return (total_block_nb);
+}
+
 void 	print_list_l(S_list *list, longest *longest)
 {
 	args_node 	*elem;
@@ -19,6 +32,9 @@ void 	print_list_l(S_list *list, longest *longest)
 	size_t 		size;
 
 	elem = list->head;
+	ft_putstr("total ");
+	ft_putnbr(get_total_block_nb(elem));
+	ft_putchar('\n');
 	while (elem)
 	{
 		ft_putstr(elem->perm);
