@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/14 15:13:32 by aguillot          #+#    #+#             */
-/*   Updated: 2018/06/14 15:13:34 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/06/19 15:12:39 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	get_perm(args_node *elem)
 	elem->perm[7] = (sb.st_mode & S_IROTH) ? 'r' : '-';
 	elem->perm[8] = (sb.st_mode & S_IWOTH) ? 'w' : '-';
 	elem->perm[9] = (sb.st_mode & S_IXOTH) ? 'x' : '-';
+	elem->perm[10] = '\0';
 	free(path);
 }
 
@@ -108,15 +109,26 @@ void get_infos(args_node *elem)
 	struct stat 	sb2;
 	struct passwd 	*p;
 	struct group 	*p2;
+	int 			link;
+	char			symlink[255];
 
 	if (elem->path == NULL)
 			path = ft_strdup(elem->content);
 		else
 			path = ft_strdup(elem->path);
+	elem->symlink = NULL;
 	if (stat(path, &sb) == -1 || lstat(path, &sb2) == -1)
 		return;
 	if (S_ISLNK(sb2.st_mode) == 1)
+	{
 		sb = sb2;
+		if ((link = readlink(path, symlink, 255)) != -1)
+		{
+			symlink[link] = '\0';
+			elem->symlink = ft_strdup(symlink);
+			//printf("ELEM: %s, LINK: %s\n", elem->content, elem->symlink);
+		}
+	}
 	if ((p = getpwuid(sb.st_uid)) != NULL)
 		elem->uid = ft_strdup(p->pw_name);
 	if ((p2 = getgrgid(sb.st_gid)) != NULL)
@@ -126,7 +138,7 @@ void get_infos(args_node *elem)
 	get_perm(elem);	
 	get_correct_date(elem);
 	elem->size = sb.st_size;
-	elem->nb_of_blocks = sb.st_blksize;
+	elem->nb_of_blocks = sb.st_blocks;
 	free(path);
 }
 
@@ -145,7 +157,7 @@ void	option_l(S_list *list)
 		get_infos(elem);
 		get_longest(elem, &longest);
 		//printf("LINKS: %zu, UID: %zu, GID: %zu, SIZE: %zu\n", longest.hardlinks, longest.uid, longest.gid, longest.size);
-		printf("LINKS: %zu, UID: %s, GID: %s, SIZE: %zu, BLOCKS: %ld\n", elem->hardlinks, elem->uid, elem->gid, elem->size, elem->nb_of_blocks);
+		//printf("LINKS: %zu, UID: %s, GID: %s, SIZE: %zu, BLOCKS: %ld\n", elem->hardlinks, elem->uid, elem->gid, elem->size, elem->nb_of_blocks);
 		elem = elem->next;
 	}
 	//printf("FIN\n");

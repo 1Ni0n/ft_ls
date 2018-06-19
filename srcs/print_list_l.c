@@ -32,9 +32,12 @@ void 	print_list_l(S_list *list, longest *longest)
 	size_t 		size;
 
 	elem = list->head;
-	ft_putstr("total ");
-	ft_putnbr(get_total_block_nb(elem));
-	ft_putchar('\n');
+	if (elem != NULL)
+	{
+		ft_putstr("total ");
+		ft_putnbr(get_total_block_nb(elem));
+		ft_putchar('\n');
+	}
 	while (elem)
 	{
 		ft_putstr(elem->perm);
@@ -78,8 +81,12 @@ void 	print_list_l(S_list *list, longest *longest)
 		ft_putstr(elem->mtimefull);
 		ft_putchar(32);
 		ft_putstr(elem->content);
+		if (elem->symlink != NULL)
+		{
+			ft_putstr(" -> ");
+			ft_putstr(elem->symlink);
+		}
 		ft_putchar('\n');
-		//ft_putstr(elem->content);
 		elem = elem->next;
 	}
 }

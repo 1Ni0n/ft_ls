@@ -49,7 +49,6 @@ void		main_ls(char *dir_name, options *opts)
 	truc_lu = NULL;
 	mtime = 0;
 	list = new_s_list();
-	//printf("%s\n", dir_name);
 	if ((rep = opendir(dir_name)) == NULL)
 	{
 		perror("");
@@ -70,7 +69,6 @@ void		main_ls(char *dir_name, options *opts)
 	}
 	closedir(rep);
 	merge_sort(&(list->head), opts);
-	//print_with_opts;
 	print_list(list, opts);
 	if (opts != NULL && opts->R == 1)
 		ls_recursive(list, opts);

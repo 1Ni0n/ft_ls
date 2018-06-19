@@ -40,7 +40,7 @@ struct args_node
 {
 	char			*content;
 	char 			*path;
-	char 			perm[10];
+	char 			perm[11];
 	size_t 			hardlinks; //physical link
 	char 			*uid;
 	char 			*gid;
@@ -49,6 +49,7 @@ struct args_node
 	char 			*mtimefull;	
 	long			time;
 	long 			nb_of_blocks;
+	char 			*symlink;				
 	args_node 		*next;
 };
 struct longest

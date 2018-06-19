@@ -80,12 +80,6 @@ options		*set_opts(int ac, char **av)
 				opts->t = 1;
 			if (av[i][j] == '1')
 				opts->one = 1;
-			/*opts->l = (av[i][j] == 'l') ? 1 : 0;
-			opts->a = (av[i][j] == 'a') ? 1 : 0;
-			opts->r = (av[i][j] == 'r') ? 1 : 0;
-			opts->R = (av[i][j] == 'R') ? 1 : 0;
-			opts->t = (av[i][j] == 't') ? 1 : 0;
-			opts->one = (av[i][j] == '1') ? 1 : 0;*/
 			j++;
 		}
 		i++;

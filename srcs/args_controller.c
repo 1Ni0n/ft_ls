@@ -24,5 +24,4 @@ void	args_controller(int ac, char **av)
 	}
 	else
 		ls_controller(av, opts);
-		//ls_arg_no_opt(ac, av);
 }

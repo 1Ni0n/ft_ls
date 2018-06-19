@@ -18,7 +18,6 @@ void	ls_recursive(S_list *list, options *opts)
 	struct stat sb;
 
 	arg = list->head;
-	//printf("TWAT\n");
 	while (arg)
 	{
 		//printf("PATH: %s, STAT:%d, DIR?: %d\n", arg->path, stat(arg->path, &sb), S_ISDIR(sb.st_mode));
