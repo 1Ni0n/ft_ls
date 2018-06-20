@@ -27,6 +27,7 @@ int				check_if_only_opts(char **av)
 	{
 		if (av[i + 1] != NULL)
 			return (0);
+		i++;
 	}
 	return (1);
 }

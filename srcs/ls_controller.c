@@ -12,7 +12,7 @@
 
 #include "../ft_ls.h"
 
-void	check_inexistant(char **av)
+int		check_inexistant(char **av)
 {
 	S_list	*does_not_exist_list;
 	int 	i;
@@ -20,7 +20,9 @@ void	check_inexistant(char **av)
 
 	does_not_exist_list = new_s_list();
 	i = 1;
-	while (av[i] && av[i][0] == '-' && ft_strcmp(av[i], "--"))
+	while (av[i] && av[i][0] == '-' && ft_strcmp(av[i], "--") != 0)
+		i++;
+	if (ft_strcmp(av[i], "--") == 0)
 		i++;
 	while (av[i])
 	{
@@ -28,28 +30,38 @@ void	check_inexistant(char **av)
 			append_to_list(does_not_exist_list, av[i], 0, NULL);
 		i++;
 	}
+	if (does_not_exist_list->head == NULL)
+		return (0);
 	merge_sort(&(does_not_exist_list->head), NULL);
 	print_does_not_exist_list(does_not_exist_list);
+	return (1);
 }
 
-void	check_files(char **av, options *opts)
+int		check_files(char **av, options *opts)
 {
 	S_list 		*no_dir_list;
 	struct stat sb;
 	int 		i;
+	int 		print_newline;
 
 	no_dir_list = new_s_list();
 	i = 1;
+	print_newline = 0;
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[i], "--") != 0)
 		i++;
 	while (av[i])
 	{
 		if (stat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 0)
 			append_to_list(no_dir_list, av[i], sb.st_mtime, NULL);
+		if (S_ISDIR(sb.st_mode) == 1)
+			print_newline = 1;
 		i++;
 	}
+	if (no_dir_list->head == NULL)
+		return (0);
 	merge_sort(&(no_dir_list->head), opts);
-	print_list(no_dir_list, opts);
+	print_list(no_dir_list, opts, print_newline);
+	return (1);
 }
 
 S_list 	*check_dir(char **av, options *opts)
@@ -84,18 +96,33 @@ void	ls_controller(char **av, options *opts)
 	//on instancie la dir_list que va nous renvoyer check_dir, pour ensuite la passer à main_ls;
 	S_list 		*dir_list;
 	args_node 	*dir;
+	int 		inexistant;
+	int 		files;
+	int 		print_newline;
 
 	if (check_if_only_opts(av) == 1)
-		main_ls("./", opts);
-	check_inexistant(av);
-	check_files(av, opts);
+	{
+		main_ls("./", opts, 0);
+		return;
+	}
+	inexistant = check_inexistant(av);
+	files = check_files(av, opts);
 	dir_list = check_dir(av, opts);
+	print_newline = 0;
 	if (dir_list->head != NULL)
 	{
 		dir = dir_list->head;
 		while (dir)
 		{
-			main_ls(dir->content, opts);
+			if (dir_list->length > 1 || inexistant == 1 || files == 1)
+			{
+				ft_putstr(dir->content);
+				ft_putstr(":\n");
+				print_newline = 1;
+			}
+			if (dir->next == NULL)
+				print_newline = 0;
+			main_ls(dir->content, opts, print_newline);
 			dir = dir->next;
 		}
 	}

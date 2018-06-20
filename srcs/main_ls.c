@@ -35,7 +35,7 @@ static char	*check_path(char *dir_name, char *name)
 	return (NULL);
 }
 
-void		main_ls(char *dir_name, options *opts)
+void		main_ls(char *dir_name, options *opts, int print_newline)
 {
 
 	DIR			*rep;
@@ -69,7 +69,7 @@ void		main_ls(char *dir_name, options *opts)
 	}
 	closedir(rep);
 	merge_sort(&(list->head), opts);
-	print_list(list, opts);
+	print_list(list, opts, print_newline);
 	if (opts != NULL && opts->R == 1)
 		ls_recursive(list, opts);
 	//free(list);
