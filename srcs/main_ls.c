@@ -35,7 +35,7 @@ static char	*check_path(char *dir_name, char *name)
 	return (NULL);
 }
 
-void		main_ls(char *dir_name, options *opts, int print_newline)
+void		main_ls(char *dir_name, options *opts)
 {
 
 	DIR			*rep;
@@ -57,7 +57,7 @@ void		main_ls(char *dir_name, options *opts, int print_newline)
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);
-		if (stat(full_path, &sb) == 0)
+		if (lstat(full_path, &sb) == 0)
 			mtime = sb.st_mtime;
 		if (truc_lu->d_name[0] == '.' && opts != NULL && opts->a == 1)
 			append_to_list(list, truc_lu->d_name, mtime, full_path);
@@ -65,11 +65,19 @@ void		main_ls(char *dir_name, options *opts, int print_newline)
 		{
 			//printf("CHECK: %s, len: %zu\n", check_path(dir_name, truc_lu->d_name), ft_strlen(check_path(dir_name, truc_lu->d_name)));
 			append_to_list(list, truc_lu->d_name, mtime, full_path);
+			//printf("NAME: %s, TIME: %ld\n", truc_lu->d_name, mtime);
 		}
 	}
 	closedir(rep);
-	merge_sort(&(list->head), opts);
-	print_list(list, opts, print_newline);
+	if (opts != NULL && opts->t == 1)
+	{
+		merge_sort_t(&(list->head));
+		if (opts->r == 1)
+			rev_list(&(list->head));
+	}
+	else
+		merge_sort(&(list->head), opts);
+	print_list(list, opts);
 	if (opts != NULL && opts->R == 1)
 		ls_recursive(list, opts);
 	//free(list);

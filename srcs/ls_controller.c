@@ -60,7 +60,7 @@ int		check_files(char **av, options *opts)
 	if (no_dir_list->head == NULL)
 		return (0);
 	merge_sort(&(no_dir_list->head), opts);
-	print_list(no_dir_list, opts, print_newline);
+	print_list(no_dir_list, opts);
 	return (1);
 }
 
@@ -102,7 +102,7 @@ void	ls_controller(char **av, options *opts)
 
 	if (check_if_only_opts(av) == 1)
 	{
-		main_ls("./", opts, 0);
+		main_ls("./", opts);
 		return;
 	}
 	inexistant = check_inexistant(av);
@@ -122,7 +122,7 @@ void	ls_controller(char **av, options *opts)
 			}
 			if (dir->next == NULL)
 				print_newline = 0;
-			main_ls(dir->content, opts, print_newline);
+			main_ls(dir->content, opts);
 			dir = dir->next;
 		}
 	}

@@ -12,7 +12,7 @@
 
 #include "../ft_ls.h"
 
-void	print_list(S_list *list, options *opts, int print_newline)
+void	print_list(S_list *list, options *opts)
 {
 	args_node	*arg;
 
@@ -28,8 +28,6 @@ void	print_list(S_list *list, options *opts, int print_newline)
 			arg = arg->next;
 		}
 	}
-	if (print_newline == 1)
-		ft_putchar('\n');
 }
 
 void	print_does_not_exist_list(S_list *no_list)

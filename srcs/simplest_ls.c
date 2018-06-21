@@ -33,7 +33,7 @@ void	simplest_ls(void)
 	}
 	closedir(rep);
 	merge_sort(&(list->head), NULL);
-	print_list(list, NULL, 0);
+	print_list(list, NULL);
 //	free(&list);
 }
 
