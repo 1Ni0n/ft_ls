@@ -78,12 +78,7 @@ S_list 	*check_dir(char **av, options *opts)
 	{
 		//printf("AV: %s, STAT: %d, DIR?: %d\n", av[i], stat(av[i], &sb), S_ISDIR(sb.st_mode));
 		if (stat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1)
-		{
-			//if (av[i][0] == '.' && opts->a == 1)
-				append_to_list(dir_list, av[i], sb.st_mtime, NULL);
-			//else if (av[i][0] != '.')
-			//	append_to_list(dir_list, av[i], sb.st_mtime, NULL);
-		}
+			append_to_list(dir_list, av[i], sb.st_mtime, NULL);
 		i++;
 	}
 	merge_sort(&(dir_list->head), opts);

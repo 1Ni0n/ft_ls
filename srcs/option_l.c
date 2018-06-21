@@ -117,11 +117,11 @@ void get_infos(args_node *elem)
 		else
 			path = ft_strdup(elem->path);
 	elem->symlink = NULL;
-	if (stat(path, &sb) == -1 || lstat(path, &sb2) == -1)
+	if (/*stat(path, &sb) == -1 ||*/ lstat(path, &sb/*2*/) == -1)
 		return;
-	if (S_ISLNK(sb2.st_mode) == 1)
+	if (S_ISLNK(sb/*2*/.st_mode) == 1)
 	{
-		sb = sb2;
+		/*sb = sb2;*/
 		if ((link = readlink(path, symlink, 255)) != -1)
 		{
 			symlink[link] = '\0';

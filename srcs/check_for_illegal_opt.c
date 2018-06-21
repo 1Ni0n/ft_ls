@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 11:30:25 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/28 11:30:28 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/06/21 18:31:25 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void		print_usage(char c)
 	ft_putchar('\n');
 }
 
-void 		set_null_opts(options **opts)
+void			set_null_opts(options **opts)
 {
 	if ((*opts) != NULL)
 	{
@@ -57,11 +57,11 @@ void 		set_null_opts(options **opts)
 options		*set_opts(int ac, char **av)
 {
 	options *opts;
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 
 	i = 1;
-	if (!(opts = malloc(sizeof *opts)))
+	if (!(opts = malloc(sizeof*opts)))
 		return (NULL);
 	set_null_opts(&opts);
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[1], "--") != 0)
@@ -90,8 +90,8 @@ options		*set_opts(int ac, char **av)
 
 options		*check_for_illegal_opt(int ac, char **av)
 {
-	int 	i;
-	int 	j;
+	int		i;
+	int		j;
 	options	*opts;
 
 	opts = NULL;
@@ -102,7 +102,8 @@ options		*check_for_illegal_opt(int ac, char **av)
 		opts = set_opts(ac, av);
 		while (av[i][j])
 		{
-			if (av[i][j] != 'l' && av[i][j] != 'a' && av[i][j] != 'r' && av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1')
+			if (av[i][j] != 'l' && av[i][j] != 'a' && av[i][j] != 'r' &&\
+					av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1')
 			{
 				print_usage(av[i][j]);
 				exit(1);
@@ -111,6 +112,5 @@ options		*check_for_illegal_opt(int ac, char **av)
 		}
 		i++;
 	}
-	//printf("l: %d, a: %d, r: %d, R: %d, t: %d, one: %d\n", opts->l, opts->a, opts->r, opts->R, opts->t, opts->one);
 	return (opts);
 }
