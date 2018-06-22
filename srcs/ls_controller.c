@@ -42,19 +42,15 @@ int		check_files(char **av, options *opts)
 	S_list 		*no_dir_list;
 	struct stat sb;
 	int 		i;
-	int 		print_newline;
 
 	no_dir_list = new_s_list();
 	i = 1;
-	print_newline = 0;
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[i], "--") != 0)
 		i++;
 	while (av[i])
 	{
 		if (stat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 0)
 			append_to_list(no_dir_list, av[i], sb.st_mtime, NULL);
-		if (S_ISDIR(sb.st_mode) == 1)
-			print_newline = 1;
 		i++;
 	}
 	if (no_dir_list->head == NULL)
@@ -93,7 +89,6 @@ void	ls_controller(char **av, options *opts)
 	args_node 	*dir;
 	int 		inexistant;
 	int 		files;
-	int 		print_newline;
 
 	if (check_if_only_opts(av) == 1)
 	{
@@ -103,21 +98,21 @@ void	ls_controller(char **av, options *opts)
 	inexistant = check_inexistant(av);
 	files = check_files(av, opts);
 	dir_list = check_dir(av, opts);
-	print_newline = 0;
 	if (dir_list->head != NULL)
 	{
 		dir = dir_list->head;
 		while (dir)
 		{
+			if (files == 1 && dir->next != NULL)
+				ft_putchar('\n');
 			if (dir_list->length > 1 || inexistant == 1 || files == 1)
 			{
 				ft_putstr(dir->content);
 				ft_putstr(":\n");
-				print_newline = 1;
 			}
-			if (dir->next == NULL)
-				print_newline = 0;
 			main_ls(dir->content, opts);
+			if (dir->next != NULL || (files == 1 && dir->next != NULL))
+				ft_putchar('\n');
 			dir = dir->next;
 		}
 	}

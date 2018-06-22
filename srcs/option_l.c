@@ -118,7 +118,10 @@ void get_infos(args_node *elem)
 			path = ft_strdup(elem->path);
 	elem->symlink = NULL;
 	if (/*stat(path, &sb) == -1 ||*/ lstat(path, &sb/*2*/) == -1)
+	{
+		printf("BITCH\n");
 		return;
+	}
 	if (S_ISLNK(sb/*2*/.st_mode) == 1)
 	{
 		/*sb = sb2;*/
