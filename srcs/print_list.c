@@ -28,6 +28,8 @@ void	print_list(S_list *list, options *opts)
 			arg = arg->next;
 		}
 	}
+	/*if (opts != NULL)
+		free(opts);*/
 }
 
 void	print_does_not_exist_list(S_list *no_list)

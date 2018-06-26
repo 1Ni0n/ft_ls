@@ -102,11 +102,10 @@ void	get_correct_date(args_node *elem)
 	free(correct_date);
 }
 
-void get_infos(args_node *elem)
+int get_infos(args_node *elem)
 {
 	char			*path;
 	struct stat 	sb;
-	struct stat 	sb2;
 	struct passwd 	*p;
 	struct group 	*p2;
 	int 			link;
@@ -117,19 +116,19 @@ void get_infos(args_node *elem)
 		else
 			path = ft_strdup(elem->path);
 	elem->symlink = NULL;
-	if (/*stat(path, &sb) == -1 ||*/ lstat(path, &sb/*2*/) == -1)
+	if (lstat(path, &sb) == -1)
 	{
+		printf("ELEM: %s, LSTAT: %d\n", path, lstat(path, &sb));
 		printf("BITCH\n");
-		return;
+		perror("");
+		return (0);
 	}
-	if (S_ISLNK(sb/*2*/.st_mode) == 1)
+	if (S_ISLNK(sb.st_mode) == 1)
 	{
-		/*sb = sb2;*/
 		if ((link = readlink(path, symlink, 255)) != -1)
 		{
 			symlink[link] = '\0';
 			elem->symlink = ft_strdup(symlink);
-			//printf("ELEM: %s, LINK: %s\n", elem->content, elem->symlink);
 		}
 	}
 	if ((p = getpwuid(sb.st_uid)) != NULL)
@@ -143,6 +142,7 @@ void get_infos(args_node *elem)
 	elem->size = sb.st_size;
 	elem->nb_of_blocks = sb.st_blocks;
 	free(path);
+	return (1);
 }
 
 void	option_l(S_list *list)
@@ -157,12 +157,11 @@ void	option_l(S_list *list)
 	longest.size = 0;
 	while (elem)
 	{
-		get_infos(elem);
-		get_longest(elem, &longest);
-		//printf("LINKS: %zu, UID: %zu, GID: %zu, SIZE: %zu\n", longest.hardlinks, longest.uid, longest.gid, longest.size);
-		//printf("LINKS: %zu, UID: %s, GID: %s, SIZE: %zu, BLOCKS: %ld\n", elem->hardlinks, elem->uid, elem->gid, elem->size, elem->nb_of_blocks);
+		if (get_infos(elem) == 1)
+			get_longest(elem, &longest);
+		else
+			elem->content = NULL;
 		elem = elem->next;
 	}
-	//printf("FIN\n");
 	print_list_l(list, &longest);
 }

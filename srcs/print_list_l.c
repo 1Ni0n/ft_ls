@@ -12,17 +12,32 @@
 
 #include "../ft_ls.h"
 
-long 	get_total_block_nb(args_node *elem)
+void	print_blocks(char *dir_name, options *opts)
 {
-	long 	total_block_nb;
+	DIR			*rep;
+	dirent		*truc_lu;
+	struct stat sb;
+	long 		blocks;
+	char 		*full_path;
 
-	total_block_nb = 0;
-	while (elem)
+	blocks = 0;
+	if ((rep = opendir(dir_name)) != NULL)
 	{
-		total_block_nb += elem->nb_of_blocks;
-		elem = elem->next;
+		while ((truc_lu = readdir(rep)) != NULL)
+		{
+			full_path = check_path(dir_name, truc_lu->d_name);
+			if (lstat(full_path, &sb) == 0)
+			{
+				if (truc_lu->d_name[0] != '.')
+					blocks += sb.st_blocks;
+				if (truc_lu->d_name[0] == '.' && opts != NULL && opts->a == 1)
+					blocks += sb.st_blocks;
+			}
+		}
 	}
-	return (total_block_nb);
+	ft_putstr("total ");
+	ft_putnbr(blocks);
+	ft_putchar('\n');
 }
 
 void 	print_list_l(S_list *list, longest *longest)
@@ -31,62 +46,61 @@ void 	print_list_l(S_list *list, longest *longest)
 	size_t		max;
 	size_t 		size;
 
-	elem = list->head;
-	if (elem != NULL)
+	if ((elem = list->head))
 	{
-		ft_putstr("total ");
-		ft_putnbr(get_total_block_nb(elem));
-		ft_putchar('\n');
-	}
-	while (elem)
-	{
-		ft_putstr(elem->perm);
-		ft_putchar(' ');
-		max = longest->hardlinks;
-		size  = ft_nblen(elem->hardlinks);
-		while (max > size)
+		while (elem)
 		{
-			ft_putchar(32);
-			max--;
+			if (elem->content != NULL)
+			{
+				ft_putstr(elem->perm);
+				ft_putchar(' ');
+				max = longest->hardlinks;
+				size  = ft_nblen(elem->hardlinks);
+				while (max >= size)
+				{
+					ft_putchar(32);
+					max--;
+				}
+				ft_putnbr(elem->hardlinks);
+				ft_putchar(' ');
+				max = longest->uid;
+				size = ft_strlen(elem->uid);
+				while (max > size)
+				{
+					ft_putchar(32);
+					max--;
+				}
+				ft_putstr(elem->uid);
+				ft_putstr("  ");
+				max = longest->gid;
+				size = ft_strlen(elem->gid);
+				while (max > size)
+				{
+					ft_putchar(32);
+					max--;
+				}
+				ft_putstr(elem->gid);
+				ft_putchar(32);
+				max = longest->size;
+				size = ft_nblen(elem->size);
+				while (max > size)
+				{
+					ft_putchar(32);
+					max--;
+				}
+				ft_putnbr(elem->size);
+				ft_putchar(32);
+				ft_putstr(elem->mtimefull);
+				ft_putchar(32);
+				ft_putstr(elem->content);
+				if (elem->symlink != NULL)
+				{
+					ft_putstr(" -> ");
+					ft_putstr(elem->symlink);
+				}
+				ft_putchar('\n');
+			}
+			elem = elem->next;
 		}
-		ft_putnbr(elem->hardlinks);
-		ft_putchar(' ');
-		max = longest->uid;
-		size = ft_strlen(elem->uid);
-		while (max > size)
-		{
-			ft_putchar(32);
-			max--;
-		}
-		ft_putstr(elem->uid);
-		ft_putstr("  ");
-		max = longest->gid;
-		size = ft_strlen(elem->gid);
-		while (max > size)
-		{
-			ft_putchar(32);
-			max--;
-		}
-		ft_putstr(elem->gid);
-		ft_putchar(32);
-		max = longest->size;
-		size = ft_nblen(elem->size);
-		while (max > size)
-		{
-			ft_putchar(32);
-			max--;
-		}
-		ft_putnbr(elem->size);
-		ft_putchar(32);
-		ft_putstr(elem->mtimefull);
-		ft_putchar(32);
-		ft_putstr(elem->content);
-		if (elem->symlink != NULL)
-		{
-			ft_putstr(" -> ");
-			ft_putstr(elem->symlink);
-		}
-		ft_putchar('\n');
-		elem = elem->next;
 	}
 }

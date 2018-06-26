@@ -31,4 +31,5 @@ void	ls_recursive(S_list *list, options *opts)
 			}
 			arg = arg->next;
 	}
+	free_list(list);
 }

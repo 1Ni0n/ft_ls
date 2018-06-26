@@ -12,29 +12,22 @@
 
 #include "../ft_ls.h"
 
-/*longest	*new_longest(void)
-{
-	longest *longest;
-
-	longest->hardlinks = 0;
-	longest->uid = 0;
-	longest->gid = 0;
-	longest->size = 0;
-	return (longest);
-}*/
-
-void	free_list(S_list **list)
+void	free_list(S_list *list)
 {
 	args_node	*elem;
-	args_node	*tmp;
+	args_node	*next;
 
-	elem = (*list)->head;
+	if (list == NULL || (list != NULL && list->head == NULL))
+		return;
+	elem = list->head;
 	while (elem)
 	{
-		tmp = elem;
-		elem = elem->next;
-		free(tmp);
+		free(elem->content);
+		next = elem->next;
+		free(elem);
+		elem = next;
 	}
+	free(list);
 }
 
 S_list 	*append_to_list(S_list *list, char *content, long mtime, char *path)

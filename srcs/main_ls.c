@@ -12,11 +12,12 @@
 
 #include "../ft_ls.h"
 
-static char	*check_path(char *dir_name, char *name)
+char	*check_path(char *dir_name, char *name)
 {
 	size_t	len;
 	char	*full_path;
 	char	end;
+	char 	*tmp;
 
 	len = ft_strlen(dir_name);
 	full_path = NULL;
@@ -28,14 +29,18 @@ static char	*check_path(char *dir_name, char *name)
 	}
 	else if (end != '/')
 	{
+		tmp = full_path;
 		full_path = ft_strjoin(dir_name, "/");
+		free(tmp);
+		tmp = full_path;
 		full_path = ft_strjoin(full_path, name);
+		free(tmp);
 		return (full_path);
 	}
 	return (NULL);
 }
 
-void		main_ls(char *dir_name, options *opts)
+void	main_ls(char *dir_name, options *opts)
 {
 
 	DIR			*rep;
@@ -54,6 +59,11 @@ void		main_ls(char *dir_name, options *opts)
 		perror("");
 		return;
 	}
+	if (opts != NULL && opts->l == 1 && lstat(dir_name, &sb) == 0)
+	{
+		printf("ELEM: %s, BLOCKS: %d\n", dir_name, lstat(dir_name, &sb));
+		print_blocks(dir_name, opts);
+	}
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);
@@ -67,6 +77,7 @@ void		main_ls(char *dir_name, options *opts)
 			append_to_list(list, truc_lu->d_name, mtime, full_path);
 			//printf("NAME: %s, TIME: %ld\n", truc_lu->d_name, mtime);
 		}
+		free(full_path);
 	}
 	closedir(rep);
 	if (opts != NULL && opts->t == 1)
@@ -80,5 +91,5 @@ void		main_ls(char *dir_name, options *opts)
 	print_list(list, opts);
 	if (opts != NULL && opts->R == 1)
 		ls_recursive(list, opts);
-	//free(list);
+	free_list(list);
 }

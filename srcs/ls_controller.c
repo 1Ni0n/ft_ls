@@ -34,6 +34,7 @@ int		check_inexistant(char **av)
 		return (0);
 	merge_sort(&(does_not_exist_list->head), NULL);
 	print_does_not_exist_list(does_not_exist_list);
+	free_list(does_not_exist_list);
 	return (1);
 }
 
@@ -57,6 +58,7 @@ int		check_files(char **av, options *opts)
 		return (0);
 	merge_sort(&(no_dir_list->head), opts);
 	print_list(no_dir_list, opts);
+	free_list(no_dir_list);
 	return (1);
 }
 
@@ -98,13 +100,13 @@ void	ls_controller(char **av, options *opts)
 	inexistant = check_inexistant(av);
 	files = check_files(av, opts);
 	dir_list = check_dir(av, opts);
+	if (files == 1 && dir_list->length >= 1)
+		ft_putchar('\n');
 	if (dir_list->head != NULL)
 	{
 		dir = dir_list->head;
 		while (dir)
 		{
-			if (files == 1 && dir->next != NULL)
-				ft_putchar('\n');
 			if (dir_list->length > 1 || inexistant == 1 || files == 1)
 			{
 				ft_putstr(dir->content);
@@ -115,5 +117,6 @@ void	ls_controller(char **av, options *opts)
 				ft_putchar('\n');
 			dir = dir->next;
 		}
+		free_list(dir_list);
 	}
 }

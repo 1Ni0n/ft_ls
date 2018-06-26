@@ -93,5 +93,7 @@ void		print_list_l(S_list *list, longest *longest);
 void		merge_sort_t(args_node **head);
 void		split_list(args_node *elem, args_node **front, args_node **back);
 int			rev_list(args_node **head);
-
+void		print_blocks(char *dir_name, options *opts);
+char		*check_path(char *dir_name, char *name);
+void		free_list(S_list *list);
 #endif
