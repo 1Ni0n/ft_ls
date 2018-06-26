@@ -31,10 +31,10 @@ char	*check_path(char *dir_name, char *name)
 	{
 		tmp = full_path;
 		full_path = ft_strjoin(dir_name, "/");
-		free(tmp);
+		//free(tmp);
 		tmp = full_path;
 		full_path = ft_strjoin(full_path, name);
-		free(tmp);
+		//free(tmp);
 		return (full_path);
 	}
 	return (NULL);
@@ -60,24 +60,17 @@ void	main_ls(char *dir_name, options *opts)
 		return;
 	}
 	if (opts != NULL && opts->l == 1 && lstat(dir_name, &sb) == 0)
-	{
-		printf("ELEM: %s, BLOCKS: %d\n", dir_name, lstat(dir_name, &sb));
 		print_blocks(dir_name, opts);
-	}
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);
 		if (lstat(full_path, &sb) == 0)
 			mtime = sb.st_mtime;
-		if (truc_lu->d_name[0] == '.' && opts != NULL && opts->a == 1)
+		if (truc_lu->d_name[0] == '.' && opts != NULL && opts->a == 1 && ft_strcmp(truc_lu->d_name, ".") != 0 && ft_strcmp(truc_lu->d_name, "..") != 0)
 			append_to_list(list, truc_lu->d_name, mtime, full_path);
 		else if (truc_lu->d_name[0] != '.')
-		{
-			//printf("CHECK: %s, len: %zu\n", check_path(dir_name, truc_lu->d_name), ft_strlen(check_path(dir_name, truc_lu->d_name)));
 			append_to_list(list, truc_lu->d_name, mtime, full_path);
-			//printf("NAME: %s, TIME: %ld\n", truc_lu->d_name, mtime);
-		}
-		free(full_path);
+		//free(full_path);
 	}
 	closedir(rep);
 	if (opts != NULL && opts->t == 1)
@@ -91,5 +84,5 @@ void	main_ls(char *dir_name, options *opts)
 	print_list(list, opts);
 	if (opts != NULL && opts->R == 1)
 		ls_recursive(list, opts);
-	free_list(list);
+	//free_list(list);
 }

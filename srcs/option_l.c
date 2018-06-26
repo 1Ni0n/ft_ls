@@ -12,13 +12,19 @@
 
 #include "../ft_ls.h"
 
+void 	set_majorminor(args_node *elem, struct stat sb)
+{
+	elem->major = major(sb.st_rdev);
+	elem->minor = minor(sb.st_rdev);
+}
+
 void	get_longest(args_node *elem, longest *longest)
 {
 	if (ft_nblen(elem->hardlinks) > longest->hardlinks)
 		longest->hardlinks = ft_nblen(elem->hardlinks);
-	if (ft_strlen(elem->uid) > longest->uid)
+	if (elem->uid != NULL && ft_strlen(elem->uid) > longest->uid)
 		longest->uid = ft_strlen(elem->uid);
-	if (ft_strlen(elem->gid) > longest->gid)
+	if (elem->gid != NULL && ft_strlen(elem->gid) > longest->gid)
 		longest->gid = ft_strlen(elem->gid);
 	if (ft_nblen(elem->size) > longest->size)
 		longest->size = ft_nblen(elem->size);
@@ -68,6 +74,8 @@ void	get_perm(args_node *elem)
 	elem->perm[9] = (sb.st_mode & S_IXOTH) ? 'x' : '-';
 	elem->perm[10] = '\0';
 	free(path);
+	if (elem->perm[0] == 'c' || elem->perm[0] == 'b')
+		set_majorminor(elem, sb);
 }
 
 void	get_correct_date(args_node *elem)
@@ -110,16 +118,20 @@ int get_infos(args_node *elem)
 	struct group 	*p2;
 	int 			link;
 	char			symlink[255];
+	char 			*tmp;
 
 	if (elem->path == NULL)
-			path = ft_strdup(elem->content);
-		else
-			path = ft_strdup(elem->path);
+		path = ft_strdup(elem->content);
+	else
+	{
+		tmp = path;
+		path = ft_strdup(elem->path);
+		//free(path);
+	}
 	elem->symlink = NULL;
 	if (lstat(path, &sb) == -1)
 	{
-		printf("ELEM: %s, LSTAT: %d\n", path, lstat(path, &sb));
-		printf("BITCH\n");
+		//printf("ELEM: %s, LSTAT: %d\n", path, lstat(path, &sb));
 		perror("");
 		return (0);
 	}
@@ -141,7 +153,7 @@ int get_infos(args_node *elem)
 	get_correct_date(elem);
 	elem->size = sb.st_size;
 	elem->nb_of_blocks = sb.st_blocks;
-	free(path);
+//	free(path);
 	return (1);
 }
 

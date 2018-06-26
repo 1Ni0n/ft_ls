@@ -49,7 +49,9 @@ struct args_node
 	char 			*mtimefull;	
 	long			time;
 	long 			nb_of_blocks;
-	char 			*symlink;				
+	char 			*symlink;
+	long 			major;
+	long 			minor;				
 	args_node 		*next;
 };
 struct longest

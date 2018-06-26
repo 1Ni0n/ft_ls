@@ -11,3 +11,6 @@ Ne pas oublier que si la liste est vide il faut brake.
 Lorsque lon passe juste '-' en arg il le considere pas comme une erreur il devrait. Plus general lorsque juste '-' est passe il le considere pas comme un arg ais comme une opts pas bon.
 Lors dun affichage de -l, la section time ne montre pas lannee de modif comme il faudrait sur certains liens symboliques, mais lheure exacte.
 Lorsque l'on passe -- il nique;
+Lorsqu'on ./ft_ls -lRt ~/ il affiche le total meme si il devrait pas.
+./ft_ls -lRrta / segfault.
+Il pete toujours sur le munki en -Rl...

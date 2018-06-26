@@ -35,6 +35,7 @@ void	print_blocks(char *dir_name, options *opts)
 			}
 		}
 	}
+	closedir(rep);
 	ft_putstr("total ");
 	ft_putnbr(blocks);
 	ft_putchar('\n');
@@ -88,7 +89,15 @@ void 	print_list_l(S_list *list, longest *longest)
 					ft_putchar(32);
 					max--;
 				}
-				ft_putnbr(elem->size);
+				if (elem->perm[0] != 'b' && elem->perm[0] != 'c')
+					ft_putnbr(elem->size);
+				else
+				{
+					ft_putstr("   ");
+					ft_putnbr(elem->major);
+					ft_putstr(",   ");
+					ft_putnbr(elem->minor);
+				}
 				ft_putchar(32);
 				ft_putstr(elem->mtimefull);
 				ft_putchar(32);
