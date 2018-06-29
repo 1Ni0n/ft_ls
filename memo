@@ -13,4 +13,4 @@ Lors dun affichage de -l, la section time ne montre pas lannee de modif comme il
 Lorsque l'on passe -- il nique;
 Lorsqu'on ./ft_ls -lRt ~/ il affiche le total meme si il devrait pas.
 ./ft_ls -lRrta / segfault.
-Il pete toujours sur le munki en -Rl...
+Affichage d'un total 0 meme sur les dossiers vides en -lRatr racine.

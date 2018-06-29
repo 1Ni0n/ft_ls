@@ -55,7 +55,7 @@ void 	print_list_l(S_list *list, longest *longest)
 			{
 				ft_putstr(elem->perm);
 				ft_putchar(' ');
-				max = longest->hardlinks;
+				max = longest->hardlinks;				
 				size  = ft_nblen(elem->hardlinks);
 				while (max >= size)
 				{
@@ -64,23 +64,36 @@ void 	print_list_l(S_list *list, longest *longest)
 				}
 				ft_putnbr(elem->hardlinks);
 				ft_putchar(' ');
+				//printf("BOOBS\n");
 				max = longest->uid;
-				size = ft_strlen(elem->uid);
+				if (elem->uid)
+					size = ft_strlen(elem->uid);
+				else
+					size = ft_nblen(elem->uidd);
 				while (max > size)
 				{
 					ft_putchar(32);
 					max--;
 				}
-				ft_putstr(elem->uid);
+				if (elem->uid)
+					ft_putstr(elem->uid);
+				else
+					ft_putnbr(elem->uidd);
 				ft_putstr("  ");
 				max = longest->gid;
-				size = ft_strlen(elem->gid);
+				if (elem->gid)
+					size = ft_strlen(elem->gid);
+				else
+					size = ft_nblen(elem->gidd);
 				while (max > size)
 				{
 					ft_putchar(32);
 					max--;
 				}
-				ft_putstr(elem->gid);
+				if (elem->gid)
+					ft_putstr(elem->gid);
+				else
+					ft_putnbr(elem->gidd);
 				ft_putchar(32);
 				max = longest->size;
 				size = ft_nblen(elem->size);

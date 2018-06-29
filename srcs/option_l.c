@@ -131,6 +131,7 @@ int get_infos(args_node *elem)
 	elem->symlink = NULL;
 	if (lstat(path, &sb) == -1)
 	{
+		printf("ELEM: %s\n", path);
 		//printf("ELEM: %s, LSTAT: %d\n", path, lstat(path, &sb));
 		perror("");
 		return (0);
@@ -145,8 +146,12 @@ int get_infos(args_node *elem)
 	}
 	if ((p = getpwuid(sb.st_uid)) != NULL)
 		elem->uid = ft_strdup(p->pw_name);
+	else
+		elem->uidd = sb.st_uid;
 	if ((p2 = getgrgid(sb.st_gid)) != NULL)
 		elem->gid = ft_strdup(p2->gr_name);
+	else
+		elem->gidd = sb.st_gid;
 	elem->hardlinks = sb.st_nlink;
 	elem->mtimefull = ft_strdup(ft_strtrim(ctime(&sb.st_mtime)));
 	get_perm(elem);	

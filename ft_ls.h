@@ -42,8 +42,10 @@ struct args_node
 	char 			*path;
 	char 			perm[11];
 	size_t 			hardlinks; //physical link
-	char 			*uid;
+	char			*uid;
+	unsigned int	uidd;// dans le cas ou get_pwuid marche pas on affiche luid cash
 	char 			*gid;
+	unsigned int	gidd;
 	long			size;
 	long 			mtime;
 	char 			*mtimefull;	
