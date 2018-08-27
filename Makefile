@@ -18,11 +18,11 @@ LIB = libft/libft.a
 
 SRC_DIR	= srcs/
 
-SRC_FILE = ft_ls.c simplest_ls.c lists_controller.c args_controller.c  print_list.c check_for_illegal_opt.c ls_controller.c ls_recursive.c main_ls.c sort_list.c option_l.c print_list_l.c sort_list_t.c
+SRC_FILE = ft_ls.c simplest_ls.c lists_controller.c args_controller.c  print_list.c check_for_illegal_opt.c ls_controller.c ls_recursive.c main_ls.c sort_list.c option_l.c print_list_l.c sort_list_t.c check.c
 
 SRCS =	$(addprefix $(SRC_DIR), $(SRC_FILE))
 
-OBJ = ft_ls.o simplest_ls.o lists_controller.o args_controller.o  print_list.o check_for_illegal_opt.o ls_controller.o ls_recursive.o main_ls.o sort_list.o option_l.o print_list_l.o sort_list_t.o
+OBJ = ft_ls.o simplest_ls.o lists_controller.o args_controller.o  print_list.o check_for_illegal_opt.o ls_controller.o ls_recursive.o main_ls.o sort_list.o option_l.o print_list_l.o sort_list_t.o check.o
 
 all: $(NAME)
 

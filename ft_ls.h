@@ -40,10 +40,11 @@ struct args_node
 {
 	char			*content;
 	char 			*path;
+	struct stat 	*stats;
 	char 			perm[11];
 	size_t 			hardlinks; //physical link
 	char			*uid;
-	unsigned int	uidd;// dans le cas ou get_pwuid marche pas on affiche luid cash
+	unsigned int	uidd;// dans le cas ou get_pwuid marche pas on affiche uid cash
 	char 			*gid;
 	unsigned int	gidd;
 	long			size;
@@ -100,4 +101,6 @@ int			rev_list(args_node **head);
 void		print_blocks(char *dir_name, options *opts);
 char		*check_path(char *dir_name, char *name);
 void		free_list(S_list *list);
+int		 	check_for_opt_a(options *opts);
+int 		check_if_curr_or_prev_dir(char *name);
 #endif

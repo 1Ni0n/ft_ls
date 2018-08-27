@@ -66,7 +66,7 @@ void	main_ls(char *dir_name, options *opts)
 		full_path = check_path(dir_name, truc_lu->d_name);
 		if (lstat(full_path, &sb) == 0)
 			mtime = sb.st_mtime;
-		if (truc_lu->d_name[0] == '.' && opts != NULL && opts->a == 1 && ft_strcmp(truc_lu->d_name, ".") != 0 && ft_strcmp(truc_lu->d_name, "..") != 0)
+		if (truc_lu->d_name[0] == '.' && check_for_opt_a(opts) == 1)
 			append_to_list(list, truc_lu->d_name, mtime, full_path);
 		else if (truc_lu->d_name[0] != '.')
 			append_to_list(list, truc_lu->d_name, mtime, full_path);
