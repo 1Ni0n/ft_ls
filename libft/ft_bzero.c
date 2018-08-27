@@ -18,5 +18,5 @@ void	ft_bzero(void *s, size_t n)
 	unsigned char	*ps;
 
 	ps = (unsigned char *)s;
-	ft_memset(s, 0, n);
+	ft_memset(ps, 0, n);
 }

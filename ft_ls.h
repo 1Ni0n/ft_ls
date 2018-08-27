@@ -40,7 +40,7 @@ struct args_node
 {
 	char			*content;
 	char 			*path;
-	struct stat 	*stats;
+	struct stat 	stats;
 	char 			perm[11];
 	size_t 			hardlinks; //physical link
 	char			*uid;
@@ -49,12 +49,12 @@ struct args_node
 	unsigned int	gidd;
 	long			size;
 	long 			mtime;
-	char 			*mtimefull;	
+	char 			*mtimefull;
 	long			time;
 	long 			nb_of_blocks;
 	char 			*symlink;
 	long 			major;
-	long 			minor;				
+	long 			minor;
 	args_node 		*next;
 };
 struct longest
@@ -62,7 +62,11 @@ struct longest
 	size_t	hardlinks;
 	size_t	uid;
 	size_t	gid;
-	long 	size;
+	long 	  size;
+  size_t  major;
+  size_t  minor;
+  size_t  mami;
+  size_t  size_mami;
 };
 struct options
 {
@@ -103,4 +107,14 @@ char		*check_path(char *dir_name, char *name);
 void		free_list(S_list *list);
 int		 	check_for_opt_a(options *opts);
 int 		check_if_curr_or_prev_dir(char *name);
+longest get_longest(S_list *list);
+void    option_l_printing(S_list *list, longest longest);
+void    get_stats_for_option_l(args_node *elem, longest longest);
+void    print_hardlinks(struct stat stats, size_t longest_hardlink);
+void    print_uid(struct stat stats, size_t longest_uid);
+void    print_gid(struct stat stats, size_t longest_gid);
+void    print_size(struct stat stats, size_t longest_size);
+void    get_longest_mami(args_node *elem, longest longest);
+int     is_elem_special(struct stat stats);
+/*void    get_longest(args_node *elem, longest *longest);*/
 #endif

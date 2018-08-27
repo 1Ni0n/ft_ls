@@ -12,15 +12,15 @@
 
 #include "../ft_ls.h"
 
-void	get_longest_hardlinks(args_node *elem, longest *longest)
+void	get_longest_hardlink(args_node *elem, longest *longest)
 {
 	size_t hardlinks;
 	size_t len;
 
 	hardlinks = 0;
-	if (elem->stats != NULL)
+	if (elem->content)
 	{
-		hardlinks = elem->stats->st_nlink;
+		hardlinks = elem->stats.st_nlink;
 		if ((len = ft_nblen(hardlinks)) > longest->hardlinks)
 			longest->hardlinks = len;
 	}
@@ -28,33 +28,79 @@ void	get_longest_hardlinks(args_node *elem, longest *longest)
 
 void	get_longest_uid(args_node *elem, longest *longest)
 {
-	size_t uid_len;
+	size_t          uid_len;
+  size_t          uid;
+  struct passwd   *p;
 
-	if (elem->stats != NULL)
+  uid_len = 0;
+	if (elem->content)
 	{
-		if ((p = getpwuid(sb.st_uid)) != NULL)
-			elem->uid = ft_strdup(p->pw_name);
+		if ((p = getpwuid(elem->stats.st_uid)) != NULL)
+      if ((uid_len = ft_strlen(p->pw_name)) > longest->uid)
+        longest->uid = uid_len;
 		else
-			elem->uidd = sb.st_uid;
+		{
+      uid = elem->stats.st_uid;
+      if ((uid_len = ft_nblen(uid)) > longest->uid)
+        longest->uid = uid_len;
+    }
 	}
 }
 
-void	get_longest(S_list *list)
+void  get_longest_gid(args_node *elem, longest *longest)
+{
+  size_t          gid_len;
+  size_t          gid;
+  struct group   *g;
+
+  gid_len = 0;
+  if (elem->content)
+  {
+    if ((g = getgrgid(elem->stats.st_gid)) != NULL)
+      if ((gid_len = ft_strlen(g->gr_name)) > longest->gid)
+        longest->gid = gid_len;
+    else
+    {
+      gid = elem->stats.st_gid;
+      if ((gid_len = ft_nblen(gid)) > longest->gid)
+        longest->gid = gid_len;
+    }
+  }
+}
+
+void  get_longest_size(args_node *elem, longest *longest)
+{
+  long size;
+
+  if (elem->content)
+  {
+    if ((size = ft_nblen(elem->stats.st_size)) > longest->size)
+      longest->size = size;
+  }
+}
+
+longest	 get_longest(S_list *list)
 {
 	args_node 	*elem;
 	longest 	longest;
 
 	elem = list->head;
-	longest.hardlinks = 0;
-	longest.uid = 0;
-	longest.gid = 0;
-	longest.size = 0;
+	longest.hardlinks = 1;
+	longest.uid = 1;
+	longest.gid = 1;
+	longest.size = 1;
+  longest.major = 1;
+  longest.minor = 1;
+  longest.mami = 4;
+  longest.size_mami = 4;
 	while (elem)
 	{
-		get_longest_hardlinks(elem, &longest);
+		get_longest_hardlink(elem, &longest);
 		get_longest_uid(elem, &longest);
 		get_longest_gid(elem, &longest);
 		get_longest_size(elem, &longest);
+    get_longest_mami(elem, &longest);
 		elem = elem->next;
 	}
+  return(longest);
 }

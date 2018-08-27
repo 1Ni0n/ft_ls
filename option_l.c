@@ -41,6 +41,7 @@ void	get_perm(args_node *elem)
 			path = ft_strdup(elem->content);
 		else
 			path = ft_strdup(elem->path);
+  printf("PATH: %s\n", elem->path);
 	if (stat(path, &sb) == -1 || lstat(path, &sb2) == -1)
 		return;
 	if (S_ISLNK(sb2.st_mode) == 1)
@@ -89,7 +90,7 @@ void	get_correct_date(args_node *elem)
 	i = 4;
 	j = 0;
 	if ((actual_time = time(NULL)) == -1)
-		return;	
+		return;
 	correct_date = (char*)malloc(sizeof(char) * (13));
 	while (i < 16)
 		correct_date[j++] = elem->mtimefull[i++];
@@ -154,7 +155,7 @@ int get_infos(args_node *elem)
 		elem->gidd = sb.st_gid;
 	elem->hardlinks = sb.st_nlink;
 	elem->mtimefull = ft_strdup(ft_strtrim(ctime(&sb.st_mtime)));
-	get_perm(elem);	
+	get_perm(elem);
 	get_correct_date(elem);
 	elem->size = sb.st_size;
 	elem->nb_of_blocks = sb.st_blocks;
