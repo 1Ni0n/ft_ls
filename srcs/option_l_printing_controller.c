@@ -53,7 +53,7 @@ void  get_full_permissions(args_node *elem)
   get_permissions(elem->stats);
 }
 
-void  get_stats_for_option_l(args_node *elem, longest longest, int special_elem)
+void  option_l_printing_controller(args_node *elem, longest longest)
 {
   if (elem)
   {
@@ -63,15 +63,10 @@ void  get_stats_for_option_l(args_node *elem, longest longest, int special_elem)
       print_hardlinks(elem->stats, longest.hardlinks);
       print_uid(elem->stats, longest.uid);
       print_gid(elem->stats, longest.gid);
-      if (special_elem == 0)
-        print_size(elem->stats, longest, special_elem);
-      else if (special_elem == 1)
-      {
-        if (is_elem_special(elem->stats) == 1)
-          print_majmin(elem->stats, longest);
-        else
-          print_size(elem->stats, longest, special_elem);
-      }
+      if (is_elem_special(elem->stats) == 1)
+        print_majmin(elem->stats);
+      else
+        print_size(elem->stats, longest.size);
     }
   }
 }

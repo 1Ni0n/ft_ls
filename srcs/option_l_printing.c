@@ -35,7 +35,7 @@ void  print_uid(struct stat stats, size_t longest_uid)
   {
     whitespaces = ft_strlen(p->pw_name);
     ft_putstr(p->pw_name);
-    while (whitespaces <= longest_uid)
+    while (whitespaces <= longest_uid + 1)
     {
       write(1, " ", 1);
       whitespaces++;
@@ -44,7 +44,7 @@ void  print_uid(struct stat stats, size_t longest_uid)
   else
   {
     whitespaces = ft_nblen(stats.st_uid);
-    while (whitespaces <= longest_uid)
+    while (whitespaces <= longest_uid + 1)
     {
       write(1, " ", 1);
       whitespaces++;
@@ -83,13 +83,11 @@ void  print_gid(struct stat stats, size_t longest_gid)
 void  option_l_printing(S_list *list, longest longest)
 {
   args_node *elem;
-  int       special_elem;
 
-  special_elem = look_for_special_elem(list);
   elem = list->head;
   while (elem)
   {
-    get_stats_for_option_l(elem, longest, special_elem);
+    option_l_printing_controller(elem, longest);
     write(1, "\n", 1);
     elem = elem->next;
   }

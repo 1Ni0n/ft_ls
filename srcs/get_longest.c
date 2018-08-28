@@ -89,14 +89,12 @@ longest	 get_longest(S_list *list)
 	longest.uid = 1;
 	longest.gid = 1;
 	longest.size = 1;
-  longest.majmin = 0;
 	while (elem)
 	{
 		get_longest_hardlink(elem, &longest);
 		get_longest_uid(elem, &longest);
 		get_longest_gid(elem, &longest);
 		get_longest_size(elem, &longest);
-    get_longest_majmin(elem, &longest);
 		elem = elem->next;
 	} 
   return(longest);

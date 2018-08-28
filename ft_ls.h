@@ -106,14 +106,13 @@ int		 	check_for_opt_a(options *opts);
 int 		check_if_curr_or_prev_dir(char *name);
 longest 	get_longest(S_list *list);
 void    	option_l_printing(S_list *list, longest longest);
-void    	get_stats_for_option_l(args_node *elem, longest longest, int special_elem);
+void    	option_l_printing_controller(args_node *elem, longest longest);
 void    	print_hardlinks(struct stat stats, size_t longest_hardlink);
 void    	print_uid(struct stat stats, size_t longest_uid);
 void    	print_gid(struct stat stats, size_t longest_gid);
-void    	print_size(struct stat stats, longest longest, int special_elem);
-void    	get_longest_majmin(args_node *elem, longest *longest);
+void    	print_size(struct stat stats, size_t longest_size);
+void 		print_majmin(struct stat stats);
 int     	is_elem_special(struct stat stats);
 int 		look_for_special_elem(S_list *list);
-void 		print_majmin(struct stat stats, longest longest);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif
