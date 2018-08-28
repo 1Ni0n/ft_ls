@@ -35,7 +35,8 @@ void	print_blocks(char *dir_name, options *opts)
 			}
 		}
 	}
-	closedir(rep);
+	if (rep)
+		closedir(rep);
 	ft_putstr("total ");
 	ft_putnbr(blocks);
 	ft_putchar('\n');
