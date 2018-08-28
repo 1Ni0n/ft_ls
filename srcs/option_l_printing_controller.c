@@ -47,7 +47,7 @@ void  get_permissions(struct stat stats)
   write(1, &permissions, 10);
 }
 
-void  get_full_permissions(args_node *elem)
+void  print_full_permissions(args_node *elem)
 {
   get_type(elem->stats);
   get_permissions(elem->stats);
@@ -59,7 +59,7 @@ void  option_l_printing_controller(args_node *elem, longest longest)
   {
     if (elem->content)
     {
-      get_full_permissions(elem);
+      print_full_permissions(elem);
       print_hardlinks(elem->stats, longest.hardlinks);
       print_uid(elem->stats, longest.uid);
       print_gid(elem->stats, longest.gid);
@@ -67,6 +67,10 @@ void  option_l_printing_controller(args_node *elem, longest longest)
         print_majmin(elem->stats);
       else
         print_size(elem->stats, longest.size);
+      print_correct_date(elem);
+      print_name(elem);
+      if (is_elem_symlink(elem->stats) == 1)
+        print_symlink(elem);
     }
   }
 }

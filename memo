@@ -15,3 +15,4 @@ Lorsqu'on ./ft_ls -lRt ~/ il affiche le total meme si il devrait pas.
 ./ft_ls -lRrta / segfault.
 Affichage d'un total 0 meme sur les dossiers vides en -lRatr racine.
 Gerer l'alignement des majmin et de la size des sorties sur un -l.
+Gerer le total 0 qui s'affiche des que -l est active faut pas.

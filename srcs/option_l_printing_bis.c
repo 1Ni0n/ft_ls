@@ -23,6 +23,7 @@ void  print_size(struct stat stats, size_t longest_size)
     whitespaces++;
   }
   ft_putoff_t(stats.st_size);
+  write(1, " ", 1);
 }
 
 void print_majmin(struct stat stats)
@@ -46,5 +47,30 @@ void print_majmin(struct stat stats)
     	write(1, " ", 1);
     	whitespaces++;
 	}
-	ft_putnbr(majmin);
+	ft_putnbr(majmin); 
+	write(1, " ", 1);
+}
+
+void 	print_name(args_node *elem)
+{
+	write(1, " ", 1);
+	ft_putstr(elem->content);
+}
+
+void 	print_symlink(args_node *elem)
+{
+	int 	link;
+	char	symlink[255];
+	char	*path;
+
+	if (elem->path == NULL)
+		path = ft_strdup(elem->content);
+	else
+		path = ft_strdup(elem->path);
+	if ((link = readlink(path, symlink, 255)) != -1)
+	{
+		symlink[link] = '\0';
+		write(1, " -> ", 4);
+		write(1, &symlink, link);		
+	}
 }

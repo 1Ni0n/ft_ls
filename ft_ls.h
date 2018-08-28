@@ -113,6 +113,11 @@ void    	print_gid(struct stat stats, size_t longest_gid);
 void    	print_size(struct stat stats, size_t longest_size);
 void 		print_majmin(struct stat stats);
 int     	is_elem_special(struct stat stats);
+int 		is_elem_symlink(struct stat stats);
 int 		look_for_special_elem(S_list *list);
+void		print_correct_date(args_node *elem);
+void 		print_name(args_node *elem);
+void		print_symlink(args_node *elem);
+int			check_dir_for_l(char *dir_name);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif

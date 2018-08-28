@@ -59,8 +59,9 @@ void	main_ls(char *dir_name, options *opts)
 		perror("");
 		return;
 	}
-	if (opts != NULL && opts->l == 1 && lstat(dir_name, &sb) == 0)
-		print_blocks(dir_name, opts);
+	if (check_dir_for_l(dir_name) == 1)
+		if (opts != NULL && opts->l == 1 && lstat(dir_name, &sb) == 0)
+			print_blocks(dir_name, opts);
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);

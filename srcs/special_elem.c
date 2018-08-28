@@ -21,3 +21,10 @@ int   is_elem_special(struct stat stats)
     return (1);
   return (-1);
 }
+
+int   is_elem_symlink(struct stat stats)
+{
+  if (S_ISLNK(stats.st_mode) == 1)
+    return (1);
+  return (0);
+}

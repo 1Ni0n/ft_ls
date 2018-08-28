@@ -36,8 +36,10 @@ void	get_longest_uid(args_node *elem, longest *longest)
 	if (elem->content)
 	{
 		if ((p = getpwuid(elem->stats.st_uid)) != NULL)
+    {
       if ((uid_len = ft_strlen(p->pw_name)) > longest->uid)
         longest->uid = uid_len;
+    }
 		else
 		{
       uid = elem->stats.st_uid;
@@ -57,8 +59,10 @@ void  get_longest_gid(args_node *elem, longest *longest)
   if (elem->content)
   {
     if ((g = getgrgid(elem->stats.st_gid)) != NULL)
+    {
       if ((gid_len = ft_strlen(g->gr_name)) > longest->gid)
         longest->gid = gid_len;
+    }
     else
     {
       gid = elem->stats.st_gid;
