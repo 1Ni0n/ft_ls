@@ -39,7 +39,7 @@ int 	retreive_stats(args_node *elem)
 void	option_l(S_list *list)
 {
 	args_node 	*elem;
-  longest     longest;
+  	longest     longest;
 
 	elem = list->head;
 	while (elem)

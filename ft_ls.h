@@ -62,11 +62,8 @@ struct longest
 	size_t	hardlinks;
 	size_t	uid;
 	size_t	gid;
-	long 	  size;
-  size_t  major;
-  size_t  minor;
-  size_t  mami;
-  size_t  size_mami;
+	long 	size;
+  	size_t  majmin;
 };
 struct options
 {
@@ -107,14 +104,16 @@ char		*check_path(char *dir_name, char *name);
 void		free_list(S_list *list);
 int		 	check_for_opt_a(options *opts);
 int 		check_if_curr_or_prev_dir(char *name);
-longest get_longest(S_list *list);
-void    option_l_printing(S_list *list, longest longest);
-void    get_stats_for_option_l(args_node *elem, longest longest);
-void    print_hardlinks(struct stat stats, size_t longest_hardlink);
-void    print_uid(struct stat stats, size_t longest_uid);
-void    print_gid(struct stat stats, size_t longest_gid);
-void    print_size(struct stat stats, size_t longest_size);
-void    get_longest_mami(args_node *elem, longest longest);
-int     is_elem_special(struct stat stats);
+longest 	get_longest(S_list *list);
+void    	option_l_printing(S_list *list, longest longest);
+void    	get_stats_for_option_l(args_node *elem, longest longest, int special_elem);
+void    	print_hardlinks(struct stat stats, size_t longest_hardlink);
+void    	print_uid(struct stat stats, size_t longest_uid);
+void    	print_gid(struct stat stats, size_t longest_gid);
+void    	print_size(struct stat stats, longest longest, int special_elem);
+void    	get_longest_majmin(args_node *elem, longest *longest);
+int     	is_elem_special(struct stat stats);
+int 		look_for_special_elem(S_list *list);
+void 		print_majmin(struct stat stats, longest longest);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif
