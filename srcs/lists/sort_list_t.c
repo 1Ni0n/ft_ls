@@ -88,3 +88,25 @@ void	merge_sort_t(args_node **head)
 	merge_sort_t(&b);
 	*head = sorted_merge_t(a, b);
 }
+
+void 	get_time_info(args_node **head, char *dir_name)
+{
+	args_node *elem;
+	struct stat sb;
+	char *full_path;
+
+	elem = *head;
+	while (elem)
+	{
+		full_path = check_path(dir_name, elem->content);
+		if (lstat(full_path, &sb) == 0)
+			elem->mtime = sb.st_mtime;
+		elem = elem->next;
+	}
+}
+
+void	sort_list_t(args_node **head, char *dir_name)
+{
+	get_time_info(head, dir_name);
+	merge_sort_t(head);
+}

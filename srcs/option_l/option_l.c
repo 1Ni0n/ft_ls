@@ -28,7 +28,11 @@ int 	retreive_stats(args_node *elem)
 	else
 	{
 		if (lstat(elem->path, &sb) == -1)
+		{
+			printf("PATH: %s\n", elem->path);
+			perror("");
 			return(0);
+		}
 		else
 			elem->stats = sb;
     return (1);
@@ -43,7 +47,7 @@ void	option_l(S_list *list, options *opts, char *dir_name)
   	//if (is_dir_symlink(dir_name) == 0)
   	//{
 		elem = list->head;
-		if (ft_strcmp(dir_name, "dont print the blocks") != 0)
+		if (ft_strcmp(dir_name, "dont print the blocks 887712*%$") != 0)
 			print_blocks_if_dir_full(list, opts, dir_name);
 		//printf("YES\n");
 		while (elem)

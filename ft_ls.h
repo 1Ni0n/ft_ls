@@ -78,7 +78,7 @@ struct options
 void		simplest_ls(void);
 void		args_controller(int ac, char **av);
 S_list		*new_s_list(void);
-S_list 		*append_to_list(S_list *list, char *content, long mtime, char *path);
+S_list 		*append_to_list(S_list *list, char *content, char *path);
 void 		sort_list(S_list **list);
 void		print_list(S_list 	*list, options *opts, char *dir_name);
 options		*check_for_illegal_opt(int ac, char **av);
@@ -87,7 +87,7 @@ void		print_does_not_exist_list(S_list *no_list);
 void		print_with_opts(S_list *list, options *opts);
 void		ls_recursive(S_list *dir_list, options *opts);
 void		main_ls(char *dir_name, options *opts);
-void		sort_list_t(S_list **list);
+//void		sort_list_t(S_list **list);
 void		sort_list_r(S_list **list);
 int			check_if_only_opts(char **av);
 void		merge_sort(args_node **head, options *opts);
@@ -121,5 +121,6 @@ void		print_symlink(args_node *elem);
 int			check_dir_for_l(char *dir_name);
 void		print_usage(char c);
 void		print_errors(char *name);
+void		sort_list_t(args_node **head, char *dir_name);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif

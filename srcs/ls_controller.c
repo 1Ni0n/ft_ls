@@ -27,7 +27,7 @@ int		check_inexistant(char **av)
 	while (av[i])
 	{
 		if (lstat(av[i], &sb) == -1 && (errno & ENOENT) == 2)
-			append_to_list(does_not_exist_list, av[i], 0, NULL);
+			append_to_list(does_not_exist_list, av[i], NULL);
 		i++;
 	}
 	if (does_not_exist_list->head == NULL)
@@ -51,13 +51,13 @@ int		check_files(char **av, options *opts)
 	while (av[i])
 	{
 		if (lstat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 0)
-			append_to_list(no_dir_list, av[i], sb.st_mtime, NULL);
+			append_to_list(no_dir_list, av[i], NULL);
 		i++;
 	}
 	if (no_dir_list->head == NULL)
 		return (0);
 	merge_sort(&(no_dir_list->head), opts);
-	print_list(no_dir_list, opts, "dont print the blocks");
+	print_list(no_dir_list, opts, "dont print the blocks 887712*%$");
 	free_list(no_dir_list);
 	return (1);
 }
@@ -76,10 +76,7 @@ S_list 	*check_dir(char **av, options *opts)
 	{
 		//printf("AV: %s, STAT: %d, DIR?: %d\n", av[i], stat(av[i], &sb), S_ISDIR(sb.st_mode));
 		if (lstat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1)
-		{
-			printf("YES\n");
-			append_to_list(dir_list, av[i], sb.st_mtime, NULL);
-		}
+			append_to_list(dir_list, av[i], NULL);
 		i++;
 	}
 	merge_sort(&(dir_list->head), opts);

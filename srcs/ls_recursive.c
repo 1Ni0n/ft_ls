@@ -38,28 +38,3 @@ void	ls_recursive(S_list *list, options *opts)
 	}
 	//free_list(list);
 }
-
-
-/*void	ls_recursive(S_list *list, options *opts)
-{
-	args_node	*arg;
-	struct stat sb;
-
-	arg = list->head;
-	while (arg)
-	{
-		//printf("PATH: %s, STAT:%d, DIR?: %d\n", arg->path, stat(arg->path, &sb), S_ISDIR(sb.st_mode));
-		if (stat(arg->path, &sb) == 0 && S_ISDIR(sb.st_mode) == 1)
-			if (lstat(arg->path, &sb) == 0 && S_ISLNK(sb.st_mode) != 1)
-			{
-				ft_putchar('\n');
-				ft_putstr(arg->path);
-			 	ft_putstr(":\n");
-				main_ls(arg->path, opts);
-			}
-			arg = arg->next;
-	}
-	//free_list(list);
-}
-
-*/

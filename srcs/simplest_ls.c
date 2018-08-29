@@ -29,7 +29,7 @@ void	simplest_ls(void)
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		if (truc_lu->d_name[0] != '.')
-			append_to_list(list, truc_lu->d_name, 0, NULL);
+			append_to_list(list, truc_lu->d_name, NULL);
 	}
 	closedir(rep);
 	merge_sort(&(list->head), NULL);

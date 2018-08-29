@@ -30,7 +30,7 @@ void	free_list(S_list *list)
 	free(list);
 }
 
-S_list 	*append_to_list(S_list *list, char *content, long mtime, char *path)
+S_list 	*append_to_list(S_list *list, char *content, char *path)
 {
 	if (list != NULL)
 	{
@@ -39,7 +39,7 @@ S_list 	*append_to_list(S_list *list, char *content, long mtime, char *path)
 		{
 			arg->content = ft_strdup(content);
 			arg->path = path;
-			arg->mtime = mtime;
+			arg->mtime = 0;
 			arg->next = NULL;
 			if (list->head == NULL)
 				list->head = arg;
