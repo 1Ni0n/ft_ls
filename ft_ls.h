@@ -119,5 +119,7 @@ void		print_correct_date(args_node *elem);
 void 		print_name(args_node *elem);
 void		print_symlink(args_node *elem);
 int			check_dir_for_l(char *dir_name);
+void		print_usage(char c);
+void		print_errors(char *name);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif

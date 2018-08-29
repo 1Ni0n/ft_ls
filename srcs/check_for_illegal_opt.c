@@ -32,16 +32,7 @@ int				check_if_only_opts(char **av)
 	return (1);
 }
 
-static void		print_usage(char c)
-{
-	ft_putstr("ft_ls: illegal option -- ");
-	ft_putchar(c);
-	ft_putchar('\n');
-	ft_putstr("usage: ft_ls [-Ralrt1] [file ...]");
-	ft_putchar('\n');
-}
-
-void			set_null_opts(options **opts)
+static void			set_null_opts(options **opts)
 {
 	if ((*opts) != NULL)
 	{
@@ -54,7 +45,7 @@ void			set_null_opts(options **opts)
 	}
 }
 
-options		*set_opts(int ac, char **av)
+static options		*set_opts(int ac, char **av)
 {
 	options *opts;
 	int		i;

@@ -12,6 +12,15 @@
 
 #include "../../ft_ls.h"
 
+int	is_dir_symlink(char *dir_name)
+{
+	struct stat sb;
+	
+	if (lstat(dir_name, &sb) == 0 && S_ISLNK(sb.st_mode) == 1)
+		return (1);
+	return(0);
+}
+
 int   is_elem_special(struct stat stats)
 {
   if (S_ISDIR(stats.st_mode) == 1 || S_ISREG(stats.st_mode) == 1 ||\
