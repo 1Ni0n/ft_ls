@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_ls.h"
+#include "../../ft_ls.h"
 
 void  print_hardlinks(struct stat stats, size_t longest_hardlink)
 {

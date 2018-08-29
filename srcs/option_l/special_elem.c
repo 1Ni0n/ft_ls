@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_ls.h"
+#include "../../ft_ls.h"
 
 int   is_elem_special(struct stat stats)
 {

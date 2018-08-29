@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_ls.h"
+#include "../../ft_ls.h"
 
 void	get_longest_hardlink(args_node *elem, longest *longest)
 {

@@ -57,7 +57,7 @@ int		check_files(char **av, options *opts)
 	if (no_dir_list->head == NULL)
 		return (0);
 	merge_sort(&(no_dir_list->head), opts);
-	print_list(no_dir_list, opts);
+	print_list(no_dir_list, opts, NULL);
 	free_list(no_dir_list);
 	return (1);
 }

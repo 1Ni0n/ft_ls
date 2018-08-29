@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_ls.h"
+#include "../../ft_ls.h"
 
-void	print_list(S_list *list, options *opts)
+void	print_list(S_list *list, options *opts, char *dir_name)
 {
 	args_node	*arg;
 
 	arg = list->head;
 	if (opts != NULL && opts->l == 1)
-		option_l(list);
+		option_l(list, opts, dir_name);
 	else
 	{
 		while (arg)

@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_ls.h"
+#include "../../ft_ls.h"
 
-void	print_blocks(char *dir_name, options *opts)
+void	print_blocks(char *dir_name, options *opts, off_t blocks)
 {
 	DIR			*rep;
 	dirent		*truc_lu;
 	struct stat sb;
-	long 		blocks;
 	char 		*full_path;
 
-	blocks = 0;
 	if ((rep = opendir(dir_name)) != NULL)
 	{
 		while ((truc_lu = readdir(rep)) != NULL)
@@ -42,22 +40,25 @@ void	print_blocks(char *dir_name, options *opts)
 	ft_putchar('\n');
 }
 
-int	check_dir_for_l(char *dir_name)
+int 	is_dir_empty(S_list *list, options *opts)
 {
-	struct stat sb;
-	DIR			*rep;
-	dirent		*truc_lu;
-	int 		count;
+	args_node *elem;
 
-	count = 0;
-	if ((rep = opendir(dir_name)) != NULL)
+	if (opts && opts->a == 1)
 	{
-		while ((truc_lu = readdir(rep)) != NULL)
-		{
-			if (count > 1)
-				return (1);
-			count++;
-		}
+		if (list->head != NULL)
+			return (0);
 	}
-	return (0);
+	else if (list->head != NULL)
+		return(0);
+	return (1);
+}
+
+void 	print_blocks_if_dir_full(S_list *list, options *opts, char *dir_name)
+{
+	off_t blocks;
+
+	blocks = 0;
+	if (is_dir_empty(list, opts) == 0)
+		print_blocks(dir_name, opts, blocks);
 }

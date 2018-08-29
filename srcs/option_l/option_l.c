@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include "../ft_ls.h"
+#include "../../ft_ls.h"
 
 int 	retreive_stats(args_node *elem)
 {
@@ -36,12 +35,13 @@ int 	retreive_stats(args_node *elem)
 	}
 }
 
-void	option_l(S_list *list)
+void	option_l(S_list *list, options *opts, char *dir_name)
 {
 	args_node 	*elem;
   	longest     longest;
 
 	elem = list->head;
+	print_blocks_if_dir_full(list, opts, dir_name);
 	while (elem)
 	{
 		if (retreive_stats(elem) == 0)
