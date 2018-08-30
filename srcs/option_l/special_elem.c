@@ -16,12 +16,13 @@ int	is_dir_executable(char *full_path)
 {
 	struct stat stats;
 
-	if (lstat(full_path, &stats) == 0 && S_ISDIR(stats.st_mode)\
-		&& (stats.st_mode & S_IXUSR))
-		return (1);
-
-	if (!(S_ISDIR(stats.st_mode)))
-		return (1);
+	if (lstat(full_path, &stats) == 0)
+	{
+		if (S_ISDIR(stats.st_mode) && (stats.st_mode & S_IXUSR))
+			return (1);
+		if (!(S_ISDIR(stats.st_mode)))
+			return (1);
+	}
 	return (0);
 }
 
