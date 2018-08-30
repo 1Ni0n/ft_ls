@@ -31,10 +31,10 @@ char	*check_path(char *dir_name, char *name)
 	{
 		tmp = full_path;
 		full_path = ft_strjoin(dir_name, "/");
-		//free(tmp);
+		free(tmp);
 		tmp = full_path;
 		full_path = ft_strjoin(full_path, name);
-		//free(tmp);
+		free(tmp);
 		return (full_path);
 	}
 	return (NULL);
@@ -87,9 +87,9 @@ void	main_ls(char *dir_name, options *opts)
 			append_to_list(list, truc_lu->d_name, full_path);
 		else if (truc_lu->d_name[0] != '.' && is_dir_executable(full_path) == 1)
 			append_to_list(list, truc_lu->d_name, full_path);
-		//free(full_path);
+		free(full_path);
 	}
 	closedir(rep);
 	take_care_of_opts(list, dir_name, opts);
-	//free_list(list);
+	free_list(list);
 }

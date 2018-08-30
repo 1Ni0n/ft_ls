@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/03 13:58:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/04 15:47:28 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/08/30 18:52:37 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include "libft/libft.h"
+#include "libft/colors.h"
 
 typedef struct dirent dirent;
 typedef struct S_list S_list;

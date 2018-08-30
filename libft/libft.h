@@ -6,13 +6,23 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:46:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/28 15:19:17 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/08/30 18:40:31 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 # define IISNUM (str[i] >= '0' && str[i] <= '9')
+# define C_NONE         "\033[0m"
+# define C_BOLD         "\033[1m"
+# define C_BLACK        "\033[30m"
+# define C_RED          "\033[31m"
+# define C_GREEN        "\033[32m"
+# define C_BROWN        "\033[33m"
+# define C_BLUE         "\033[34m"
+# define C_MAGENTA      "\033[35m"
+# define C_CYAN         "\033[36m"
+# define C_GRAY         "\033[37m"
 # include <string.h>
 # include <sys/types.h>
 # include <sys/stat.h>
