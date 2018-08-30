@@ -54,6 +54,17 @@ int 	is_dir_empty(S_list *list, options *opts)
 	return (1);
 }
 
+int		is_munki(char *dir_name)
+{
+	if (ft_strcmp(dir_name, "munki") == 0 || ft_strcmp(dir_name, "munkitools-2.8.0.2810.pkg") == 0)
+	{
+		printf("YO\n");
+		return (1);
+	}
+	printf("ELEM: %s\n", dir_name);
+	return (0);
+}
+
 void 	print_blocks_if_dir_full(S_list *list, options *opts, char *dir_name)
 {
 	off_t blocks;

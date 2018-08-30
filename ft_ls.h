@@ -41,20 +41,7 @@ struct args_node
 	char			*content;
 	char 			*path;
 	struct stat 	stats;
-	char 			perm[11];
-	size_t 			hardlinks; //physical link
-	char			*uid;
-	unsigned int	uidd;// dans le cas ou get_pwuid marche pas on affiche uid cash
-	char 			*gid;
-	unsigned int	gidd;
-	long			size;
 	long 			mtime;
-	char 			*mtimefull;
-	long			time;
-	long 			nb_of_blocks;
-	char 			*symlink;
-	long 			major;
-	long 			minor;
 	args_node 		*next;
 };
 struct longest
@@ -122,5 +109,7 @@ int			check_dir_for_l(char *dir_name);
 void		print_usage(char c);
 void		print_errors(char *name);
 void		sort_list_t(args_node **head, char *dir_name);
+int			is_arg_executable(struct stat stats);
+int			is_dir_executable(char *full_path);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif

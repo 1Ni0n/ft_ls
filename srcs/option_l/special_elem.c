@@ -12,6 +12,26 @@
 
 #include "../../ft_ls.h"
 
+int	is_dir_executable(char *full_path)
+{
+	struct stat stats;
+
+	if (lstat(full_path, &stats) == 0 && S_ISDIR(stats.st_mode)\
+		&& (stats.st_mode & S_IXUSR))
+		return (1);
+
+	if (!(S_ISDIR(stats.st_mode)))
+		return (1);
+	return (0);
+}
+
+int	is_arg_executable(struct stat stats)
+{
+	if ((stats.st_mode & S_IXUSR))
+		return (1);
+	return (0);
+}
+
 int	is_dir_symlink(char *dir_name)
 {
 	struct stat sb;

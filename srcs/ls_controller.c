@@ -75,7 +75,7 @@ S_list 	*check_dir(char **av, options *opts)
 	while (av[i])
 	{
 		//printf("AV: %s, STAT: %d, DIR?: %d\n", av[i], stat(av[i], &sb), S_ISDIR(sb.st_mode));
-		if (lstat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1)
+		if (lstat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1 && is_arg_executable(sb) == 1)
 			append_to_list(dir_list, av[i], NULL);
 		i++;
 	}

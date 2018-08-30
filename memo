@@ -16,3 +16,8 @@ Lorsqu'on ./ft_ls -lRt ~/ il affiche le total meme si il devrait pas.
 Affichage d'un total 0 meme sur les dossiers vides en -lRatr racine.
 Gerer l'alignement des majmin et de la size des sorties sur un -l.
 Le dossier etc est un lien symbolique il doit montrer le lien lorsqu'on le demande sans / a la fin de la commande.
+
+
+Reprendre au segfault sur ls -lR /dev, segfault sur le /dev/fd/, avec le  dir causes a cycle.
+
+Check_files check_dir main_ls ----> append_to_list;

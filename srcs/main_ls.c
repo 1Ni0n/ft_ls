@@ -50,9 +50,23 @@ DIR 	*check_if_openable(char *dir_name, DIR *rep)
 		return (rep);
 }
 
+void	take_care_of_opts(S_list *list, char *dir_name, options *opts)
+{
+	if (opts != NULL && opts->t == 1)
+	{
+		sort_list_t(&(list->head), dir_name);
+		if (opts->r == 1)
+			rev_list(&(list->head));
+	}
+	else
+		merge_sort(&(list->head), opts);
+	print_list(list, opts, dir_name);
+	if (opts != NULL && opts->R == 1)
+		ls_recursive(list, opts);
+}
+
 void	main_ls(char *dir_name, options *opts)
 {
-
 	DIR			*rep;
 	dirent		*truc_lu;
 	char 		*full_path;
@@ -69,23 +83,13 @@ void	main_ls(char *dir_name, options *opts)
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);
-		if (truc_lu->d_name[0] == '.' && check_for_opt_a(opts) == 1)
+		if (truc_lu->d_name[0] == '.' && check_for_opt_a(opts) == 1 && is_dir_executable(full_path) == 1)
 			append_to_list(list, truc_lu->d_name, full_path);
-		else if (truc_lu->d_name[0] != '.')
+		else if (truc_lu->d_name[0] != '.' && is_dir_executable(full_path) == 1)
 			append_to_list(list, truc_lu->d_name, full_path);
 		//free(full_path);
 	}
 	closedir(rep);
-	if (opts != NULL && opts->t == 1)
-	{
-		sort_list_t(&(list->head), dir_name);
-		if (opts->r == 1)
-			rev_list(&(list->head));
-	}
-	else
-		merge_sort(&(list->head), opts);
-	print_list(list, opts, dir_name);
-	if (opts != NULL && opts->R == 1)
-		ls_recursive(list, opts);
+	take_care_of_opts(list, dir_name, opts);
 	//free_list(list);
 }

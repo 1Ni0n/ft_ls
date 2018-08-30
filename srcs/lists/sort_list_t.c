@@ -99,7 +99,7 @@ void 	get_time_info(args_node **head, char *dir_name)
 	while (elem)
 	{
 		full_path = check_path(dir_name, elem->content);
-		if (lstat(full_path, &sb) == 0)
+		if (lstat(full_path, &sb) == 0 && elem->mtime == 0)
 			elem->mtime = sb.st_mtime;
 		elem = elem->next;
 	}

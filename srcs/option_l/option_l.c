@@ -28,11 +28,7 @@ int 	retreive_stats(args_node *elem)
 	else
 	{
 		if (lstat(elem->path, &sb) == -1)
-		{
-			printf("PATH: %s\n", elem->path);
-			perror("");
 			return(0);
-		}
 		else
 			elem->stats = sb;
     return (1);
@@ -44,20 +40,16 @@ void	option_l(S_list *list, options *opts, char *dir_name)
 	args_node 	*elem;
   	longest     longest;
 
-  	//if (is_dir_symlink(dir_name) == 0)
-  	//{
-		elem = list->head;
-		if (ft_strcmp(dir_name, "dont print the blocks 887712*%$") != 0)
-			print_blocks_if_dir_full(list, opts, dir_name);
-		//printf("YES\n");
-		while (elem)
-		{
-			if (retreive_stats(elem) == 0)
-				elem->content = NULL; //cest comme ca quon protege les fonctions suivantes de taper dans struct stats si lstat na pas marche.
-			elem = elem->next;
-		}
-		longest = get_longest(list);
-		option_l_printing(list, longest);
-	  	//printf("hardlinks: %lu uid: %lu, gid: %lu, size: %lu\n", longest.hardlinks, longest.uid, longest.gid, longest.size);
+	elem = list->head;
+	if (ft_strcmp(dir_name, "dont print the blocks 887712*%$") != 0)
+		print_blocks_if_dir_full(list, opts, dir_name);
+	while (elem)
+	{
+		if (retreive_stats(elem) == 0)
+			elem->content = NULL; //cest comme ca quon protege les fonctions suivantes de taper dans struct stats si lstat na pas marche.
+		elem = elem->next;
+	}
+	longest = get_longest(list);
+	option_l_printing(list, longest);
 	//}
 }

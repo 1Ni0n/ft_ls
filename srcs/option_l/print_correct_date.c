@@ -12,36 +12,40 @@
 
 #include "../../ft_ls.h"
 
+void	print_date(time_t elem_modif_time, long diff, char *correct_date)
+{
+	int i;
+
+	i = 3;
+	diff = 1970 + (elem_modif_time / 31557600);
+	while (i++ < 10)
+		write(1, &correct_date[i], 1);
+	write(1, " ", 1);
+	ft_putchar(diff / 1000 + '0');
+	ft_putchar(((diff / 100) % 10) + '0');
+	ft_putchar(((diff / 10) % 10) + '0');
+	ft_putchar((diff % 10) + '0');
+}
+
 void	print_correct_date(args_node *elem)
 {
 	char 	*correct_date;
 	int 	i;
 	time_t 	actual_time;
-	time_t  elem_modification_time;
+	time_t  elem_modif_time;
 	long	diff;
 
 	i = 3;
 	if ((actual_time = time(NULL)) == -1)
 		return;
 	correct_date = ft_strtrim(ctime(&elem->stats.st_mtime));
-	elem_modification_time = elem->stats.st_mtime;
-	if ((diff = elem_modification_time - actual_time) < 15768000 && diff > -15768000)
+	elem_modif_time = elem->stats.st_mtime;
+	if ((diff = elem_modif_time - actual_time) < 15768000 && diff > -15768000)
 	{
 		while (i++ < 15)
 			write(1, &correct_date[i], 1);
 	}
-	//printf("DIFF: %ld\n", diff);
-	//if (diff >= 15768000 || diff <= -15768000)
 	else
-	{
-		diff = 1970 + (elem->mtime / 31557600);
-		while (i++ < 10)
-			write(1, &correct_date[i], 1);
-		write(1, " ", 1);
-		ft_putchar(diff / 1000 + '0');
-		ft_putchar(((diff / 100) % 10) + '0');
-		ft_putchar(((diff / 10) % 10) + '0');
-		ft_putchar((diff % 10) + '0');
-	}
+		print_date(elem_modif_time, diff, correct_date);		
 	free(correct_date);
 }
