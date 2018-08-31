@@ -6,7 +6,7 @@
 #    By: aguillot <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/15 18:57:13 by aguillot          #+#    #+#              #
-#    Updated: 2018/08/28 15:19:59 by aguillot         ###   ########.fr        #
+#    Updated: 2018/08/31 11:34:43 by aguillot         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRC  = ./ft_isalpha.c ft_memccpy.c ft_memmove.c ft_putendl_fd.c ft_strcat.c \
 	   ft_isalnum.c ft_memalloc.c ft_memdel.c ft_putendl.c ft_putstr_fd.c \
 	   ft_strcpy.c ft_striteri.c ft_strmapi.c ft_strnew.c  ft_strtrim.c \
 	   ft_itoa.c ft_strsplit.c ft_strnchr.c ft_strnnchr.c ft_power.c \
-	   ft_strflen.c ft_nblen.c ft_putoff_t.c
+	   ft_strflen.c ft_nblen.c ft_putoff_t.c ft_strlink.c
 
 OBJ = ./ft_isalpha.o ft_memccpy.o ft_memmove.o ft_putendl_fd.o ft_strcat.o \
 	   ft_strdel.o ft_strjoin.o ft_strncat.o ft_strnstr.o ft_tolower.o \
@@ -38,7 +38,7 @@ OBJ = ./ft_isalpha.o ft_memccpy.o ft_memmove.o ft_putendl_fd.o ft_strcat.o \
 	   ft_isalnum.o ft_memalloc.o ft_memdel.o ft_putendl.o ft_putstr_fd.o \
 	   ft_strcpy.o ft_striteri.o ft_strmapi.o ft_strnew.o  ft_strtrim.o \
 	   ft_itoa.o ft_strsplit.o ft_strnchr.o ft_strnnchr.o ft_power.o \
-	   ft_strflen.o ft_nblen.o ft_putoff_t.o
+	   ft_strflen.o ft_nblen.o ft_putoff_t.o ft_strlink.o
 
 all: $(NAME)
 

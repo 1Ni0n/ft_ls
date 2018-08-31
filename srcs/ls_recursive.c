@@ -12,7 +12,7 @@
 
 #include "../ft_ls.h"
 
-void	ls_recursive(S_list *list, options *opts)
+void	ls_recursive(S_list *list, options opts)
 {
 	args_node	*arg;
 	struct stat sb;
@@ -30,7 +30,7 @@ void	ls_recursive(S_list *list, options *opts)
 					ft_putchar('\n');
 					ft_putstr(arg->path);
 			 		ft_putstr(":\n");
-					main_ls(arg->path, opts);
+					main_ls(ft_strdup(arg->path), opts);
 				}
 			}
 		}

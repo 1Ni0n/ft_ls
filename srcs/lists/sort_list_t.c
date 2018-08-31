@@ -102,6 +102,7 @@ void 	get_time_info(args_node **head, char *dir_name)
 		if (lstat(full_path, &sb) == 0 && elem->mtime == 0)
 			elem->mtime = sb.st_mtime;
 		elem = elem->next;
+		free(full_path);
 	}
 }
 

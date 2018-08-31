@@ -22,7 +22,10 @@ void	free_list(S_list *list)
 	elem = list->head;
 	while (elem)
 	{
-		free(elem->content);
+		if (elem->content)
+			free(elem->content);
+		if (elem->path)
+			free(elem->path);
 		next = elem->next;
 		free(elem);
 		elem = next;
@@ -30,7 +33,7 @@ void	free_list(S_list *list)
 	free(list);
 }
 
-S_list 	*append_to_list(S_list *list, char *content, char *path)
+void	append_to_list(S_list *list, char *content, char *path)
 {
 	if (list != NULL)
 	{
@@ -38,7 +41,10 @@ S_list 	*append_to_list(S_list *list, char *content, char *path)
 		if ((arg = malloc(sizeof *arg)))
 		{
 			arg->content = ft_strdup(content);
-			arg->path = path;
+			if (path)
+				arg->path = ft_strdup(path);
+			/*else
+				arg->path = NULL;*/
 			arg->mtime = 0;
 			arg->next = NULL;
 			if (list->head == NULL)
@@ -57,7 +63,6 @@ S_list 	*append_to_list(S_list *list, char *content, char *path)
 			list->length++;
 		}
 	}
-	return (list);
 }
 
 S_list 	*new_s_list(void)

@@ -25,6 +25,14 @@
 #include "libft/libft.h"
 #include "libft/colors.h"
 
+#define DIR_COLOR 1
+#define CHARAC_SPECIAL_COLOR 2
+#define BLOCK_COLOR 3
+#define FIFO_COLOR 4
+#define LNK_COLOR 5
+#define	SOCKET_COLOR 6
+#define EXEC_COLOR 7 
+
 typedef struct dirent dirent;
 typedef struct S_list S_list;
 typedef struct args_node args_node;
@@ -66,31 +74,31 @@ struct options
 void		simplest_ls(void);
 void		args_controller(int ac, char **av);
 S_list		*new_s_list(void);
-S_list 		*append_to_list(S_list *list, char *content, char *path);
+void		append_to_list(S_list *list, char *content, char *path);
 void 		sort_list(S_list **list);
-void		print_list(S_list 	*list, options *opts, char *dir_name);
-options		*check_for_illegal_opt(int ac, char **av);
-void		ls_controller(char **av, options *opts);
+void		print_list(S_list 	*list, options opts, char *dir_name);
+options		check_for_illegal_opt(int ac, char **av);
+void		ls_controller(char **av, options opts);
 void		print_does_not_exist_list(S_list *no_list);
-void		print_with_opts(S_list *list, options *opts);
-void		ls_recursive(S_list *dir_list, options *opts);
-void		main_ls(char *dir_name, options *opts);
+void		print_with_opts(S_list *list, options opts);
+void		ls_recursive(S_list *dir_list, options opts);
+void		main_ls(char *dir_name, options opts);
 //void		sort_list_t(S_list **list);
 void		sort_list_r(S_list **list);
 int			check_if_only_opts(char **av);
-void		merge_sort(args_node **head, options *opts);
+void		merge_sort(args_node **head, options opts);
 args_node	*sorted_merge_t(args_node *a, args_node *b);
 args_node	*sorted_merge_r(args_node *a, args_node *b);
-void		option_l(S_list *list, options *opts, char *dir_name);
+void		option_l(S_list *list, options opts, char *dir_name);
 longest		*new_longest(void);
 void		print_list_l(S_list *list, longest *longest);
 void		merge_sort_t(args_node **head);
 void		split_list(args_node *elem, args_node **front, args_node **back);
 int			rev_list(args_node **head);
-void 		print_blocks_if_dir_full(S_list *list, options *opts, char *dir_name);
+void 		print_blocks_if_dir_full(S_list *list, options opts, char *dir_name);
 char		*check_path(char *dir_name, char *name);
 void		free_list(S_list *list);
-int		 	check_for_opt_a(options *opts);
+int		 	check_for_opt_a(options opts);
 int 		check_if_curr_or_prev_dir(char *name);
 longest 	get_longest(S_list *list);
 void    	option_l_printing(S_list *list, longest longest);
@@ -112,5 +120,7 @@ void		print_errors(char *name);
 void		sort_list_t(args_node **head, char *dir_name);
 int			is_arg_executable(struct stat stats);
 int			is_dir_executable(char *full_path);
+void 		print_list_no_opts(S_list *list);
+options 	*set_useless_opts(void);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif

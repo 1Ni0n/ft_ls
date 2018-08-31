@@ -12,9 +12,9 @@
 
 #include "../ft_ls.h"
 
-int		check_for_opt_a(options *opts)
+int		check_for_opt_a(options opts)
 {
-	if (opts == NULL || (opts != NULL && opts->a != 1))
+	if (opts.a == 0)
 		return (0);
 	return (1);
 }

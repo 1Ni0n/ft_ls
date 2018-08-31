@@ -35,7 +35,7 @@ int 	retreive_stats(args_node *elem)
 	}
 }
 
-void	option_l(S_list *list, options *opts, char *dir_name)
+void	option_l(S_list *list, options opts, char *dir_name)
 {
 	args_node 	*elem;
   	longest     longest;

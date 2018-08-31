@@ -73,4 +73,5 @@ void 	print_symlink(args_node *elem)
 		write(1, " -> ", 4);
 		write(1, &symlink, link);		
 	}
+	free(path);
 }

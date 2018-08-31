@@ -12,11 +12,28 @@
 
 #include "../ft_ls.h"
 
-void	simplest_ls(void)
+options 		*set_useless_opts(void)
+{
+	options *opts;
+
+	if (!(opts = malloc(sizeof*opts)))
+		return (NULL);
+	opts->l = 0;
+	opts->a = 0;
+	opts->r = 0;
+	opts->R = 0;
+	opts->t = 0;
+
+	return (opts);
+}
+
+void			simplest_ls(void)
 {
 	DIR		*rep;
 	dirent	*truc_lu;
 	S_list	*list;
+	options *opts;
+	options opt;
 
 	rep = NULL;
 	truc_lu = NULL;
@@ -32,8 +49,9 @@ void	simplest_ls(void)
 			append_to_list(list, truc_lu->d_name, NULL);
 	}
 	closedir(rep);
-	merge_sort(&(list->head), NULL);
-	print_list(list, NULL, NULL);
+	opts = set_useless_opts();
+	opt = *opts;
+	merge_sort(&(list->head), opt);
 	free_list(list);
 }
 

@@ -21,3 +21,13 @@ Le dossier etc est un lien symbolique il doit montrer le lien lorsqu'on le deman
 Reprendre au segfault sur ls -lR /dev, segfault sur le /dev/fd/, avec le  dir causes a cycle.
 
 Check_files check_dir main_ls ----> append_to_list;
+
+
+
+Blue: Directory
+Green: Executable or recognized data file
+Sky Blue: Symbolic link file
+Yellow with black background: Device
+Pink: Graphic image file
+Red: Archive file
+Red with black background: Broken link

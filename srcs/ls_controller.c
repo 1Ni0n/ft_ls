@@ -32,13 +32,13 @@ int		check_inexistant(char **av)
 	}
 	if (does_not_exist_list->head == NULL)
 		return (0);
-	merge_sort(&(does_not_exist_list->head), NULL);
+	merge_sort(&(does_not_exist_list->head), *(set_useless_opts()));
 	print_does_not_exist_list(does_not_exist_list);
 	free_list(does_not_exist_list);
 	return (1);
 }
 
-int		check_files(char **av, options *opts)
+int		check_files(char **av, options opts)
 {
 	S_list 		*no_dir_list;
 	struct stat sb;
@@ -62,7 +62,7 @@ int		check_files(char **av, options *opts)
 	return (1);
 }
 
-S_list 	*check_dir(char **av, options *opts)
+S_list 	*check_dir(char **av, options opts)
 {
 	S_list 		*dir_list;
 	struct stat sb;
@@ -74,7 +74,6 @@ S_list 	*check_dir(char **av, options *opts)
 		i++;
 	while (av[i])
 	{
-		//printf("AV: %s, STAT: %d, DIR?: %d\n", av[i], stat(av[i], &sb), S_ISDIR(sb.st_mode));
 		if (lstat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1 && is_arg_executable(sb) == 1)
 			append_to_list(dir_list, av[i], NULL);
 		i++;
@@ -84,7 +83,7 @@ S_list 	*check_dir(char **av, options *opts)
 }
 
 //On est toujours que au niveau des arguments dans 
-void	ls_controller(char **av, options *opts)
+void	ls_controller(char **av, options opts)
 {
 	//on instancie la dir_list que va nous renvoyer check_dir, pour ensuite la passer à main_ls;
 	S_list 		*dir_list;
@@ -94,7 +93,7 @@ void	ls_controller(char **av, options *opts)
 
 	if (check_if_only_opts(av) == 1)
 	{
-		main_ls("./", opts);
+		main_ls(ft_strdup("./"), opts);
 		return;
 	}
 	inexistant = check_inexistant(av);

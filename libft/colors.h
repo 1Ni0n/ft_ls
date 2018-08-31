@@ -42,6 +42,7 @@
 # define PURPLE			"\033[0;35m"
 # define CYAN			"\033[0;36m"
 # define WHITE			"\033[0;37m"
+# define RESET 			"\x1B[0m"
 
 /*
  * **		Bold Style

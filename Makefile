@@ -46,7 +46,7 @@ option_l_printing.o option_l_printing_controller.o option_l_printing_bis.o print
 
 all: $(NAME)
 
-$(NAME): $(LIB)
+$(NAME): lib $(LIB)
 	@gcc -c $(SRCS) $(ALL_OPT_L) $(ALL_LISTS)
 	@gcc $(FLAG) $(OBJ) $(LIB) -o $(NAME)
 
@@ -54,6 +54,7 @@ lib:
 	@make -C libft all
 
 clean:
+	@make -C libft clean
 	@rm -f $(OBJ)
 
 libclean:
@@ -63,6 +64,7 @@ bigclean: clean libclean
 
 
 fclean: clean
+	@make -C libft fclean
 	@rm -f $(NAME)
 
 libfclean:
@@ -70,5 +72,4 @@ libfclean:
 
 fbigclean: fclean libfclean
 
-
-re: lib fclean all
+re: fclean all

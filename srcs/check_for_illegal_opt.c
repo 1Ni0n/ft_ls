@@ -32,29 +32,29 @@ int				check_if_only_opts(char **av)
 	return (1);
 }
 
-static void			set_null_opts(options **opts)
+static void			set_null_opts(options *opts)
 {
-	if ((*opts) != NULL)
+	if ( opts != NULL)
 	{
-		(*opts)->l = 0;
-		(*opts)->a = 0;
-		(*opts)->r = 0;
-		(*opts)->R = 0;
-		(*opts)->t = 0;
-		(*opts)->one = 0;
+		opts->l = 0;
+		opts->a = 0;
+		opts->r = 0;
+		opts->R = 0;
+		opts->t = 0;
 	}
 }
 
 static options		*set_opts(int ac, char **av)
 {
 	options *opts;
+	options opt;
 	int		i;
 	int		j;
 
 	i = 1;
 	if (!(opts = malloc(sizeof*opts)))
 		return (NULL);
-	set_null_opts(&opts);
+	set_null_opts(opts);
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[1], "--") != 0)
 	{
 		j = 1;
@@ -79,11 +79,12 @@ static options		*set_opts(int ac, char **av)
 	return (opts);
 }
 
-options		*check_for_illegal_opt(int ac, char **av)
+options		check_for_illegal_opt(int ac, char **av)
 {
 	int		i;
 	int		j;
 	options	*opts;
+	options opt;
 
 	opts = NULL;
 	i = 1;
@@ -103,5 +104,6 @@ options		*check_for_illegal_opt(int ac, char **av)
 		}
 		i++;
 	}
-	return (opts);
+	opt = *opts;
+	return (opt);
 }

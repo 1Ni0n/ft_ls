@@ -19,25 +19,21 @@ char	*check_path(char *dir_name, char *name)
 	char	end;
 	char 	*tmp;
 
+	tmp = ft_strdup(dir_name);
 	len = ft_strlen(dir_name);
 	full_path = NULL;
 	end = dir_name[len - 1];
 	if (end == '/')
 	{
-		full_path = ft_strjoin(dir_name, name);
+		full_path = ft_strlink(&tmp, name);
 		return (full_path);
 	}
-	else if (end != '/')
+	else
 	{
-		tmp = full_path;
-		full_path = ft_strjoin(dir_name, "/");
-		free(tmp);
-		tmp = full_path;
-		full_path = ft_strjoin(full_path, name);
-		free(tmp);
+		full_path = ft_strlink(&tmp, "/");
+		full_path = ft_strlink(&full_path, name);
 		return (full_path);
 	}
-	return (NULL);
 }
 
 DIR 	*check_if_openable(char *dir_name, DIR *rep)
@@ -45,27 +41,27 @@ DIR 	*check_if_openable(char *dir_name, DIR *rep)
 	if ((rep = opendir(dir_name)) == NULL)
 	{
 		print_errors(dir_name);
-		return(rep);
+		return (rep);
 	}
 		return (rep);
 }
 
-void	take_care_of_opts(S_list *list, char *dir_name, options *opts)
+void	take_care_of_opts(S_list *list, char *dir_name, options opts)
 {
-	if (opts != NULL && opts->t == 1)
+	if (opts.t == 1)
 	{
 		sort_list_t(&(list->head), dir_name);
-		if (opts->r == 1)
+		if (opts.r == 1)
 			rev_list(&(list->head));
 	}
 	else
 		merge_sort(&(list->head), opts);
 	print_list(list, opts, dir_name);
-	if (opts != NULL && opts->R == 1)
+	if (opts.R == 1)
 		ls_recursive(list, opts);
 }
 
-void	main_ls(char *dir_name, options *opts)
+void	main_ls(char *dir_name, options opts)
 {
 	DIR			*rep;
 	dirent		*truc_lu;
@@ -92,4 +88,6 @@ void	main_ls(char *dir_name, options *opts)
 	closedir(rep);
 	take_care_of_opts(list, dir_name, opts);
 	free_list(list);
+	//free(opts);
+	free(dir_name);
 }

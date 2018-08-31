@@ -12,7 +12,7 @@
 
 #include "../../ft_ls.h"
 
-void	print_blocks(char *dir_name, options *opts, off_t blocks)
+void	print_blocks(char *dir_name, options opts, off_t blocks)
 {
 	DIR			*rep;
 	dirent		*truc_lu;
@@ -28,9 +28,10 @@ void	print_blocks(char *dir_name, options *opts, off_t blocks)
 			{
 				if (truc_lu->d_name[0] != '.')
 					blocks += sb.st_blocks;
-				if (truc_lu->d_name[0] == '.' && opts != NULL && opts->a == 1)
+				if (truc_lu->d_name[0] == '.' && opts.a == 1)
 					blocks += sb.st_blocks;
 			}
+			free(full_path);
 		}
 	}
 	if (rep)
@@ -40,11 +41,11 @@ void	print_blocks(char *dir_name, options *opts, off_t blocks)
 	ft_putchar('\n');
 }
 
-int 	is_dir_empty(S_list *list, options *opts)
+int 	is_dir_empty(S_list *list, options opts)
 {
 	args_node *elem;
 
-	if (opts && opts->a == 1)
+	if (opts.a == 1)
 	{
 		if (list->head != NULL)
 			return (0);
@@ -54,14 +55,7 @@ int 	is_dir_empty(S_list *list, options *opts)
 	return (1);
 }
 
-/*int		is_munki(char *dir_name)
-{
-	if (ft_strcmp(dir_name, "munki") == 0 || ft_strcmp(dir_name, "munkitools-2.8.0.2810.pkg") == 0)
-		return (1);
-	return (0);
-}*/
-
-void 	print_blocks_if_dir_full(S_list *list, options *opts, char *dir_name)
+void 	print_blocks_if_dir_full(S_list *list, options opts, char *dir_name)
 {
 	off_t blocks;
 

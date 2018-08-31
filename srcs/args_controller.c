@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_controller.c                               :+:      :+:    :+:   */
+/*   args_controller.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/16 14:09:49 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/16 14:09:51 by aguillot         ###   ########.fr       */
+/*   Created: 2018/08/31 12:23:28 by aguillot          #+#    #+#             */
+/*   Updated: 2018/08/31 12:23:30 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	args_controller(int ac, char **av)
 {
-	options	*opts;
+	options	opts;
 
-	opts = NULL;
 	if (av[1][0] == '-')
 	{
 		opts = check_for_illegal_opt(ac, av);
