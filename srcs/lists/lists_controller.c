@@ -17,7 +17,7 @@ void	free_list(S_list *list)
 	args_node	*elem;
 	args_node	*next;
 
-	if (list == NULL || (list != NULL && list->head == NULL))
+	if (list == NULL)// || (list != NULL && list->head == NULL))
 		return;
 	elem = list->head;
 	while (elem)
@@ -29,9 +29,8 @@ void	free_list(S_list *list)
 		next = elem->next;
 		free(elem);
 		elem = next;
-	}
-	if (list)
-		free(list);
+	}		
+	free(list);
 }
 
 void	append_to_list(S_list *list, char *content, char *path)

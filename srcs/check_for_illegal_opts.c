@@ -60,6 +60,16 @@ static options		*set_opts(char **av)
 		j = 1;
 		while (av[i][j])
 		{
+			if (av[i][j] == 'A')
+				opts->aa = 1;
+			if (av[i][j] == 'i')
+				opts->i = 1;
+			if (av[i][j] == 'F')
+				opts->ff = 1;
+			if (av[i][j] == 's')
+				opts->s = 1;
+			if (av[i][j] == 'c')
+				opts->c = 1;
 			if (av[i][j] == 'l')
 				opts->l = 1;
 			if (av[i][j] == 'a')
@@ -94,7 +104,7 @@ options		*check_for_illegal_opts(char **av)
 		while (av[i][j])
 		{
 			if (av[i][j] != 'l' && av[i][j] != 'a' && av[i][j] != 'r' &&\
-					av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1')
+					av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1' && av[i][j] != 'A' && av[i][j] != 'i' && av[i][j] != 'F' && av[i][j] != 's' && av[i][j] != 'c')
 			{
 				print_usage(av[i][j]);
 				exit(1);

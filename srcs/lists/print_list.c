@@ -73,8 +73,8 @@ void 	print_list_no_opts(S_list *list)
 	arg = list->head;
 	while (arg)
 	{
-		ft_putstr(arg->content);
-		//colors(arg->content, arg->stats);
+		//ft_putstr(arg->content);
+		colors(arg->content, arg->stats);
 		ft_putchar('\n');
 		arg = arg->next;
 	}
@@ -83,14 +83,19 @@ void 	print_list_no_opts(S_list *list)
 void	print_list(S_list *list, options opts, char *dir_name)
 {
 	args_node	*arg;
+	int 		max_len;
 
 	arg = list->head;
 	if (opts.l == 1)
 		option_l(list, opts, dir_name);
 	else
 	{
+		if (opts.i == 1)
+			max_len = get_inode(list);
 		while (arg)
 		{
+			if (opts.i == 1)
+				option_i(arg, max_len);
 			ft_putstr(arg->content);
 			//colors(arg->content, arg->stats);
 			ft_putchar('\n');

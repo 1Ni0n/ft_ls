@@ -31,7 +31,10 @@ int		check_inexistant(char **av)
 		i++;
 	}
 	if (does_not_exist_list->head == NULL)
+	{
+		free_list(does_not_exist_list);
 		return (0);
+	}
 	merge_sort(&(does_not_exist_list->head), *(set_useless_opts()));
 	print_does_not_exist_list(does_not_exist_list);
 	free_list(does_not_exist_list);
@@ -55,7 +58,10 @@ int		check_files(char **av, options opts)
 		i++;
 	}
 	if (no_dir_list->head == NULL)
+	{
+		free_list(no_dir_list);
 		return (0);
+	}
 	merge_sort(&(no_dir_list->head), opts);
 	print_list(no_dir_list, opts, "dont print the blocks 887712*%$");
 	free_list(no_dir_list);
@@ -82,18 +88,18 @@ S_list 	*check_dir(char **av, options opts)
 	return (dir_list);
 }
 
-//On est toujours que au niveau des arguments dans 
 void	ls_controller(char **av, options opts)
 {
-	//on instancie la dir_list que va nous renvoyer check_dir, pour ensuite la passer à main_ls;
 	S_list 		*dir_list;
 	args_node 	*dir;
 	int 		inexistant;
 	int 		files;
+	char 		*ptr;
 
 	if (check_if_only_opts(av) == 1)
 	{
-		main_ls(ft_strdup("./"), opts);
+		main_ls((ptr = ft_strdup("./")), opts);
+		free(ptr);
 		return;
 	}
 	inexistant = check_inexistant(av);

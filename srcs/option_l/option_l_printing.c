@@ -80,13 +80,18 @@ void  print_gid(struct stat stats, size_t longest_gid)
   }
 }
 
-void  option_l_printing(S_list *list, longest longest)
+void  option_l_printing(S_list *list, longest longest, options opts)
 {
   args_node *elem;
+  int       max_len;
 
+  if (opts.i == 1)
+      max_len = get_inode(list);
   elem = list->head;
   while (elem)
   {
+    if (opts.i == 1)
+      option_i(elem, max_len);
     option_l_printing_controller(elem, longest);
     write(1, "\n", 1);
     elem = elem->next;

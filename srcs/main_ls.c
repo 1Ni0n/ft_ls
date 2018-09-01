@@ -74,6 +74,7 @@ void	main_ls(char *dir_name, options opts)
 	if ((rep = opendir(dir_name)) == NULL)
 	{
 		print_errors(dir_name);
+		free_list(list);
 		return;
 	}
 	while ((truc_lu = readdir(rep)) != NULL)
@@ -83,10 +84,10 @@ void	main_ls(char *dir_name, options opts)
 			append_to_list(list, truc_lu->d_name, full_path);
 		else if (truc_lu->d_name[0] != '.' && is_dir_executable(full_path) == 1)
 			append_to_list(list, truc_lu->d_name, full_path);
+		else if (ft_strcmp(truc_lu->d_name, ".") != 0 && ft_strcmp(truc_lu->d_name, "..") != 0 && opts.aa == 1)
+			append_to_list(list, truc_lu->d_name, full_path);
 		free(full_path);
 	}
 	closedir(rep);
 	take_care_of_opts(list, dir_name, opts);
-	free_list(list);
-	//free(opts);
 }

@@ -50,6 +50,6 @@ void	option_l(S_list *list, options opts, char *dir_name)
 		elem = elem->next;
 	}
 	longest = get_longest(list);
-	option_l_printing(list, longest);
+	option_l_printing(list, longest, opts);
 	//}
 }

@@ -12,6 +12,19 @@
 
 #include "../ft_ls.h"
 
+static void	destruct_one_list(args_node **head)
+{
+	args_node *tmp;
+
+	if (*head != NULL)
+	{
+		ft_strdel(&((*head)->content));
+		ft_strdel(&((*head)->path));
+		tmp = (*head)->next;
+		free(*head);
+		*head = tmp;
+	}
+}
 void	ls_recursive(S_list *list, options opts)
 {
 	args_node	*arg;
@@ -30,11 +43,12 @@ void	ls_recursive(S_list *list, options opts)
 					ft_putchar('\n');
 					ft_putstr(arg->path);
 			 		ft_putstr(":\n");
-					main_ls(ft_strdup(arg->path), opts);
+					main_ls(arg->path, opts);
 				}
 			}
 		}
+		//destruct_one_list(&arg);
 		arg = arg->next;
 	}
-	//free_list(list);
+	free_list(list);
 }

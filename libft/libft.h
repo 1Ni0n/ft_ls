@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:46:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/31 11:34:11 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/01 20:27:15 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,5 @@ size_t	ft_strflen(char **s);
 size_t	ft_nblen(long nb);
 void	ft_putoff_t(off_t nb);
 char	*ft_strlink(char **over, char *buff);
+int		ft_off_t_len(off_t n);
 #endif

@@ -63,6 +63,11 @@ struct longest
 };
 struct options
 {
+	int i;
+	int aa;
+	int ff;
+	int s;
+	int c;
 	int l;
 	int a;
 	int r;
@@ -101,7 +106,7 @@ void		free_list(S_list *list);
 int		 	check_for_opt_a(options opts);
 int 		check_if_curr_or_prev_dir(char *name);
 longest 	get_longest(S_list *list);
-void    	option_l_printing(S_list *list, longest longest);
+void    	option_l_printing(S_list *list, longest longest, options opts);
 void    	option_l_printing_controller(args_node *elem, longest longest);
 void    	print_hardlinks(struct stat stats, size_t longest_hardlink);
 void    	print_uid(struct stat stats, size_t longest_uid);
@@ -122,5 +127,7 @@ int			is_arg_executable(struct stat stats);
 int			is_dir_executable(char *full_path);
 void 		print_list_no_opts(S_list *list);
 options 	*set_useless_opts(void);
+void 		option_i(args_node *elem, int max_len);
+int 		get_inode(S_list *list);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif
