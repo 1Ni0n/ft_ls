@@ -89,5 +89,4 @@ void	main_ls(char *dir_name, options opts)
 	take_care_of_opts(list, dir_name, opts);
 	free_list(list);
 	//free(opts);
-	free(dir_name);
 }

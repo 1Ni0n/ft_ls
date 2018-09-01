@@ -14,13 +14,14 @@
 
 void	args_controller(int ac, char **av)
 {
-	options	opts;
+	options	*opts;
 
 	if (av[1][0] == '-')
 	{
-		opts = check_for_illegal_opt(ac, av);
-		ls_controller(av, opts);
+		opts = check_for_illegal_opts(av);
+		ls_controller(av, *opts);
 	}
 	else
-		ls_controller(av, opts);
+		ls_controller(av, *opts);
+	free(opts);
 }

@@ -77,7 +77,7 @@ S_list		*new_s_list(void);
 void		append_to_list(S_list *list, char *content, char *path);
 void 		sort_list(S_list **list);
 void		print_list(S_list 	*list, options opts, char *dir_name);
-options		check_for_illegal_opt(int ac, char **av);
+options		*check_for_illegal_opts(char **av);
 void		ls_controller(char **av, options opts);
 void		print_does_not_exist_list(S_list *no_list);
 void		print_with_opts(S_list *list, options opts);

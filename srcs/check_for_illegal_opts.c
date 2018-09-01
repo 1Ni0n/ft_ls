@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_for_illegal_opt.c                            :+:      :+:    :+:   */
+/*   check_for_illegal_opts.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/28 11:30:25 by aguillot          #+#    #+#             */
-/*   Updated: 2018/06/21 18:31:25 by aguillot         ###   ########.fr       */
+/*   Created: 2018/09/01 11:04:36 by aguillot          #+#    #+#             */
+/*   Updated: 2018/09/01 11:04:38 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void			set_null_opts(options *opts)
 	}
 }
 
-static options		*set_opts(int ac, char **av)
+static options		*set_opts(char **av)
 {
 	options *opts;
 	options opt;
@@ -79,19 +79,18 @@ static options		*set_opts(int ac, char **av)
 	return (opts);
 }
 
-options		check_for_illegal_opt(int ac, char **av)
+options		*check_for_illegal_opts(char **av)
 {
 	int		i;
 	int		j;
 	options	*opts;
-	options opt;
 
 	opts = NULL;
 	i = 1;
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[i], "--") != 0)
 	{
 		j = 1;
-		opts = set_opts(ac, av);
+		opts = set_opts(av);
 		while (av[i][j])
 		{
 			if (av[i][j] != 'l' && av[i][j] != 'a' && av[i][j] != 'r' &&\
@@ -104,6 +103,5 @@ options		check_for_illegal_opt(int ac, char **av)
 		}
 		i++;
 	}
-	opt = *opts;
-	return (opt);
+	return (opts);
 }

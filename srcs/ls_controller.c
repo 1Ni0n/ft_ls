@@ -116,6 +116,6 @@ void	ls_controller(char **av, options opts)
 				ft_putchar('\n');
 			dir = dir->next;
 		}
-		free_list(dir_list);
 	}
+	free_list(dir_list);
 }

@@ -30,7 +30,8 @@ void	free_list(S_list *list)
 		free(elem);
 		elem = next;
 	}
-	free(list);
+	if (list)
+		free(list);
 }
 
 void	append_to_list(S_list *list, char *content, char *path)
@@ -43,8 +44,8 @@ void	append_to_list(S_list *list, char *content, char *path)
 			arg->content = ft_strdup(content);
 			if (path)
 				arg->path = ft_strdup(path);
-			/*else
-				arg->path = NULL;*/
+			else
+				arg->path = NULL;
 			arg->mtime = 0;
 			arg->next = NULL;
 			if (list->head == NULL)
