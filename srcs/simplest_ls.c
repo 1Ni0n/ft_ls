@@ -6,28 +6,27 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 19:28:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/14 19:28:44 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:16:11 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-options 		*set_useless_opts(void)
+options		*set_useless_opts(void)
 {
 	options *opts;
 
-	if (!(opts = malloc(sizeof*opts)))
+	if (!(opts = malloc(sizeof(*opts))))
 		return (NULL);
 	opts->l = 0;
 	opts->a = 0;
 	opts->r = 0;
 	opts->R = 0;
 	opts->t = 0;
-
 	return (opts);
 }
 
-void			simplest_ls(void)
+void		simplest_ls(void)
 {
 	DIR		*rep;
 	dirent	*truc_lu;
@@ -55,4 +54,3 @@ void			simplest_ls(void)
 	print_list_no_opts(list);
 	free_list(list);
 }
-

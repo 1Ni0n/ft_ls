@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 14:24:40 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/29 14:24:41 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:26:46 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*check_path(char *dir_name, char *name)
 	size_t	len;
 	char	*full_path;
 	char	end;
-	char 	*tmp;
+	char	*tmp;
 
 	tmp = ft_strdup(dir_name);
 	len = ft_strlen(dir_name);
@@ -36,14 +36,14 @@ char	*check_path(char *dir_name, char *name)
 	}
 }
 
-DIR 	*check_if_openable(char *dir_name, DIR *rep)
+DIR		*check_if_openable(char *dir_name, DIR *rep)
 {
 	if ((rep = opendir(dir_name)) == NULL)
 	{
 		print_errors(dir_name);
 		return (rep);
 	}
-		return (rep);
+	return (rep);
 }
 
 void	take_care_of_opts(S_list *list, char *dir_name, options opts)
@@ -65,8 +65,8 @@ void	main_ls(char *dir_name, options opts)
 {
 	DIR			*rep;
 	dirent		*truc_lu;
-	char 		*full_path;
-	S_list 		*list;
+	char		*full_path;
+	S_list		*list;
 
 	rep = NULL;
 	truc_lu = NULL;
@@ -75,18 +75,12 @@ void	main_ls(char *dir_name, options opts)
 	{
 		print_errors(dir_name);
 		free_list(list);
-		return;
+		return ;
 	}
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);
-		if (truc_lu->d_name[0] == '.' && check_for_opt_a(opts) == 1 && is_dir_executable(full_path) == 1)
-			append_to_list(list, truc_lu->d_name, full_path);
-		else if (truc_lu->d_name[0] != '.' && is_dir_executable(full_path) == 1)
-			append_to_list(list, truc_lu->d_name, full_path);
-		else if (ft_strcmp(truc_lu->d_name, ".") != 0 && ft_strcmp(truc_lu->d_name, "..") != 0 && opts.aa == 1)
-			append_to_list(list, truc_lu->d_name, full_path);
-		free(full_path);
+		create_list(truc_lu, full_path, list, opts);
 	}
 	closedir(rep);
 	take_care_of_opts(list, dir_name, opts);

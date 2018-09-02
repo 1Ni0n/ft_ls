@@ -6,13 +6,13 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/29 14:10:13 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/29 14:10:18 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:17:02 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-void		print_usage(char c)
+void	print_usage(char c)
 {
 	ft_putstr("ft_ls: illegal option -- ");
 	ft_putchar(c);
@@ -21,11 +21,11 @@ void		print_usage(char c)
 	ft_putchar('\n');
 }
 
-void 	print_errors(char *name)
+void	print_errors(char *name)
 {
-	char *simple_name;
-	int i;
-	char *ptr;
+	char	*simple_name;
+	int		i;
+	char	*ptr;
 
 	i = 0;
 	ft_putstr("ft_ls: ");
@@ -38,8 +38,7 @@ void 	print_errors(char *name)
 		i++;
 	}
 	if (ft_strrchr(name, '/') == 0)
-		ft_putstr(name);		
+		ft_putstr(name);
 	ft_putstr(": ");
-	perror("");		
-
+	perror("");
 }

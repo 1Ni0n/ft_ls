@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:20:28 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/28 17:20:30 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:18:46 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_blocks(char *dir_name, options opts, off_t blocks)
 	DIR			*rep;
 	dirent		*truc_lu;
 	struct stat sb;
-	char 		*full_path;
+	char		*full_path;
 
 	if ((rep = opendir(dir_name)) != NULL)
 	{
@@ -41,7 +41,7 @@ void	print_blocks(char *dir_name, options opts, off_t blocks)
 	ft_putchar('\n');
 }
 
-int 	is_dir_empty(S_list *list, options opts)
+int		is_dir_empty(S_list *list, options opts)
 {
 	args_node *elem;
 
@@ -51,11 +51,11 @@ int 	is_dir_empty(S_list *list, options opts)
 			return (0);
 	}
 	else if (list->head != NULL)
-		return(0);
+		return (0);
 	return (1);
 }
 
-void 	print_blocks_if_dir_full(S_list *list, options opts, char *dir_name)
+void	print_blocks_if_dir_full(S_list *list, options opts, char *dir_name)
 {
 	off_t blocks;
 

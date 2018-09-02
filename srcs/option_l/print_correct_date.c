@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 15:30:19 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/28 15:30:20 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/02 18:51:38 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ void	print_date(time_t elem_modif_time, long diff, char *correct_date)
 
 void	print_correct_date(args_node *elem)
 {
-	char 	*correct_date;
-	int 	i;
-	time_t 	actual_time;
-	time_t  elem_modif_time;
+	char	*correct_date;
+	int		i;
+	time_t	actual_time;
+	time_t	elem_modif_time;
 	long	diff;
 
 	i = 3;
 	if ((actual_time = time(NULL)) == -1)
-		return;
+		return ;
 	correct_date = ft_strtrim(ctime(&elem->stats.st_mtime));
 	elem_modif_time = elem->stats.st_mtime;
 	if ((diff = elem_modif_time - actual_time) < 15768000 && diff > -15768000)
@@ -46,6 +46,6 @@ void	print_correct_date(args_node *elem)
 			write(1, &correct_date[i], 1);
 	}
 	else
-		print_date(elem_modif_time, diff, correct_date);		
+		print_date(elem_modif_time, diff, correct_date);
 	free(correct_date);
 }

@@ -17,7 +17,7 @@ void	free_list(S_list *list)
 	args_node	*elem;
 	args_node	*next;
 
-	if (list == NULL)// || (list != NULL && list->head == NULL))
+	if (list == NULL)
 		return;
 	elem = list->head;
 	while (elem)
@@ -63,6 +63,20 @@ void	append_to_list(S_list *list, char *content, char *path)
 			list->length++;
 		}
 	}
+}
+
+void	create_list(dirent *lu, char *path, S_list *list, options opts)
+{
+	if (lu->d_name[0] == '.' && check_for_opt_a(opts) == 1 &&\
+			is_dir_executable(path) == 1)
+		append_to_list(list, lu->d_name, path);
+	else if (lu->d_name[0] != '.' && is_dir_executable(path)\
+			== 1)
+		append_to_list(list, lu->d_name, path);
+	else if (ft_strcmp(lu->d_name, ".") != 0 &&\
+			ft_strcmp(lu->d_name, "..") != 0 && opts.aa == 1)
+		append_to_list(list, lu->d_name, path);
+	free(path);
 }
 
 S_list 	*new_s_list(void)

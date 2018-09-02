@@ -134,5 +134,6 @@ int 		get_size(S_list *list, options opts);
 void		option_ff(args_node *arg);
 int			is_there_special(S_list *list);
 void		colors(args_node *elem, struct stat stats);
+void		create_list(dirent *lu, char *path, S_list *list, options opts);
 /*void    get_longest(args_node *elem, longest *longest);*/
 #endif
