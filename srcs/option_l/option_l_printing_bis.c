@@ -12,18 +12,40 @@
 
 #include "../../ft_ls.h"
 
-void  print_size(struct stat stats, size_t longest_size)
+int		is_there_special(S_list *list)
 {
-  size_t whitespaces;
+	args_node 	*elem;
+	mode_t 	mode;
 
-  whitespaces = ft_nblen(stats.st_size);
-  while (whitespaces < longest_size)
-  {
-    write(1, " ", 1);
-    whitespaces++;
-  }
-  ft_putoff_t(stats.st_size);
-  write(1, " ", 1);
+	elem = list->head;
+	while (elem)
+	{
+		lstat(elem->path, &elem->stats);
+		mode = elem->stats.st_mode;
+		if (S_ISBLK(mode) || S_ISCHR(mode))
+			return (1);
+		elem = elem->next;
+	}
+	return (0);
+}
+
+void  print_size(struct stat stats, size_t longest_size, int special)
+{
+	size_t whitespaces;
+
+	whitespaces = ft_nblen(stats.st_size);
+	if (special == 0)
+	{
+	  while (whitespaces < longest_size)
+	  {
+	    write(1, " ", 1);
+	    whitespaces++;
+	  }
+	}
+	else
+		write(1, "       ", 7);
+	ft_putoff_t(stats.st_size);
+	write(1, " ", 1);
 }
 
 void print_majmin(struct stat stats)

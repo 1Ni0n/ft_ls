@@ -53,7 +53,7 @@ void  print_full_permissions(args_node *elem)
   get_permissions(elem->stats);
 }
 
-void  option_l_printing_controller(args_node *elem, longest longest)
+void  option_l_printing_controller(args_node *elem, longest longest, int special, options opts)
 {
   if (elem)
   {
@@ -66,9 +66,11 @@ void  option_l_printing_controller(args_node *elem, longest longest)
       if (is_elem_special(elem->stats) == 1)
         print_majmin(elem->stats);
       else
-        print_size(elem->stats, longest.size);
+        print_size(elem->stats, longest.size, special);
       print_correct_date(elem);
       print_name(elem);
+      if (opts.ff == 1)
+        option_ff(elem);
       if (is_elem_symlink(elem->stats) == 1)
         print_symlink(elem);
     }

@@ -22,6 +22,6 @@ void	args_controller(int ac, char **av)
 		ls_controller(av, *opts);
 	}
 	else
-		ls_controller(av, *opts);
+		ls_controller(av, *set_useless_opts());
 	free(opts);
 }

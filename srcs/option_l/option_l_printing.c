@@ -83,16 +83,23 @@ void  print_gid(struct stat stats, size_t longest_gid)
 void  option_l_printing(S_list *list, longest longest, options opts)
 {
   args_node *elem;
-  int       max_len;
+  int       max_ino_len;
+  int       max_s_len;
+  int       special;
 
   if (opts.i == 1)
-      max_len = get_inode(list);
+      max_ino_len = get_inode(list);
+  if (opts.s == 1)
+      max_s_len = get_size(list, opts);
+  special = is_there_special(list);
   elem = list->head;
   while (elem)
   {
     if (opts.i == 1)
-      option_i(elem, max_len);
-    option_l_printing_controller(elem, longest);
+      option_i(elem, max_ino_len);
+    if (opts.s == 1)
+      option_s(elem, max_s_len);
+    option_l_printing_controller(elem, longest, special, opts);
     write(1, "\n", 1);
     elem = elem->next;
   }

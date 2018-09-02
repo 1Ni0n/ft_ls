@@ -17,13 +17,28 @@
 **DEFINE CONTROL SEQUENCES FOR FORMATTING TEXT 
 */
 
-# define INIT			"\033[0m"
+/*# define INIT			"\033[0m"
 # define BOLD			"\033[1m"
 # define DIM			"\033[2m"
 # define UNDERLINED		"\033[4m"
 # define BLINK			"\033[5m"
 # define REVERSE		"\033[7m"
-# define HIDDEN			"\033[8m"
+# define HIDDEN			"\033[8m"*/
+
+/*#define BLK "\x1B[30m"
+#define RED "\x1B[31m"
+#define REDB "\x1B[41m"
+#define GRN "\x1B[32m"
+#define YEL "\x1B[33m"
+#define YELB "\x1B[43m"
+#define BLU "\x1B[34m"
+#define MAG "\x1B[35m"
+#define CYN "\x1B[36m"
+#define CYB "\x1B[46m"
+#define CYNB "\x1B[36;1m"
+#define WHT "\x1B[37m"
+#define RESET "\x1B[0m"*/
+
 
 /*
  * **		THE FOLLOWING COLORS WORKS WITH ITERM2 AND MOST TERMINALS

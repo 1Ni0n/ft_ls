@@ -52,6 +52,7 @@ void			simplest_ls(void)
 	opts = set_useless_opts();
 	opt = *opts;
 	merge_sort(&(list->head), opt);
+	print_list_no_opts(list);
 	free_list(list);
 }
 
