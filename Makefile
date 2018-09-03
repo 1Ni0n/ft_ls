@@ -47,7 +47,7 @@ option_l_printing.o option_l_printing_controller.o option_l_printing_bis.o print
 all: $(NAME)
 
 $(NAME): lib $(LIB)
-	@gcc -c $(SRCS) $(ALL_OPT_L) $(ALL_LISTS)
+	@gcc $(FLAG) -c $(SRCS) $(ALL_OPT_L) $(ALL_LISTS)
 	@gcc $(FLAG) $(OBJ) $(LIB) -o $(NAME)
 
 lib:

@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/03 13:10:59 by aguillot          #+#    #+#             */
+/*   Updated: 2018/09/03 13:11:37 by aguillot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../ft_ls.h"
 
-void 	print_color(char *name, char *color)
+void	print_color(char *name, char *color)
 {
 	ft_putstr(color);
 	ft_putstr(name);
 	ft_putstr(RESET);
 }
 
-void print_color_background(char *name, char *color, char *background)
+void	print_color_background(char *name, char *color, char *background)
 {
 	ft_putstr(background);
 	ft_putstr(color);
 	ft_putstr(name);
 	ft_putstr(RESET);
 }
-int 	get_color_code(struct stat stats)
+
+int		get_color_code(struct stat stats)
 {
 	if (S_ISDIR(stats.st_mode) == 1)
 		return (DIR_COLOR);
@@ -22,7 +35,7 @@ int 	get_color_code(struct stat stats)
 		return (CHARAC_SPECIAL_COLOR);
 	else if (S_ISBLK(stats.st_mode) == 1)
 		return (BLOCK_COLOR);
-	else if (S_ISFIFO(stats.st_mode) ==1)
+	else if (S_ISFIFO(stats.st_mode) == 1)
 		return (FIFO_COLOR);
 	else if (S_ISLNK(stats.st_mode) == 1)
 		return (LNK_COLOR);
@@ -33,7 +46,7 @@ int 	get_color_code(struct stat stats)
 	return (0);
 }
 
-void	colors(args_node *elem, struct stat stats)
+void	colors(t_args_node *elem, struct stat stats)
 {
 	int color;
 

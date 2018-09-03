@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/04 15:36:24 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/04 16:24:30 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 17:45:57 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ int	main(int ac, char **av)
 	if (ac == 1)
 		simplest_ls();
 	else if (ac > 1)
-		args_controller(ac, av);
+		args_controller(av);
 	return (0);
 }

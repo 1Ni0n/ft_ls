@@ -6,42 +6,38 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/20 15:29:03 by aguillot          #+#    #+#             */
-/*   Updated: 2018/06/20 15:29:16 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 11:19:42 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-int	rev_list(args_node **head)
+int				rev_list(t_args_node **head)
 {
-	args_node *prev;
-	args_node *elem;
- 	args_node *next;
+	t_args_node *prev;
+	t_args_node *elem;
+	t_args_node *next;
 
- 	prev = NULL;
+	prev = NULL;
 	elem = NULL;
 	next = NULL;
-	if(head == NULL)
-		return -1;
+	if (head == NULL)
+		return (-1);
 	elem = *head;
-	while(elem != NULL)
+	while (elem != NULL)
 	{
-		/* Prend l'adresse de la structure suivante */
 		next = elem->next;
-		/* Redirige le pointeur suivant sur la précédente */
 		elem->next = prev;
-		/* Garde la structure courante comme précédente */
 		prev = elem;
-		/* Passe à la suivante. */
-		elem = next;		
+		elem = next;
 	}
 	*head = prev;
 	return (0);
 }
 
-args_node	*sorted_merge_t(args_node *a, args_node *b)
+t_args_node		*sorted_merge_t(t_args_node *a, t_args_node *b)
 {
-	args_node *tmp;
+	t_args_node *tmp;
 
 	tmp = NULL;
 	if (a == NULL)
@@ -54,18 +50,7 @@ args_node	*sorted_merge_t(args_node *a, args_node *b)
 		tmp->next = sorted_merge_t(a->next, b);
 	}
 	else if (a->mtime == b->mtime)
-	{
-		if (ft_strcmp(a->content, b->content) < 0)
-		{
-			tmp = a;
-			tmp->next = sorted_merge_t(a->next, b);
-		}
-		else
-		{
-			tmp = b;
-			tmp->next = sorted_merge_t(a, b->next);
-		}
-	}
+		sort_t_light(&a, &b, &tmp);
 	else
 	{
 		tmp = b;
@@ -74,26 +59,26 @@ args_node	*sorted_merge_t(args_node *a, args_node *b)
 	return (tmp);
 }
 
-void	merge_sort_t(args_node **head)
+void			merge_sort_t(t_args_node **head)
 {
-	args_node *elem;
-	args_node *a;
-	args_node *b;
+	t_args_node *elem;
+	t_args_node *a;
+	t_args_node *b;
 
 	elem = *head;
 	if (elem == NULL || elem->next == NULL)
-		return;
+		return ;
 	split_list(elem, &a, &b);
 	merge_sort_t(&a);
 	merge_sort_t(&b);
 	*head = sorted_merge_t(a, b);
 }
 
-void 	get_time_info(args_node **head, char *dir_name)
+void			get_time_info(t_args_node **head, char *dir_name)
 {
-	args_node *elem;
-	struct stat sb;
-	char *full_path;
+	t_args_node	*elem;
+	struct stat	sb;
+	char		*full_path;
 
 	elem = *head;
 	while (elem)
@@ -106,7 +91,7 @@ void 	get_time_info(args_node **head, char *dir_name)
 	}
 }
 
-void	sort_list_t(args_node **head, char *dir_name)
+void			sort_list_t(t_args_node **head, char *dir_name)
 {
 	get_time_info(head, dir_name);
 	merge_sort_t(head);

@@ -6,15 +6,29 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 14:01:02 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/30 14:01:03 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 11:19:40 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-args_node	*sorted_merge_r(args_node *a, args_node *b)
+void		sort_t_light(t_args_node **a, t_args_node **b, t_args_node **tmp)
 {
-	args_node *elem;
+	if (ft_strcmp((*a)->content, (*b)->content) < 0)
+	{
+		*tmp = *a;
+		(*tmp)->next = sorted_merge_t((*a)->next, *b);
+	}
+	else
+	{
+		*tmp = *b;
+		(*tmp)->next = sorted_merge_t(*a, (*b)->next);
+	}
+}
+
+t_args_node	*sorted_merge_r(t_args_node *a, t_args_node *b)
+{
+	t_args_node *elem;
 
 	elem = NULL;
 	if (a == NULL)
@@ -34,9 +48,9 @@ args_node	*sorted_merge_r(args_node *a, args_node *b)
 	return (elem);
 }
 
-args_node	*sorted_merge(args_node *a, args_node *b)
+t_args_node	*sorted_merge(t_args_node *a, t_args_node *b)
 {
-	args_node *elem;
+	t_args_node *elem;
 
 	elem = NULL;
 	if (a == NULL)
@@ -56,10 +70,10 @@ args_node	*sorted_merge(args_node *a, args_node *b)
 	return (elem);
 }
 
-void	split_list(args_node *elem, args_node **front, args_node **back)
+void		split_list(t_args_node *elem, t_args_node **front, t_args_node **back)
 {
-	args_node *fast;
-	args_node *slow;
+	t_args_node *fast;
+	t_args_node *slow;
 
 	slow = elem;
 	fast = elem->next;
@@ -77,20 +91,20 @@ void	split_list(args_node *elem, args_node **front, args_node **back)
 	slow->next = NULL;
 }
 
-void	merge_sort(args_node **head, options opts)
+void		merge_sort(t_args_node **head, options opts)
 {
-	args_node *elem;
-	args_node *a;
-	args_node *b;
+	t_args_node *elem;
+	t_args_node *a;
+	t_args_node *b;
 
 	elem = *head;
 	if (elem == NULL || elem->next == NULL)
-		return;
+		return ;
 	split_list(elem, &a, &b);
 	merge_sort(&a, opts);
 	merge_sort(&b, opts);
 	if (opts.r == 1)
 		*head = sorted_merge_r(a, b);
-	else 
+	else
 		*head = sorted_merge(a, b);
 }

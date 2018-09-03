@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_stats_for_option_l.c                           :+:      :+:    :+:   */
+/*   option_l_printing_controller.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/28 09:18:46 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/28 09:18:48 by aguillot         ###   ########.fr       */
+/*   Created: 2018/09/03 13:54:51 by aguillot          #+#    #+#             */
+/*   Updated: 2018/09/03 14:01:38 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,29 @@ void  get_permissions(struct stat stats)
   permissions[0] = (stats.st_mode & S_IRUSR) ? 'r' : '-';
   permissions[1] = (stats.st_mode & S_IWUSR) ? 'w' : '-';
   permissions[2] = (stats.st_mode & S_IXUSR) ? 'x' : '-';
+  if (stats.st_mode & S_ISGID)
+    permissions[2] = (stats.st_mode & S_IXGRP ? 'S' : 's');
   permissions[3] = (stats.st_mode & S_IRGRP) ? 'r' : '-';
   permissions[4] = (stats.st_mode & S_IWGRP) ? 'w' : '-';
   permissions[5] = (stats.st_mode & S_IXGRP) ? 'x' : '-';
+  if (stats.st_mode & S_ISGID)
+    permissions[2] = (stats.st_mode & S_IXGRP ? 'S' : 's');
   permissions[6] = (stats.st_mode & S_IROTH) ? 'r' : '-';
   permissions[7] = (stats.st_mode & S_IWOTH) ? 'w' : '-';
   permissions[8] = (stats.st_mode & S_IXOTH) ? 'x' : '-';
+  if (stats.st_mode & S_ISVTX)
+    permissions[8] = (stats.st_mode & S_IXOTH) ? 't' : 'T';
   permissions[9] = '\0';
   write(1, &permissions, 10);
 }
 
-void  print_full_permissions(args_node *elem)
+void  print_full_permissions(t_args_node *elem)
 {
   get_type(elem->stats);
   get_permissions(elem->stats);
 }
 
-void  option_l_printing_controller(args_node *elem, longest longest, int special, options opts)
+void  option_l_printing_controller(t_args_node *elem, t_longest longest, int special, t_flags opts)
 {
   if (elem)
   {

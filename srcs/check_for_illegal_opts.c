@@ -6,13 +6,13 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 11:04:36 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/01 11:04:38 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 17:36:27 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-int				check_if_only_opts(char **av)
+int					check_if_only_opts(char **av)
 {
 	int	i;
 
@@ -32,9 +32,9 @@ int				check_if_only_opts(char **av)
 	return (1);
 }
 
-static void			set_null_opts(options *opts)
+static void			set_null_opts(t_flags *opts)
 {
-	if ( opts != NULL)
+	if (opts != NULL)
 	{
 		opts->l = 0;
 		opts->a = 0;
@@ -44,15 +44,40 @@ static void			set_null_opts(options *opts)
 	}
 }
 
-static options		*set_opts(char **av)
+void				set_em(char **av, t_flags **opts, int i, int j)
 {
-	options *opts;
-	options opt;
+	if (av[i][j] == 'A')
+		(*opts)->aa = 1;
+	if (av[i][j] == 'i')
+		(*opts)->i = 1;
+	if (av[i][j] == 'F')
+		(*opts)->ff = 1;
+	if (av[i][j] == 's')
+		(*opts)->s = 1;
+	if (av[i][j] == 'c')
+		(*opts)->c = 1;
+	if (av[i][j] == 'l')
+		(*opts)->l = 1;
+	if (av[i][j] == 'a')
+		(*opts)->a = 1;
+	if (av[i][j] == 'r')
+		(*opts)->r = 1;
+	if (av[i][j] == 'R')
+		(*opts)->R = 1;
+	if (av[i][j] == 't')
+		(*opts)->t = 1;
+	if (av[i][j] == '1')
+		(*opts)->one = 1;
+}
+
+static t_flags		*set_opts(char **av)
+{
+	t_flags *opts;
 	int		i;
 	int		j;
 
 	i = 1;
-	if (!(opts = malloc(sizeof*opts)))
+	if (!(opts = malloc(sizeof(*opts))))
 		return (NULL);
 	set_null_opts(opts);
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[1], "--") != 0)
@@ -60,24 +85,7 @@ static options		*set_opts(char **av)
 		j = 1;
 		while (av[i][j])
 		{
-			if (av[i][j] == 'A')
-				opts->aa = 1;
-			if (av[i][j] == 'i')
-				opts->i = 1;
-			if (av[i][j] == 'F')
-				opts->ff = 1;
-			if (av[i][j] == 's')
-				opts->s = 1;
-			if (av[i][j] == 'c')
-				opts->c = 1;
-			if (av[i][j] == 'l')
-				opts->l = 1;
-			if (av[i][j] == 'a')
-				opts->a = 1;
-			if (av[i][j] == 'r')
-				opts->r = 1;
-			if (av[i][j] == 'R')
-				opts->R = 1;
+			set_em(av, &opts, i, j);
 			if (av[i][j] == 't')
 				opts->t = 1;
 			if (av[i][j] == '1')
@@ -89,13 +97,12 @@ static options		*set_opts(char **av)
 	return (opts);
 }
 
-options		*check_for_illegal_opts(char **av)
+t_flags				*check_for_illegal_opts(char **av)
 {
 	int		i;
 	int		j;
-	options	*opts;
+	t_flags	*opts;
 
-	opts = NULL;
 	i = 1;
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[i], "--") != 0)
 	{
@@ -104,7 +111,9 @@ options		*check_for_illegal_opts(char **av)
 		while (av[i][j])
 		{
 			if (av[i][j] != 'l' && av[i][j] != 'a' && av[i][j] != 'r' &&\
-					av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1' && av[i][j] != 'A' && av[i][j] != 'i' && av[i][j] != 'F' && av[i][j] != 's' && av[i][j] != 'c')
+					av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1'\
+					&& av[i][j] != 'A' && av[i][j] != 'i' && av[i][j] != 'F'\
+					&& av[i][j] != 's' && av[i][j] != 'c')
 			{
 				print_usage(av[i][j]);
 				exit(1);

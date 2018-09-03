@@ -6,19 +6,19 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 17:33:14 by aguillot          #+#    #+#             */
-/*   Updated: 2018/05/15 17:33:16 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 11:56:23 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-void	free_list(S_list *list)
+void	free_list(t_list *list)
 {
 	args_node	*elem;
 	args_node	*next;
 
 	if (list == NULL)
-		return;
+		return ;
 	elem = list->head;
 	while (elem)
 	{
@@ -29,22 +29,28 @@ void	free_list(S_list *list)
 		next = elem->next;
 		free(elem);
 		elem = next;
-	}		
+	}
 	free(list);
 }
 
-void	append_to_list(S_list *list, char *content, char *path)
+void	append(t_args_node **arg, char *content, char *path)
 {
+	(*arg)->content = ft_strdup(content);
+	if (path)
+		(*arg)->path = ft_strdup(path);
+	else
+		(*arg)->path = NULL;
+}
+
+void	append_to_list(t_list *list, char *content, char *path)
+{
+	t_args_node *arg;
+
 	if (list != NULL)
 	{
-		args_node *arg;
-		if ((arg = malloc(sizeof *arg)))
+		if ((arg = malloc(sizeof(*arg))))
 		{
-			arg->content = ft_strdup(content);
-			if (path)
-				arg->path = ft_strdup(path);
-			else
-				arg->path = NULL;
+			append(&arg, content, path);
 			arg->mtime = 0;
 			arg->next = NULL;
 			if (list->head == NULL)
@@ -65,25 +71,11 @@ void	append_to_list(S_list *list, char *content, char *path)
 	}
 }
 
-void	create_list(dirent *lu, char *path, S_list *list, options opts)
+t_list	*new_s_list(void)
 {
-	if (lu->d_name[0] == '.' && check_for_opt_a(opts) == 1 &&\
-			is_dir_executable(path) == 1)
-		append_to_list(list, lu->d_name, path);
-	else if (lu->d_name[0] != '.' && is_dir_executable(path)\
-			== 1)
-		append_to_list(list, lu->d_name, path);
-	else if (ft_strcmp(lu->d_name, ".") != 0 &&\
-			ft_strcmp(lu->d_name, "..") != 0 && opts.aa == 1)
-		append_to_list(list, lu->d_name, path);
-	free(path);
-}
+	t_list	*args;
 
-S_list 	*new_s_list(void)
-{
-	S_list 	*args;
-
-	if (!(args = malloc(sizeof *args)))
+	if (!(args = malloc(sizeof(*args))))
 		return (NULL);
 	args->length = 0;
 	args->head = NULL;

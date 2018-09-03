@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   option_l2.c                                        :+:      :+:    :+:   */
+/*   option_l.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/27 09:56:02 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/27 09:56:05 by aguillot         ###   ########.fr       */
+/*   Created: 2018/09/03 13:53:55 by aguillot          #+#    #+#             */
+/*   Updated: 2018/09/03 17:34:43 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-int 	retreive_stats(args_node *elem)
+int		retreive_stats(t_args_node *elem)
 {
 	struct stat sb;
-	char	*path;
 
-  if (elem->path == NULL)
+	if (elem->path == NULL)
 	{
-		if (lstat(elem->content, &sb) == -1)
+		if (lstat(elem->content, &sb))
 			return (0);
 		else
 			elem->stats = sb;
@@ -27,18 +26,17 @@ int 	retreive_stats(args_node *elem)
 	}
 	else
 	{
-		if (lstat(elem->path, &sb) == -1)
+		if (lstat(elem->path, &sb))
 			return(0);
-		else
-			elem->stats = sb;
-    return (1);
+		elem->stats = sb;
+		return (1);
 	}
 }
 
-void	option_l(S_list *list, options opts, char *dir_name)
+void	option_l(S_list *list, t_flags opts, char *dir_name)
 {
-	args_node 	*elem;
-  	longest     longest;
+	t_args_node	*elem;
+	t_longest		longest;
 
 	elem = list->head;
 	if (ft_strcmp(dir_name, "dont print the blocks 887712*%$") != 0)
@@ -46,10 +44,9 @@ void	option_l(S_list *list, options opts, char *dir_name)
 	while (elem)
 	{
 		if (retreive_stats(elem) == 0)
-			elem->content = NULL; //cest comme ca quon protege les fonctions suivantes de taper dans struct stats si lstat na pas marche.
+			elem->content = NULL;
 		elem = elem->next;
 	}
 	longest = get_longest(list);
 	option_l_printing(list, longest, opts);
-	//}
 }

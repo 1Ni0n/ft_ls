@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 14:24:40 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/02 18:26:46 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 17:23:07 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ DIR		*check_if_openable(char *dir_name, DIR *rep)
 	return (rep);
 }
 
-void	take_care_of_opts(S_list *list, char *dir_name, options opts)
+void	take_care_of_opts(t_list *list, char *dir_name, t_flags opts)
 {
 	if (opts.t == 1)
 	{
@@ -61,12 +61,28 @@ void	take_care_of_opts(S_list *list, char *dir_name, options opts)
 		ls_recursive(list, opts);
 }
 
-void	main_ls(char *dir_name, options opts)
+void	main_ls_end(dirent *lu, char *path, t_list *list, t_flags opts)
+{
+	struct stat stats;
+
+	if (lu->d_name[0] == '.' && check_for_opt_a(opts) == 1 &&\
+			lstat(path, &stats) == 0)
+		append_to_list(list, lu->d_name, path);
+	else if (lu->d_name[0] != '.' && lstat(path, &stats) == 0)
+		append_to_list(list, lu->d_name, path);
+	else if (ft_strcmp(lu->d_name, ".") != 0 &&\
+			ft_strcmp(lu->d_name, "..") != 0 && opts.aa == 1 &&\
+			lstat(path, &stats) == 0)
+		append_to_list(list, lu->d_name, path);
+	free(path);
+}
+
+void	main_ls(char *dir_name, t_flags opts)
 {
 	DIR			*rep;
 	dirent		*truc_lu;
 	char		*full_path;
-	S_list		*list;
+	t_list		*list;
 
 	rep = NULL;
 	truc_lu = NULL;
@@ -80,7 +96,7 @@ void	main_ls(char *dir_name, options opts)
 	while ((truc_lu = readdir(rep)) != NULL)
 	{
 		full_path = check_path(dir_name, truc_lu->d_name);
-		create_list(truc_lu, full_path, list, opts);
+		main_ls_end(truc_lu, full_path, list, opts);
 	}
 	closedir(rep);
 	take_care_of_opts(list, dir_name, opts);

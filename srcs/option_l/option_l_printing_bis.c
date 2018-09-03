@@ -12,9 +12,9 @@
 
 #include "../../ft_ls.h"
 
-int		is_there_special(S_list *list)
+int		is_there_special(t_list *list)
 {
-	args_node	*elem;
+	t_args_node	*elem;
 	mode_t		mode;
 
 	elem = list->head;
@@ -73,13 +73,13 @@ void	print_majmin(struct stat stats)
 	write(1, " ", 1);
 }
 
-void	print_name(args_node *elem)
+void	print_name(t_args_node *elem)
 {
 	write(1, " ", 1);
 	ft_putstr(elem->content);
 }
 
-void	print_symlink(args_node *elem)
+void	print_symlink(t_args_node *elem)
 {
 	int		link;
 	char	symlink[255];

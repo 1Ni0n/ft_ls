@@ -6,13 +6,13 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/27 10:50:11 by aguillot          #+#    #+#             */
-/*   Updated: 2018/08/27 10:50:12 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 13:52:50 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-void	get_longest_hardlink(args_node *elem, longest *longest)
+void	get_longest_hardlink(t_args_node *elem, t_longest *longest)
 {
 	size_t hardlinks;
 	size_t len;
@@ -26,7 +26,7 @@ void	get_longest_hardlink(args_node *elem, longest *longest)
 	}
 }
 
-void	get_longest_uid(args_node *elem, longest *longest)
+void	get_longest_uid(t_args_node *elem, t_longest *longest)
 {
 	size_t          uid_len;
   size_t          uid;
@@ -36,20 +36,20 @@ void	get_longest_uid(args_node *elem, longest *longest)
 	if (elem->content)
 	{
 		if ((p = getpwuid(elem->stats.st_uid)) != NULL)
-    {
-      if ((uid_len = ft_strlen(p->pw_name)) > longest->uid)
-        longest->uid = uid_len;
-    }
+		{
+			if ((uid_len = ft_strlen(p->pw_name)) > longest->uid)
+			 longest->uid = uid_len;
+		}
 		else
 		{
-      uid = elem->stats.st_uid;
-      if ((uid_len = ft_nblen(uid)) > longest->uid)
-        longest->uid = uid_len;
-    }
+			uid = elem->stats.st_uid;
+			if ((uid_len = ft_nblen(uid)) > longest->uid)
+				longest->uid = uid_len;
+		}
 	}
 }
 
-void  get_longest_gid(args_node *elem, longest *longest)
+void  get_longest_gid(t_args_node *elem, t_longest *longest)
 {
   size_t          gid_len;
   size_t          gid;
@@ -72,7 +72,7 @@ void  get_longest_gid(args_node *elem, longest *longest)
   }
 }
 
-void  get_longest_size(args_node *elem, longest *longest)
+void  get_longest_size(t_args_node *elem, t_longest *longest)
 {
   long size;
 
@@ -83,9 +83,9 @@ void  get_longest_size(args_node *elem, longest *longest)
   }
 }
 
-longest	 get_longest(S_list *list)
+longest	 get_longest(t_list *list)
 {
-	args_node 	*elem;
+	t_args_node 	*elem;
 	longest 	longest;
 
 	elem = list->head;

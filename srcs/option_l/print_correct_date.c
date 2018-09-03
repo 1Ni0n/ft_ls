@@ -27,7 +27,7 @@ void	print_date(time_t elem_modif_time, long diff, char *correct_date)
 	ft_putchar((diff % 10) + '0');
 }
 
-void	print_correct_date(args_node *elem)
+void	print_correct_date(t_args_node *elem)
 {
 	char	*correct_date;
 	int		i;

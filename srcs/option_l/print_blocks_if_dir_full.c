@@ -6,13 +6,13 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 17:20:28 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/02 18:18:46 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 17:35:13 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-void	print_blocks(char *dir_name, options opts, off_t blocks)
+void	print_blocks(char *dir_name, t_flags opts, off_t blocks)
 {
 	DIR			*rep;
 	dirent		*truc_lu;
@@ -41,10 +41,8 @@ void	print_blocks(char *dir_name, options opts, off_t blocks)
 	ft_putchar('\n');
 }
 
-int		is_dir_empty(S_list *list, options opts)
+int		is_dir_empty(S_list *list, t_flags opts)
 {
-	args_node *elem;
-
 	if (opts.a == 1)
 	{
 		if (list->head != NULL)
@@ -55,7 +53,7 @@ int		is_dir_empty(S_list *list, options opts)
 	return (1);
 }
 
-void	print_blocks_if_dir_full(S_list *list, options opts, char *dir_name)
+void	print_blocks_if_dir_full(S_list *list, t_flags opts, char *dir_name)
 {
 	off_t blocks;
 

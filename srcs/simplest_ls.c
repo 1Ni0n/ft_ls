@@ -12,9 +12,9 @@
 
 #include "../ft_ls.h"
 
-options		*set_useless_opts(void)
+t_flags		*set_useless_opts(void)
 {
-	options *opts;
+	t_flags *opts;
 
 	if (!(opts = malloc(sizeof(*opts))))
 		return (NULL);
@@ -31,8 +31,8 @@ void		simplest_ls(void)
 	DIR		*rep;
 	dirent	*truc_lu;
 	S_list	*list;
-	options *opts;
-	options opt;
+	t_flags *opts;
+	t_flags opt;
 
 	rep = NULL;
 	truc_lu = NULL;

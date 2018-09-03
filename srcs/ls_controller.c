@@ -6,15 +6,15 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 13:31:49 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/02 19:11:27 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/03 17:33:15 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../ft_ls.h"
 
-int			check_inexistant(char **av)
+int				check_inexistant(char **av)
 {
-	S_list		*does_not_exist_list;
+	t_list		*does_not_exist_list;
 	int			i;
 	struct stat	sb;
 
@@ -41,9 +41,9 @@ int			check_inexistant(char **av)
 	return (1);
 }
 
-int		check_files(char **av, options opts)
+int				check_files(char **av, options opts)
 {
-	S_list		*no_dir_list;
+	t_list		*no_dir_list;
 	struct stat	sb;
 	int			i;
 
@@ -54,23 +54,20 @@ int		check_files(char **av, options opts)
 	while (av[i])
 	{
 		if (lstat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 0)
-			append_to_list(no_dir_list, av[i], NULL);
+		{
+			if (!S_ISLNK(sb.st_mode))
+				append_to_list(no_dir_list, av[i], NULL);
+			else if (opts.l == 1)
+				append_to_list(no_dir_list, av[i], NULL);
+		}
 		i++;
 	}
-	if (no_dir_list->head == NULL)
-	{
-		free_list(no_dir_list);
-		return (0);
-	}
-	merge_sort(&(no_dir_list->head), opts);
-	print_list(no_dir_list, opts, "dont print the blocks 887712*%$");
-	free_list(no_dir_list);
-	return (1);
+	return (check_files_end(no_dir_list, opts));
 }
 
-S_list		*check_dir(char **av, options opts)
+t_list			*check_dir(char **av, options opts)
 {
-	S_list		*dir_list;
+	t_list		*dir_list;
 	struct stat sb;
 	int			i;
 
@@ -80,16 +77,21 @@ S_list		*check_dir(char **av, options opts)
 		i++;
 	while (av[i])
 	{
-		if (lstat(av[i], &sb) == 0 && (S_ISDIR(sb.st_mode)) == 1 &&\
-				is_arg_executable(sb) == 1)
-			append_to_list(dir_list, av[i], NULL);
+		if (lstat(av[i], &sb) == 0)
+		{
+			if (S_ISDIR(sb.st_mode) == 1)
+				append_to_list(dir_list, av[i], NULL);
+			else if (S_ISLNK(sb.st_mode) == 1 && opts.l == 0)
+				append_to_list(dir_list, av[i], NULL);
+		}
 		i++;
 	}
 	merge_sort(&(dir_list->head), opts);
 	return (dir_list);
 }
 
-void		manage_dir(S_list *dir_list, int inexistant, int files, options opts)
+void			manage_dir(t_list *dir_list, int inexistant, int files,\
+		options opts)
 {
 	args_node *dir;
 
@@ -108,10 +110,9 @@ void		manage_dir(S_list *dir_list, int inexistant, int files, options opts)
 	}
 }
 
-void		ls_controller(char **av, options opts)
+void			ls_controller(char **av, options opts)
 {
-	S_list		*dir_list;
-	args_node	*dir;
+	t_list		*dir_list;
 	int			inexistant;
 	int			files;
 	char		*ptr;

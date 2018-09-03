@@ -12,7 +12,7 @@
 
 #include "../ft_ls.h"
 
-void	option_ff(args_node *elem)
+void	option_ff(t_args_node *elem)
 {
 	mode_t mode;
 
@@ -28,9 +28,9 @@ void	option_ff(args_node *elem)
 		write(1, "|", 1);
 }
 
-int		get_size(S_list *list, options opts)
+int		get_size(t_list *list, t_flags opts)
 {
-	args_node	*elem;
+	t_args_node	*elem;
 	int			max_len;
 	int			len;
 	int			blocks;
@@ -49,14 +49,14 @@ int		get_size(S_list *list, options opts)
 	}
 	if (opts.l == 0)
 	{
-		ft_putstr("total: ");
+		ft_putstr("total ");
 		ft_putoff_t(blocks);
 		write(1, "\n", 1);
 	}
 	return (max_len);
 }
 
-void	option_s(args_node *elem, int max_len)
+void	option_s(t_args_node *elem, int max_len)
 {
 	int size_len;
 
@@ -68,9 +68,9 @@ void	option_s(args_node *elem, int max_len)
 	write(1, " ", 1);
 }
 
-int		get_inode(S_list *list)
+int		get_inode(t_list *list)
 {
-	args_node	*elem;
+	t_args_node	*elem;
 	int			max_len;
 	int			len;
 
@@ -86,7 +86,7 @@ int		get_inode(S_list *list)
 	return (max_len);
 }
 
-void	option_i(args_node *elem, int max_len)
+void	option_i(t_args_node *elem, int max_len)
 {
 	int ino_len;
 
