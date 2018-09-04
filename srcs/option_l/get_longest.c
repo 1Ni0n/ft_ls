@@ -6,13 +6,13 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/27 10:50:11 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/03 13:52:50 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:32:25 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-void	get_longest_hardlink(t_args_node *elem, t_longest *longest)
+void		get_longest_hardlink(t_args_node *elem, t_longest *longest)
 {
 	size_t hardlinks;
 	size_t len;
@@ -26,19 +26,19 @@ void	get_longest_hardlink(t_args_node *elem, t_longest *longest)
 	}
 }
 
-void	get_longest_uid(t_args_node *elem, t_longest *longest)
+void		get_longest_uid(t_args_node *elem, t_longest *longest)
 {
-	size_t          uid_len;
-  size_t          uid;
-  struct passwd   *p;
+	size_t			uid_len;
+	size_t			uid;
+	struct passwd	*p;
 
-  uid_len = 0;
+	uid_len = 0;
 	if (elem->content)
 	{
 		if ((p = getpwuid(elem->stats.st_uid)) != NULL)
 		{
 			if ((uid_len = ft_strlen(p->pw_name)) > longest->uid)
-			 longest->uid = uid_len;
+				longest->uid = uid_len;
 		}
 		else
 		{
@@ -49,44 +49,44 @@ void	get_longest_uid(t_args_node *elem, t_longest *longest)
 	}
 }
 
-void  get_longest_gid(t_args_node *elem, t_longest *longest)
+void		get_longest_gid(t_args_node *elem, t_longest *longest)
 {
-  size_t          gid_len;
-  size_t          gid;
-  struct group   *g;
+	size_t			gid_len;
+	size_t			gid;
+	struct group	*g;
 
-  gid_len = 0;
-  if (elem->content)
-  {
-    if ((g = getgrgid(elem->stats.st_gid)) != NULL)
-    {
-      if ((gid_len = ft_strlen(g->gr_name)) > longest->gid)
-        longest->gid = gid_len;
-    }
-    else
-    {
-      gid = elem->stats.st_gid;
-      if ((gid_len = ft_nblen(gid)) > longest->gid)
-        longest->gid = gid_len;
-    }
-  }
+	gid_len = 0;
+	if (elem->content)
+	{
+		if ((g = getgrgid(elem->stats.st_gid)) != NULL)
+		{
+			if ((gid_len = ft_strlen(g->gr_name)) > longest->gid)
+				longest->gid = gid_len;
+		}
+		else
+		{
+			gid = elem->stats.st_gid;
+			if ((gid_len = ft_nblen(gid)) > longest->gid)
+				longest->gid = gid_len;
+		}
+	}
 }
 
-void  get_longest_size(t_args_node *elem, t_longest *longest)
+void		get_longest_size(t_args_node *elem, t_longest *longest)
 {
-  long size;
+	long size;
 
-  if (elem->content)
-  {
-    if ((size = ft_nblen(elem->stats.st_size)) > longest->size)
-      longest->size = size;
-  }
+	if (elem->content)
+	{
+		if ((size = ft_nblen(elem->stats.st_size)) > longest->size)
+			longest->size = size;
+	}
 }
 
-longest	 get_longest(t_list *list)
+t_longest	get_longest(t_list *list)
 {
-	t_args_node 	*elem;
-	longest 	longest;
+	t_args_node		*elem;
+	t_longest		longest;
 
 	elem = list->head;
 	longest.hardlinks = 1;
@@ -100,6 +100,6 @@ longest	 get_longest(t_list *list)
 		get_longest_gid(elem, &longest);
 		get_longest_size(elem, &longest);
 		elem = elem->next;
-	} 
-  return(longest);
+	}
+	return (longest);
 }

@@ -12,7 +12,7 @@
 
 #include "../ft_ls.h"
 
-int		check_for_opt_a(options opts)
+int		check_for_opt_a(t_flags opts)
 {
 	if (opts.a == 0)
 		return (0);

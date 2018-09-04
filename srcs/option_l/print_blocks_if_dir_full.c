@@ -15,7 +15,7 @@
 void	print_blocks(char *dir_name, t_flags opts, off_t blocks)
 {
 	DIR			*rep;
-	dirent		*truc_lu;
+	t_dirent	*truc_lu;
 	struct stat sb;
 	char		*full_path;
 
@@ -41,7 +41,7 @@ void	print_blocks(char *dir_name, t_flags opts, off_t blocks)
 	ft_putchar('\n');
 }
 
-int		is_dir_empty(S_list *list, t_flags opts)
+int		is_dir_empty(t_list *list, t_flags opts)
 {
 	if (opts.a == 1)
 	{
@@ -53,7 +53,7 @@ int		is_dir_empty(S_list *list, t_flags opts)
 	return (1);
 }
 
-void	print_blocks_if_dir_full(S_list *list, t_flags opts, char *dir_name)
+void	print_blocks_if_dir_full(t_list *list, t_flags opts, char *dir_name)
 {
 	off_t blocks;
 

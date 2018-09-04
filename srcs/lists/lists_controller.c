@@ -14,8 +14,8 @@
 
 void	free_list(t_list *list)
 {
-	args_node	*elem;
-	args_node	*next;
+	t_args_node	*elem;
+	t_args_node	*next;
 
 	if (list == NULL)
 		return ;

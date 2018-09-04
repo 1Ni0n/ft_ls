@@ -27,7 +27,7 @@ int		check_files_end(t_list *no_dir_list, t_flags opts)
 
 void	args_controller(char **av)
 {
-	options	*opts;
+	t_flags	*opts;
 
 	opts = NULL;
 	if (av[1][0] == '-')
@@ -36,6 +36,9 @@ void	args_controller(char **av)
 		ls_controller(av, *opts);
 	}
 	else
-		ls_controller(av, *set_useless_opts());
+	{
+		opts = set_useless_opts();
+		ls_controller(av, *opts);
+	}
 	free(opts);
 }

@@ -41,7 +41,7 @@ int				check_inexistant(char **av)
 	return (1);
 }
 
-int				check_files(char **av, options opts)
+int				check_files(char **av, t_flags opts)
 {
 	t_list		*no_dir_list;
 	struct stat	sb;
@@ -65,7 +65,7 @@ int				check_files(char **av, options opts)
 	return (check_files_end(no_dir_list, opts));
 }
 
-t_list			*check_dir(char **av, options opts)
+t_list			*check_dir(char **av, t_flags opts)
 {
 	t_list		*dir_list;
 	struct stat sb;
@@ -91,9 +91,9 @@ t_list			*check_dir(char **av, options opts)
 }
 
 void			manage_dir(t_list *dir_list, int inexistant, int files,\
-		options opts)
+		t_flags opts)
 {
-	args_node *dir;
+	t_args_node *dir;
 
 	dir = dir_list->head;
 	while (dir)
@@ -110,7 +110,7 @@ void			manage_dir(t_list *dir_list, int inexistant, int files,\
 	}
 }
 
-void			ls_controller(char **av, options opts)
+void			ls_controller(char **av, t_flags opts)
 {
 	t_list		*dir_list;
 	int			inexistant;

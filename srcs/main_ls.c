@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/29 14:24:40 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/03 17:23:07 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:46:50 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	take_care_of_opts(t_list *list, char *dir_name, t_flags opts)
 	else
 		merge_sort(&(list->head), opts);
 	print_list(list, opts, dir_name);
-	if (opts.R == 1)
+	if (opts.rr == 1)
 		ls_recursive(list, opts);
 }
 
-void	main_ls_end(dirent *lu, char *path, t_list *list, t_flags opts)
+void	main_ls_end(t_dirent *lu, char *path, t_list *list, t_flags opts)
 {
 	struct stat stats;
 
@@ -80,7 +80,7 @@ void	main_ls_end(dirent *lu, char *path, t_list *list, t_flags opts)
 void	main_ls(char *dir_name, t_flags opts)
 {
 	DIR			*rep;
-	dirent		*truc_lu;
+	t_dirent	*truc_lu;
 	char		*full_path;
 	t_list		*list;
 

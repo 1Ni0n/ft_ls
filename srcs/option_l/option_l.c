@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/03 13:53:55 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/03 17:34:43 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:30:00 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ int		retreive_stats(t_args_node *elem)
 	else
 	{
 		if (lstat(elem->path, &sb))
-			return(0);
+			return (0);
 		elem->stats = sb;
 		return (1);
 	}
 }
 
-void	option_l(S_list *list, t_flags opts, char *dir_name)
+void	option_l(t_list *list, t_flags opts, char *dir_name)
 {
-	t_args_node	*elem;
+	t_args_node		*elem;
 	t_longest		longest;
 
 	elem = list->head;

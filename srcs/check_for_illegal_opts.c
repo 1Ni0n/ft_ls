@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/01 11:04:36 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/03 17:36:27 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:45:35 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void			set_null_opts(t_flags *opts)
 		opts->l = 0;
 		opts->a = 0;
 		opts->r = 0;
-		opts->R = 0;
+		opts->rr = 0;
 		opts->t = 0;
 	}
 }
@@ -63,7 +63,7 @@ void				set_em(char **av, t_flags **opts, int i, int j)
 	if (av[i][j] == 'r')
 		(*opts)->r = 1;
 	if (av[i][j] == 'R')
-		(*opts)->R = 1;
+		(*opts)->rr = 1;
 	if (av[i][j] == 't')
 		(*opts)->t = 1;
 	if (av[i][j] == '1')

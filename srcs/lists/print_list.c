@@ -25,14 +25,14 @@ void	print_list_no_opts(t_list *list)
 	}
 }
 
-void	print_it(t_args_node *arg, options opts, int max_s_len, int max_i_len)
+void	print_it(t_args_node *arg, t_flags opts, int maxslen, int maxilen)
 {
 	while (arg)
 	{
 		if (opts.i == 1)
-			option_i(arg, max_i_len);
+			option_i(arg, maxilen);
 		if (opts.s == 1)
-			option_s(arg, max_s_len);
+			option_s(arg, maxslen);
 		colors(arg, arg->stats);
 		if (opts.ff == 1)
 			option_ff(arg);
@@ -41,7 +41,7 @@ void	print_it(t_args_node *arg, options opts, int max_s_len, int max_i_len)
 	}
 }
 
-void	print_list(t_list *list, options opts, char *dir_name)
+void	print_list(t_list *list, t_flags opts, char *dir_name)
 {
 	t_args_node	*arg;
 	int			max_i_len;

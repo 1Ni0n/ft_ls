@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lists_controller_bis.c                             :+:      :+:    :+:   */
+/*   sort_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/30 14:01:02 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/03 11:19:40 by aguillot         ###   ########.fr       */
+/*   Created: 2018/09/04 11:34:05 by aguillot          #+#    #+#             */
+/*   Updated: 2018/09/04 11:34:33 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ t_args_node	*sorted_merge(t_args_node *a, t_args_node *b)
 	return (elem);
 }
 
-void		split_list(t_args_node *elem, t_args_node **front, t_args_node **back)
+void		split_list(t_args_node *elem, t_args_node **front,\
+		t_args_node **back)
 {
 	t_args_node *fast;
 	t_args_node *slow;
@@ -91,7 +92,7 @@ void		split_list(t_args_node *elem, t_args_node **front, t_args_node **back)
 	slow->next = NULL;
 }
 
-void		merge_sort(t_args_node **head, options opts)
+void		merge_sort(t_args_node **head, t_flags opts)
 {
 	t_args_node *elem;
 	t_args_node *a;

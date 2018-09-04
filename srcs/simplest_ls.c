@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 19:28:42 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/02 18:16:11 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/04 11:47:17 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ t_flags		*set_useless_opts(void)
 	opts->l = 0;
 	opts->a = 0;
 	opts->r = 0;
-	opts->R = 0;
+	opts->rr = 0;
 	opts->t = 0;
 	return (opts);
 }
 
 void		simplest_ls(void)
 {
-	DIR		*rep;
-	dirent	*truc_lu;
-	S_list	*list;
-	t_flags *opts;
-	t_flags opt;
+	DIR			*rep;
+	t_dirent	*truc_lu;
+	t_list		*list;
+	t_flags		*opts;
+	t_flags		opt;
 
 	rep = NULL;
 	truc_lu = NULL;
