@@ -6,7 +6,7 @@
 /*   By: aguillot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/28 09:19:30 by aguillot          #+#    #+#             */
-/*   Updated: 2018/09/02 18:56:30 by aguillot         ###   ########.fr       */
+/*   Updated: 2018/09/04 12:22:47 by aguillot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	print_majmin(struct stat stats)
 void	print_name(t_args_node *elem)
 {
 	write(1, " ", 1);
-	ft_putstr(elem->content);
+	colors(elem, elem->stats);
 }
 
 void	print_symlink(t_args_node *elem)

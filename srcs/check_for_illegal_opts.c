@@ -104,16 +104,15 @@ t_flags				*check_for_illegal_opts(char **av)
 	t_flags	*opts;
 
 	i = 1;
+	opts = set_opts(av);
 	while (av[i] && av[i][0] == '-' && ft_strcmp(av[i], "--") != 0)
 	{
 		j = 1;
+		free(opts);
 		opts = set_opts(av);
 		while (av[i][j])
 		{
-			if (av[i][j] != 'l' && av[i][j] != 'a' && av[i][j] != 'r' &&\
-					av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1'\
-					&& av[i][j] != 'A' && av[i][j] != 'i' && av[i][j] != 'F'\
-					&& av[i][j] != 's' && av[i][j] != 'c')
+			if (ARGUMENT1 && ARGUMENT2 && ARGUMENT3 && ARGUMENT4)
 			{
 				print_usage(av[i][j]);
 				exit(1);

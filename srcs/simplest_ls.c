@@ -32,7 +32,6 @@ void		simplest_ls(void)
 	t_dirent	*truc_lu;
 	t_list		*list;
 	t_flags		*opts;
-	t_flags		opt;
 
 	rep = NULL;
 	truc_lu = NULL;
@@ -49,8 +48,8 @@ void		simplest_ls(void)
 	}
 	closedir(rep);
 	opts = set_useless_opts();
-	opt = *opts;
-	merge_sort(&(list->head), opt);
+	merge_sort(&(list->head), *opts);
 	print_list_no_opts(list);
 	free_list(list);
+	free(opts);
 }
