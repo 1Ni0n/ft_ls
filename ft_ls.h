@@ -35,7 +35,7 @@
 # define ARGUMENT1 av[i][j] != 'l' && av[i][j] != 'a' && av[i][j] != 'r'
 # define ARGUMENT2 av[i][j] != 'R' && av[i][j] != 't' && av[i][j] != '1'
 # define ARGUMENT3 av[i][j] != 'A' && av[i][j] != 'i' && av[i][j] != 'F'
-# define ARGUMENT4 av[i][j] != 's' && av[i][j] != 'c'
+# define ARGUMENT4 av[i][j] != 's'
 
 typedef struct dirent	t_dirent;
 
@@ -82,6 +82,7 @@ typedef struct			s_flags
 void					simplest_ls(void);
 void					args_controller(char **av);
 t_list					*new_s_list(void);
+void					free_elem(t_list **list, t_args_node *elem);
 void					append_to_list(t_list *list, char *content, char\
 		*path);
 void					sort_list(t_list **list);

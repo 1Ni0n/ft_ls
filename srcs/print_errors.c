@@ -12,7 +12,7 @@
 
 #include "../ft_ls.h"
 
-void	print_usage(char c)
+void		print_usage(char c)
 {
 	ft_putstr("ft_ls: illegal option -- ");
 	ft_putchar(c);
@@ -21,22 +21,28 @@ void	print_usage(char c)
 	ft_putchar('\n');
 }
 
-void	print_errors(char *name)
+static int	ft_str_error(char *str)
+{
+	int i;
+
+	i = 0;
+	i = ft_strlen(str) - 1;
+	while (i > 0 && str[i] != '/')
+		i--;
+	if (str[i] == '/')
+		i++;
+	if (i < 0)
+		return (0);
+	return (i);
+}
+
+void		print_errors(char *name)
 {
 	int		i;
 
 	i = 0;
 	ft_putstr("ft_ls: ");
-	while (name[i])
-	{
-		if (name[i] == '/')
-		{
-			ft_putstr(name + i + 1);
-		}
-		i++;
-	}
-	if (ft_strrchr(name, '/') == 0)
-		ft_putstr(name);
+	ft_putstr(name + ft_str_error(name));
 	ft_putstr(": ");
 	perror("");
 }

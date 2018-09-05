@@ -65,7 +65,6 @@ void	main_ls_end(t_dirent *lu, char *path, t_list *list, t_flags opts)
 {
 	struct stat stats;
 
-	lstat(path, &stats);
 	if (lu->d_name[0] == '.' && check_for_opt_a(opts) == 1 &&\
 			lstat(path, &stats) == 0)
 		append_to_list(list, lu->d_name, path);
@@ -101,4 +100,5 @@ void	main_ls(char *dir_name, t_flags opts)
 	}
 	closedir(rep);
 	take_care_of_opts(list, dir_name, opts);
+	free_list(list);
 }

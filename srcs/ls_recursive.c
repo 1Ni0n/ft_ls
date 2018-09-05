@@ -33,5 +33,4 @@ void		ls_recursive(t_list *list, t_flags opts)
 		}
 		arg = arg->next;
 	}
-	free_list(list);
 }

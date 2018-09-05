@@ -12,6 +12,25 @@
 
 #include "../../ft_ls.h"
 
+void	free_elem(t_list **list, t_args_node *elem)
+{
+	t_args_node *tmp;
+
+	tmp = (*list)->head;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->next->content, elem->content) == 0)
+			break ;
+		tmp = tmp->next;
+	}
+	tmp->next = elem->next;
+	if (elem->content)
+		free(elem->content);
+	if (elem->path)
+		free(elem->path);
+	free(elem);
+}
+
 void	free_list(t_list *list)
 {
 	t_args_node	*elem;
@@ -37,9 +56,15 @@ void	append(t_args_node **arg, char *content, char *path)
 {
 	(*arg)->content = ft_strdup(content);
 	if (path)
+	{
 		(*arg)->path = ft_strdup(path);
+		lstat(path, &(*arg)->stats);
+	}
 	else
+	{
 		(*arg)->path = NULL;
+		lstat(content, &(*arg)->stats);
+	}
 }
 
 void	append_to_list(t_list *list, char *content, char *path)

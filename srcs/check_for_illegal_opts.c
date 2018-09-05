@@ -41,6 +41,11 @@ static void			set_null_opts(t_flags *opts)
 		opts->r = 0;
 		opts->rr = 0;
 		opts->t = 0;
+		opts->i = 0;
+		opts->ff = 0;
+		opts->s = 0;
+		opts->one = 0;
+		opts->aa = 0;
 	}
 }
 
@@ -54,8 +59,6 @@ void				set_em(char **av, t_flags **opts, int i, int j)
 		(*opts)->ff = 1;
 	if (av[i][j] == 's')
 		(*opts)->s = 1;
-	if (av[i][j] == 'c')
-		(*opts)->c = 1;
 	if (av[i][j] == 'l')
 		(*opts)->l = 1;
 	if (av[i][j] == 'a')

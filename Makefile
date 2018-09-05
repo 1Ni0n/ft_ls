@@ -21,8 +21,6 @@ SRC_DIR	= srcs/
 SRC_FILE = ft_ls.c simplest_ls.c  args_controller.c\
 check_for_illegal_opts.c ls_controller.c ls_recursive.c main_ls.c  check.c print_errors.c option_i_s_ff.c colors.c
 
-SRCS =	$(addprefix $(SRC_DIR), $(SRC_FILE))
-
 OPT_L_FILES = option_l.c get_longest.c special_elem.c option_l_printing.c option_l_printing_controller.c\
 option_l_printing_bis.c print_correct_date.c print_blocks_if_dir_full.c
 
@@ -39,6 +37,8 @@ LISTS_DIR = lists/
 LISTS = $(addprefix $(LISTS_DIR), $(LISTS_FILES))
 
 ALL_LISTS = $(addprefix $(SRC_DIR), $(LISTS))
+
+SRCS = $(addprefix $(SRC_DIR), $(SRC_FILE))
 
 OBJ = ft_ls.o simplest_ls.o lists_controller.o args_controller.o  print_list.o\
 check_for_illegal_opts.o ls_controller.o ls_recursive.o main_ls.o sort_list.o option_l.o sort_list_t.o check.o get_longest.o special_elem.o\
