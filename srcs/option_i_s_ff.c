@@ -41,7 +41,6 @@ int		get_size(t_list *list, t_flags opts)
 	elem = list->head;
 	while (elem)
 	{
-		lstat(elem->path, &elem->stats);
 		if ((len = ft_off_t_len(elem->stats.st_blocks)) > max_len)
 			max_len = len;
 		blocks += elem->stats.st_blocks;
@@ -78,7 +77,6 @@ int		get_inode(t_list *list)
 	max_len = 0;
 	while (elem)
 	{
-		lstat(elem->path, &elem->stats);
 		if ((len = ft_off_t_len(elem->stats.st_ino)) > max_len)
 			max_len = len;
 		elem = elem->next;
