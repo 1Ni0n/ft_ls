@@ -37,13 +37,13 @@ void	get_permissions(struct stat stats)
 	permissions[0] = (stats.st_mode & S_IRUSR) ? 'r' : '-';
 	permissions[1] = (stats.st_mode & S_IWUSR) ? 'w' : '-';
 	permissions[2] = (stats.st_mode & S_IXUSR) ? 'x' : '-';
-	if (stats.st_mode & S_ISGID)
-		permissions[2] = (stats.st_mode & S_IXGRP ? 'S' : 's');
+	if (stats.st_mode & S_ISUID)
+		permissions[2] = (stats.st_mode & S_IXUSR ? 's' : 'S');
 	permissions[3] = (stats.st_mode & S_IRGRP) ? 'r' : '-';
 	permissions[4] = (stats.st_mode & S_IWGRP) ? 'w' : '-';
 	permissions[5] = (stats.st_mode & S_IXGRP) ? 'x' : '-';
 	if (stats.st_mode & S_ISGID)
-		permissions[2] = (stats.st_mode & S_IXGRP ? 'S' : 's');
+		permissions[5] = (stats.st_mode & S_IXGRP ? 's' : 'S');
 	permissions[6] = (stats.st_mode & S_IROTH) ? 'r' : '-';
 	permissions[7] = (stats.st_mode & S_IWOTH) ? 'w' : '-';
 	permissions[8] = (stats.st_mode & S_IXOTH) ? 'x' : '-';
